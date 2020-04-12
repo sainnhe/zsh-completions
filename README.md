@@ -1,8 +1,6 @@
 ## zsh-completions
 
-This project is a collection of zsh completion definitions inspired by [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot).
-
-The sources currently collected by this project include:
+This project is a personal collection of zsh completion definitions, currently includes:
 
 - [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
 - [zchee/zsh-completions](https://github.com/zchee/zsh-completions)
