@@ -4,3 +4,6 @@
 [submodule "src/zchee.zsh-completions"]
 	path = src/zchee.zsh-completions
 	url = https://github.com/zchee/zsh-completions.git
+[submodule "src/edouard-lopez.yeoman-zsh-plugin"]
+	path = src/edouard-lopez.yeoman-zsh-plugin
+	url = https://github.com/edouard-lopez/yeoman-zsh-plugin.git
