@@ -7,6 +7,7 @@ The sources currently collected by this project include:
 - [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
 - [zchee/zsh-completions](https://github.com/zchee/zsh-completions)
 - [edouard-lopez/yeoman-zsh-plugin](https://github.com/edouard-lopez/yeoman-zsh-plugin)
+- [gradle/gradle-completion](https://github.com/gradle/gradle-completion)
 - Some [custom](https://github.com/sainnhe/zsh-completions/tree/master/src/custom) completion definitions.
 
 ## Installation
