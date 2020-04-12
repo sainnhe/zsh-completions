@@ -5,6 +5,7 @@ This project is a personal collection of zsh completion definitions, currently i
 - [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
 - [zchee/zsh-completions](https://github.com/zchee/zsh-completions)
 - [gradle/gradle-completion](https://github.com/gradle/gradle-completion)
+- [esc/conda-zsh-completion](https://github.com/esc/conda-zsh-completion)
 - Some [custom](https://github.com/sainnhe/zsh-completions/tree/master/src/custom) completion definitions.
 
 ## Installation

@@ -7,3 +7,6 @@
 [submodule "src/gradle.gradle-completion"]
 	path = src/gradle.gradle-completion
 	url = https://github.com/gradle/gradle-completion.git
+[submodule "src/esc.conda-zsh-completion"]
+	path = src/esc.conda-zsh-completion
+	url = https://github.com/esc/conda-zsh-completion.git
