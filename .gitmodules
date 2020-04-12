@@ -10,6 +10,3 @@
 [submodule "src/esc.conda-zsh-completion"]
 	path = src/esc.conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion.git
-[submodule "src/MenkeTechnologies.zsh-more-completions"]
-	path = src/MenkeTechnologies.zsh-more-completions
-	url = https://github.com/MenkeTechnologies/zsh-more-completions.git
