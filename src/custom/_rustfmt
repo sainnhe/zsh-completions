@@ -1,0 +1,24 @@
+#compdef rustfmt
+
+local arguments
+
+arguments=(
+  '--check[run in check mode]'
+  '--emit:what data to emit and how:(files stdout coverage checkstyle)'
+  '--backup[backup any modified files]'
+  '--config-path[recursively searches the given path for the rustfmt.toml config file]'
+  '--edition:rust edition to use:(2015 2018)'
+  '--color:use colored output (if supported):(always never auto)'
+  '--print-config:dumps a default or minimal config to PATH:(default minimal current)'
+  '--unstable-features[enables unstable features]'
+  '--file-lines[format specified line ranges]'
+  '--error-on-unformatted[error if unable to get comments or string literals within max_width, or they are left with trailing whitespaces (unstable)]'
+  '--skip-children[dont reformat child modules (unstable)]'
+  {-v,--verbose}'[print verbose output]'
+  {-q,--quiet}'[print less output]'
+  {-V,--version}'[show version information]'
+  {-h,--help=}':show help message about a specific topic:(config file-lines)'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments

@@ -1,0 +1,35 @@
+#compdef rust-lldb
+
+local arguments
+
+arguments=(
+  {--attach-name,-n}'[tells the debugger to attach to a process with the given name]'
+  {--attach-pid,-p}'[tells the debugger to attach to a process with the given pid]'
+  {--wait-for,-w}'[tells the debugger to wait for a process with the given pid or name to launch before attaching]'
+  {--batch,-b}'[tells the debugger to run the commands from -s, -S, -o & -O, and then quit]'
+  {--no-lldbinit,-x}'[do not automatically parse any .lldbinit files]'
+  {--one-line-before-file,-O}'[tells the debugger to execute this one-line lldb command before any file provided on the command line has been loaded]'
+  {--one-line-on-crash,-k}'[when in batch mode, tells the debugger to execute this one-line lldb command if the target crashes]'
+  {--one-line,-o}'[tells the debugger to execute this one-line lldb command after any file provided on the command line has been loaded]'
+  {--source-before-file,-S}'[tells the debugger to read in and execute the lldb commands in the given file, before any file has been loaded]'
+  {--source-on-crash,-K}'[when in batch mode, tells the debugger to source this file of lldb commands if the target crashes]'
+  {--source-quietly,-Q}'[tells the debugger to execute this one-line lldb command before any file has been loaded]'
+  {--source,-s}'[tells the debugger to read in and execute the lldb commands in the given file, after any file has been loaded]'
+  {--arch,-a}'[tells the debugger to use the specified architecture when starting and running the program]'
+  '--capture[tells the debugger to capture a reproducer to <filename>]'
+  {--core,-c}'[tells the debugger to use the full path to <filename> as the core file]'
+  {--debug,-d}'[tells the debugger to print out extra information for debugging itself]'
+  {--editor,-e}'[tells the debugger to open source files using the hosts "external editor" mechanism]'
+  {--file,-f}'[tells the debugger to use the file <filename> as the program to be debugged]'
+  {--help,-h}'[show help message]'
+  {--no-use-colors,-X}'[do not use colors]'
+  '--replay[tells the debugger to replay a reproducer from <filename>]'
+  {--version,-v}'[prints out the current version number of the LLDB debugger]'
+  {--repl-language,-R}'[chooses the language for the REPL]'
+  '(--repl,-r)'{--repl=,-r=}'[runs lldb in REPL mode with a stub process with the given flags]'
+  {--python-path,-P}'[out the path to the lldb.py file for this version of lldb]'
+  {--script-language,-l}'[tells the debugger to use the specified scripting language for user-defined scripts]'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments

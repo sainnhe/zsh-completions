@@ -1,0 +1,12 @@
+#compdef rls
+
+local arguments
+
+arguments=(
+  {--version,-V}'[print the version and commit info]'
+  {--help,-h}'[show help message]'
+  '--cli[starts the RLS in command line mode]'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments

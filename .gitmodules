@@ -1,0 +1,6 @@
+[submodule "src/zsh-users.zsh-completions"]
+	path = src/zsh-users.zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "src/zchee.zsh-completions"]
+	path = src/zchee.zsh-completions
+	url = https://github.com/zchee/zsh-completions.git
