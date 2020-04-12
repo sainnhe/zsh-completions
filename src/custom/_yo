@@ -1,18 +1,17 @@
-###-begin-yo-completion-###
-_yo_completion () {
-  local cword line point words si
-  read -Ac words
-  read -cn cword
-  let cword-=1
-  read -l line
-  read -ln point
-  si="$IFS"
-  IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                     COMP_LINE="$line" \
-                     COMP_POINT="$point" \
-                     yo-complete completion -- "${words[@]}" \
-                     2>/dev/null)) || return $?
-  IFS="$si"
-}
-compctl -K _yo_completion yo
-###-end-yo-completion-###
+#compdef yo
+
+# zsh completions for 'yo'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
+local arguments
+
+arguments=(
+  '--help[# Print this info and generators options and usage]'
+  {-f,--force}'[# Overwrite files that already exist]'
+  '--version[# Print version]'
+  '--no-color[# Disable colors]'
+  '--generators[# Print available generators]'
+  '--local-only[# Disable lookup of globally-installed generators]'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments
