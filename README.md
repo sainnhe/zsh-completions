@@ -3,6 +3,7 @@
 This project is a personal collection of zsh completion definitions, currently includes:
 
 - [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
+- [MenkeTechnologies/zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - [zchee/zsh-completions](https://github.com/zchee/zsh-completions)
 - [gradle/gradle-completion](https://github.com/gradle/gradle-completion)
 - [esc/conda-zsh-completion](https://github.com/esc/conda-zsh-completion)
