@@ -249,8 +249,8 @@ _arguments "${_arguments_options[@]}" \
 '--help[Prints help information]' \
 '-V[Prints version information]' \
 '--version[Prints version information]' \
-':toolchain -- Toolchain name, such as 'stable', 'nightly', or '1.8.0'. For more information see `rustup help toolchain`:_files' \
-':path:_files' \
+':toolchain -- Custom toolchain name:_files' \
+':path -- Path to the directory:_files' \
 && ret=0
 ;;
 (help)
