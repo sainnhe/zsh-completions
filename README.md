@@ -15,7 +15,7 @@ This project is a personal collection of zsh completion definitions, currently i
 Take [zinit](https://github.com/zdharma/zinit) for example:
 
 ```shell
-zinit ice wait'0' blockf lucid; zinit light sainnhe/zsh-completions
+zinit ice wait'0' lucid; zinit light sainnhe/zsh-completions
 ```
 
 **Note:** This repository contains some submodules, please make sure your plugin manager can update them.
