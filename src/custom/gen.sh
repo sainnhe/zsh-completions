@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
-pip completion --zsh > _pip
-npm completion > _npm
+cd $(git rev-parse --show-toplevel)/src/custom
+pip completion --zsh > pip.plugin.zsh
+npm completion > npm.plugin.zsh
 rustup completions zsh rustup > _rustup
 rustup completions zsh cargo > _cargo
 
