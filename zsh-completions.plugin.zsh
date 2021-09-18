@@ -1,3 +1,4 @@
+autoload -U +X bashcompinit && bashcompinit
 source "${0:h}/src/zsh-users.zsh-completions/zsh-completions.plugin.zsh"
 source "${0:h}/src/zchee.zsh-completions/zsh-completions.plugin.zsh"
 [ -x "$(command -v gradle)" ] && source "${0:h}/src/gradle.gradle-completion/gradle-completion.plugin.zsh"
