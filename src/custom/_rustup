@@ -58,6 +58,8 @@ case $state in
         case $line[1] in
             (active-toolchain)
 _arguments "${_arguments_options[@]}" \
+'-v[Enable verbose output with rustc information]' \
+'--verbose[Enable verbose output with rustc information]' \
 '-h[Prints help information]' \
 '--help[Prints help information]' \
 '-V[Prints version information]' \
@@ -121,10 +123,23 @@ _arguments "${_arguments_options[@]}" \
 ':toolchain -- Toolchain name, such as 'stable', 'nightly', or '1.8.0'. For more information see `rustup help toolchain`:_files' \
 && ret=0
 ;;
+(upgrade)
+_arguments "${_arguments_options[@]}" \
+'--no-self-update[Don'\''t perform self update when running the `rustup update` command]' \
+'--force[Force an update, even if some components are missing]' \
+'--force-non-host[Install toolchains that require an emulator. See https://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+'::toolchain -- Toolchain name, such as 'stable', 'nightly', or '1.8.0'. For more information see `rustup help toolchain`:_files' \
+&& ret=0
+;;
 (update)
 _arguments "${_arguments_options[@]}" \
 '--no-self-update[Don'\''t perform self update when running the `rustup update` command]' \
 '--force[Force an update, even if some components are missing]' \
+'--force-non-host[Install toolchains that require an emulator. See https://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
 '-h[Prints help information]' \
 '--help[Prints help information]' \
 '-V[Prints version information]' \
@@ -644,6 +659,15 @@ _arguments "${_arguments_options[@]}" \
 ':profile-name:(minimal default complete)' \
 && ret=0
 ;;
+(auto-self-update)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+':auto-self-update-mode:(enable disable check-only)' \
+&& ret=0
+;;
 (help)
 _arguments "${_arguments_options[@]}" \
 '-h[Prints help information]' \
@@ -687,7 +711,7 @@ _rustup_commands() {
 "install:Update Rust toolchains" \
 "uninstall:Uninstall Rust toolchains" \
 "update:Update Rust toolchains and rustup" \
-"check:Check for updates to Rust toolchains" \
+"check:Check for updates to Rust toolchains and rustup" \
 "default:Set the default toolchain" \
 "toolchain:Modify or query the installed toolchains" \
 "target:Modify a toolchain's supported targets" \
@@ -745,6 +769,13 @@ _rustup__toolchain__add_commands() {
         
     )
     _describe -t commands 'rustup toolchain add commands' commands "$@"
+}
+(( $+functions[_rustup__set__auto-self-update_commands] )) ||
+_rustup__set__auto-self-update_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'rustup set auto-self-update commands' commands "$@"
 }
 (( $+functions[_rustup__check_commands] )) ||
 _rustup__check_commands() {
@@ -1033,6 +1064,7 @@ _rustup__set_commands() {
     local commands; commands=(
         "default-host:The triple used to identify toolchains when not specified" \
 "profile:The default components installed" \
+"auto-self-update:The rustup auto self update mode" \
 "help:Prints this message or the help of the given subcommand(s)" \
     )
     _describe -t commands 'rustup set commands' commands "$@"
@@ -1124,6 +1156,20 @@ _rustup__update_commands() {
         
     )
     _describe -t commands 'rustup update commands' commands "$@"
+}
+(( $+functions[_rustup__upgrade_commands] )) ||
+_rustup__upgrade_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'rustup upgrade commands' commands "$@"
+}
+(( $+functions[_upgrade_commands] )) ||
+_upgrade_commands() {
+    local commands; commands=(
+        
+    )
+    _describe -t commands 'upgrade commands' commands "$@"
 }
 (( $+functions[_rustup__self__upgrade-data_commands] )) ||
 _rustup__self__upgrade-data_commands() {
