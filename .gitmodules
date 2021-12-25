@@ -10,3 +10,6 @@
 [submodule "src/esc.conda-zsh-completion"]
 	path = src/esc.conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion.git
+[submodule "src/spwhitt.nix-zsh-completions"]
+	path = src/spwhitt.nix-zsh-completions
+	url = https://github.com/spwhitt/nix-zsh-completions.git
