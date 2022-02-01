@@ -1,0 +1,14 @@
+#compdef rustlings
+
+# zsh completions for 'rustlings'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
+local arguments
+
+arguments=(
+  '--nocapture[show outputs from the test exercises]'
+  {-v,--version}'[show the executable version]'
+  '--help[display usage information]'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments

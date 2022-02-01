@@ -1,23 +1,27 @@
 #compdef rustfmt
 
+# zsh completions for 'rustfmt'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
 local arguments
 
 arguments=(
-  '--check[run in check mode]'
-  '--emit:what data to emit and how:(files stdout coverage checkstyle)'
-  '--backup[backup any modified files]'
-  '--config-path[recursively searches the given path for the rustfmt.toml config file]'
-  '--edition:rust edition to use:(2015 2018)'
-  '--color:use colored output (if supported):(always never auto)'
-  '--print-config:dumps a default or minimal config to PATH:(default minimal current)'
-  '--unstable-features[enables unstable features]'
-  '--file-lines[format specified line ranges]'
-  '--error-on-unformatted[error if unable to get comments or string literals within max_width, or they are left with trailing whitespaces (unstable)]'
-  '--skip-children[dont reformat child modules (unstable)]'
+  '--check[run in check mode. Exits with 0 if input is]'
+  '--emit[what data to emit and how]'
+  '--backup[backup any modified files.]'
+  '--config-path[for the configuration file\]]'
+  '--edition[2015|2018|2021\]]'
+  '--color[use colored output (if supported)]'
+  '--print-config[PATH]'
+  {-l,--files-with-diff}'[prints the names of mismatched files that were]'
+  '--config[1=val1,key2=val2...\]]'
+  '--unstable-features[enables unstable features. Only available on nightly]'
+  '--file-lines[format specified line ranges. Run with]'
+  '--error-on-unformatted[error if unable to get comments or string literals]'
+  '--skip-children[dont reformat child modules (unstable).]'
   {-v,--verbose}'[print verbose output]'
   {-q,--quiet}'[print less output]'
   {-V,--version}'[show version information]'
-  {-h,--help=}':show help message about a specific topic:(config file-lines)'
+  {-h,--help}'[TOPIC\] Show this message or help about a specific topic:]'
   '*:filename:_files'
 )
 

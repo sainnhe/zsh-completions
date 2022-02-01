@@ -1,11 +1,13 @@
 #compdef rls
 
+# zsh completions for 'rls'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
 local arguments
 
 arguments=(
   {--version,-V}'[print the version and commit info]'
-  {--help,-h}'[show help message]'
-  '--cli[starts the RLS in command line mode]'
+  {--help,-h}'[this message]'
+  '--cli[the RLS in command line mode]'
   '*:filename:_files'
 )
 

@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+_custom_dir="$(git rev-parse --show-toplevel)/src/custom"
+
+_genhelp() {
+  "${1}" --help | "${_custom_dir}/genhelp/help2comp.py" "${1}" > "${_custom_dir}/_${1}"
+}
+
+cd "${_custom_dir}"
+[ -x "$(command -v limactl)" ] && limactl completion zsh > _limactl
+[ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
+[ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
+[ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
+[ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
+[ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
+[ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
+[ -x "$(command -v rls)" ] && _genhelp rls
+[ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
+[ -x "$(command -v rust-gdb)" ] && [ -x "$(command -v gdb)" ] && _genhelp rust-gdb
+[ -x "$(command -v rust-lldb)" ] && [ -x "$(command -v lldb)" ] && _genhelp rust-lldb
+[ -x "$(command -v rustc)" ] && _genhelp rustc
+[ -x "$(command -v rustdoc)" ] && _genhelp rustdoc
+[ -x "$(command -v rustfmt)" ] && _genhelp rustfmt
+[ -x "$(command -v rustc)" ] && _genhelp rustc
+[ -x "$(command -v rustlings)" ] && _genhelp rustlings
+[ -x "$(command -v fzf)" ] && _genhelp fzf
+curl -L https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker > _docker

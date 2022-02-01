@@ -1,17 +1,19 @@
 #compdef rustc
 
+# zsh completions for 'rustc'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
 local arguments
 
 arguments=(
-  {-h,--help}'[show help message]'
+  {-h,--help}'[display this message]'
   '--cfg[configure the compilation environment]'
-  '-L:add a directory to the library search path:(dependency= crate= native= framework= all=)'
-  '-l:link the generated crate(s) to the specified native library name:(static= dylib= framework=)'
-  '--crate-type[\[bin|lib|rlib|dylib|cdylib|staticlib|proc-macro\] comma separated list of types of crates for the compiler to emit]'
+  '-L[\]PATH      Add a directory to the library search path. The]'
+  '-l[\]NAME\[:RENAME\]]'
+  '--crate-type[comma separated list of types of crates]'
   '--crate-name[specify the name of the crate being built]'
-  '--edition:specify which edition of the compiler to use when compiling code:(2015 2018)'
-  '--emit[\[asm|llvm-bc|llvm-ir|obj|metadata|link|dep-info|mir\] comma separated list of types of output for the compiler to emit]'
-  '--print:compiler information to print on stdout:(crate-name file-names sysroot cfg target-list target-cpus target-features relocation-models code-models tls-models target-spec-json native-static-libs)'
+  '--edition[015|2018|2021]'
+  '--emit[comma separated list of types of output for the]'
+  '--print[compiler information to print on stdout]'
   '-g[equivalent to -C debuginfo=2]'
   '-O[equivalent to -C opt-level=2]'
   '-o[write output to <filename>]'
@@ -19,12 +21,13 @@ arguments=(
   '--explain[provide a detailed explanation of an error message]'
   '--test[build a test harness]'
   '--target[target triple for which the code is compiled]'
-  {-W,--warn}'[set lint warnings]'
   {-A,--allow}'[set lint allowed]'
+  {-W,--warn}'[set lint warnings]'
+  '--force-warn[set lint force-warn]'
   {-D,--deny}'[set lint denied]'
   {-F,--forbid}'[set lint forbidden]'
-  '--cap-lints[set the most restrictive lint level]'
-  {-C,--codegen}'[set a codegen option]'
+  '--cap-lints[set the most restrictive lint level. More restrictive]'
+  {-C,--codegen}'[VALUE\]]'
   {-V,--version}'[print version info and exit]'
   {-v,--verbose}'[use verbose output]'
   '-C[print codegen options]'

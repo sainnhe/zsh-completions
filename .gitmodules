@@ -13,3 +13,6 @@
 [submodule "src/spwhitt.nix-zsh-completions"]
 	path = src/spwhitt.nix-zsh-completions
 	url = https://github.com/spwhitt/nix-zsh-completions.git
+[submodule "src/custom/genhelp"]
+	path = src/custom/genhelp
+	url = http://github.com/RobSis/zsh-completion-generator
