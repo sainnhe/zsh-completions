@@ -6,4 +6,4 @@ cd $(git rev-parse --show-toplevel)/src/custom
 [ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v limactl)" ] && limactl completion zsh > _limactl
-
+curl -L https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker > _docker
