@@ -24,4 +24,6 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustc)" ] && _genhelp rustc
 [ -x "$(command -v rustlings)" ] && _genhelp rustlings
 [ -x "$(command -v fzf)" ] && _genhelp fzf
+[ -x "$(command -v youtube-dl)" ] && _genhelp youtube-dl
+[ -x "$(command -v yt-dlp)" ] && _genhelp yt-dlp
 curl -L https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker > _docker
