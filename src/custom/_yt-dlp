@@ -145,6 +145,7 @@ arguments=(
   {-O,--print}'[field name or output template to print to]'
   '--use-postprocessor[and "video" (default).]'
   '--no-simulate[used). This option can be]'
+  '--print-to-file[FILE]'
   {-j,--dump-json}'[quiet, but print JSON information for each]'
   {-J,--dump-single-json}'[quiet, but print JSON information for each]'
   '--no-simulate[used. If the URL refers to]'
