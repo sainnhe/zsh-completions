@@ -15,6 +15,7 @@ arguments=(
   '--print-config-schema[dump a LSP config JSON schema.]'
   '--no-dump[suppress printing.]'
   '--rainbow[enable rainbow highlighting of identifiers.]'
+  '--output[]'
   '--randomize[randomize order in which crates, modules, and items are processed.]'
   '--parallel[run type inference in parallel.]'
   '--memory-usage[collect memory usage statistics.]'

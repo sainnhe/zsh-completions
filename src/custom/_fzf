@@ -39,6 +39,7 @@ arguments=(
   '--header[string to print as header]'
   '--header-lines[the first N lines of the input are treated as header]'
   '--header-first[print header before the prompt line]'
+  '--ellipsis[ellipsis to show when line is truncated (default: ..)]'
   '--ansi[enable processing of ANSI color codes]'
   '--tabstop[number of spaces for a tab character (default: 8)]'
   '--color[base scheme (dark|light|16|bw) and/or custom colors]'
