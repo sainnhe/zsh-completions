@@ -26,6 +26,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v youtube-dl)" ] && _genhelp youtube-dl
 [ -x "$(command -v yt-dlp)" ] && _genhelp yt-dlp
 [ -x "$(command -v rip)" ] && _genhelp rip
-curl -L https://raw.fastgit.org/docker/cli/master/contrib/completion/zsh/_docker > _docker
-curl -L https://raw.fastgit.org/BurntSushi/ripgrep/master/complete/_rg > _rg
-curl -L https://raw.fastgit.org/sharkdp/fd/master/contrib/completion/_fd > _fd
+curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker > _docker
+curl -L https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg > _rg
+curl -L https://raw.githubusercontent.com/sharkdp/fd/master/contrib/completion/_fd > _fd
+curl -L https://raw.githubusercontent.com/dbrgn/tealdeer/main/completion/zsh_tealdeer > _tldr
