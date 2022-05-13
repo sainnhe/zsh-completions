@@ -30,3 +30,4 @@ curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/z
 curl -L https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg > _rg
 curl -L https://raw.githubusercontent.com/sharkdp/fd/master/contrib/completion/_fd > _fd
 curl -L https://raw.githubusercontent.com/dbrgn/tealdeer/main/completion/zsh_tealdeer > _tldr
+curl -L https://raw.githubusercontent.com/rofl0r/proxychains-ng/master/completions/_proxychains > _proxychains
