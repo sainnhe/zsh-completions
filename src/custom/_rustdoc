@@ -35,7 +35,7 @@ arguments=(
   '--markdown-playground-url[URL to send code snippets to]'
   '--markdown-no-toc[dont include table of contents]'
   {-e,--extend-css}'[to add some CSS rules with a given file to generate]'
-  '-Z[internal and debugging options (only on nightly build)]'
+  '-Z[unstable / perma-unstable options (only on nightly]'
   '--sysroot[override the system root]'
   '--playground-url[URL to send code snippets to, may be reset by]'
   '--markdown-playground-url[`#!\[doc(html_playground_url=...)\]`]'

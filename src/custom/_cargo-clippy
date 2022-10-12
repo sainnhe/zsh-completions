@@ -9,6 +9,7 @@ arguments=(
   '--fix[automatically apply lint suggestions. This flag implies `--no-deps`]'
   {-h,--help}'[print this message]'
   {-V,--version}'[print version info and exit]'
+  '--explain[print the documentation for a given lint]'
   {-W,--warn}'[set lint warnings]'
   {-A,--allow}'[set lint allowed]'
   {-D,--deny}'[set lint denied]'

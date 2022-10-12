@@ -7,8 +7,8 @@ local arguments
 arguments=(
   {-x,--extended}'[extended-search mode]'
   {-e,--exact}'[enable Exact-match]'
-  '--algo[fuzzy matching algorithm: \[v1|v2\] (default: v2)]'
   '-i[case-insensitive match (default: smart-case match)]'
+  '--scheme[scoring scheme \[default|path|history\]]'
   '--literal[do not normalize latin script letters before matching]'
   {-n,--nth}'[..\]      Comma-separated list of field index expressions]'
   '--with-nth[..\]     Transform the presentation of each line using]'
@@ -26,7 +26,7 @@ arguments=(
   '--hscroll-off[number of screen columns to keep to the right of the]'
   '--filepath-word[make word-wise movements respect path separators]'
   '--jump-labels[label characters for jump and jump-accept]'
-  '--height[%\]    Display fzf window below the cursor with the given]'
+  '--height[~\]HEIGHT\[%\] Display fzf window below the cursor with the given]'
   '--min-height[minimum height when --height is given in percent]'
   '--layout[choose layout: \[default|reverse|reverse-list\]]'
   '--border[draw border around the finder]'

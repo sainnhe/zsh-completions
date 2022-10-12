@@ -9,7 +9,7 @@ arguments=(
   {-q,--quiet}'[verbosity level.]'
   '--log-file[log to the specified file instead of stderr.]'
   '--no-log-buffering[flush log records to the file immediately.]'
-  '--wait-dbg[wait until a debugger is attached to (requires debug build).]'
+  '--wait-dbg[\[Unstable\] Wait until a debugger is attached to (requires debug build).]'
   '--version[print version.]'
   {-h,--help}'[print help.]'
   '--print-config-schema[dump a LSP config JSON schema.]'
