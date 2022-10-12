@@ -15,7 +15,6 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
-[ -x "$(command -v rls)" ] && _genhelp rls
 [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
 [ -x "$(command -v rust-gdb)" ] && [ -x "$(command -v gdb)" ] && _genhelp rust-gdb
 [ -x "$(command -v rust-lldb)" ] && [ -x "$(command -v lldb)" ] && _genhelp rust-lldb
