@@ -43,8 +43,8 @@ arguments=(
   '--geo-bypass-country[force bypass geographic restriction with]'
   '--geo-bypass-ip-block[force bypass geographic restriction with]'
   {-I,--playlist-items}'[comma separated playlist_index of the videos]'
-  '--min-filesize[do not download any videos smaller than]'
-  '--max-filesize[do not download any videos larger than SIZE]'
+  '--min-filesize[abort download if filesize is smaller than]'
+  '--max-filesize[abort download if filesize if larger than]'
   '--date[download only videos uploaded on this date.]'
   '--datebefore[download only videos uploaded on or before]'
   '--dateafter[download only videos uploaded on or after]'
@@ -127,7 +127,7 @@ arguments=(
   '--no-cookies[do not read/dump cookies from/to file]'
   '--cookies-from-browser[+KEYRING\]\[:PROFILE\]\[::CONTAINER\]]'
   '--no-cookies-from-browser[do not load cookies from browser (default)]'
-  '--cache-dir[location in the filesystem where youtube-dl]'
+  '--cache-dir[location in the filesystem where yt-dlp can]'
   '--no-cache-dir[disable filesystem caching]'
   '--rm-cache-dir[delete all filesystem cache files]'
   '--write-thumbnail[write thumbnail image to disk]'
@@ -264,7 +264,7 @@ arguments=(
   '--ignore-dynamic-mpd[do not process dynamic DASH manifests]'
   '--hls-split-discontinuity[split HLS playlists to different formats at]'
   '--no-hls-split-discontinuity[do not split HLS playlists to different]'
-  '--extractor-args[pass these arguments to the extractor. See]'
+  '--extractor-args[pass ARGS arguments to the IE_KEY extractor.]'
   '*:filename:_files'
 )
 
