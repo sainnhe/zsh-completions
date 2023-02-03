@@ -25,7 +25,7 @@ zinit ice wait'0' lucid; zinit light sainnhe/zsh-completions
 
 1. Clone this repository: `git clone --depth 1 https://github.com/sainnhe/zsh-completions.git`
 2. Update submodules: `cd zsh-completions; git submodule init; git submodule update`
-3. Add this in your `~/.zshrc`: `source /path/to/zsh-completions/zsh-completions.plugin.zsh`
+3. Add this to your `~/.zshrc`: `source /path/to/zsh-completions/zsh-completions.plugin.zsh`
 
 ## License
 
