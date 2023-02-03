@@ -28,6 +28,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rip)" ] && _genhelp rip
 [ -x "$(command -v rip)" ] && _genhelp axel
 curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker > _docker
+curl -L https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose > _docker-compose
 curl -L https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg > _rg
 curl -L https://raw.githubusercontent.com/sharkdp/fd/master/contrib/completion/_fd > _fd
 curl -L https://raw.githubusercontent.com/dbrgn/tealdeer/main/completion/zsh_tealdeer > _tldr
