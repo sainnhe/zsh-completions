@@ -1,6 +1,6 @@
 ## zsh-completions
 
-This project is a personal collection of zsh completion definitions, currently includes:
+This project is my personal collection of zsh completion definitions, currently includes:
 
 - [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
 - [zchee/zsh-completions](https://github.com/zchee/zsh-completions)
