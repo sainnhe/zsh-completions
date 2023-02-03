@@ -13,7 +13,7 @@ This project is a personal collection of zsh completion definitions, currently i
 
 ### Via Plugin Manager
 
-Take [zinit](https://github.com/zdharma/zinit) for example:
+Take [zinit](https://github.com/zdharma-continuum/zinit) for example:
 
 ```shell
 zinit ice wait'0' lucid depth=1 \
