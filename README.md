@@ -17,7 +17,7 @@ Take [zinit](https://github.com/zdharma-continuum/zinit) for example:
 
 ```shell
 zinit ice wait'0' lucid depth=1 \
-    atload"zcomp_init" \
+    atload"autoload -Uz compinit && compinit -u" \
     atpull"zinit cclear && zinit creinstall sainnhe/zsh-completions"
 zinit light sainnhe/zsh-completions
 ```
