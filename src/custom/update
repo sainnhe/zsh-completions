@@ -11,6 +11,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v mdbook)" ] && mdbook completions zsh > _mdbook
 [ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
 [ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
+[ -x "$(command -v deno)" ] && deno completions zsh > _deno
 [ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
@@ -26,7 +27,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v youtube-dl)" ] && _genhelp youtube-dl
 [ -x "$(command -v yt-dlp)" ] && _genhelp yt-dlp
 [ -x "$(command -v rip)" ] && _genhelp rip
-[ -x "$(command -v rip)" ] && _genhelp axel
+[ -x "$(command -v axel)" ] && _genhelp axel
 curl -LO https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker
 curl -LO https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman
