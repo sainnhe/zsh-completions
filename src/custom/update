@@ -9,6 +9,7 @@ _genhelp() {
 cd "${_custom_dir}"
 [ -x "$(command -v limactl)" ] && limactl completion zsh > _limactl
 [ -x "$(command -v mdbook)" ] && mdbook completions zsh > _mdbook
+[ -x "$(command -v hugo)" ] && hugo completion zsh > _hugo
 [ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
 [ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
 [ -x "$(command -v deno)" ] && deno completions zsh > _deno
