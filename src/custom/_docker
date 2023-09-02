@@ -602,6 +602,7 @@ __docker_container_subcommand() {
     opts_create_run=(
         "($help -a --attach)"{-a=,--attach=}"[Attach to stdin, stdout or stderr]:device:(STDIN STDOUT STDERR)"
         "($help)*--add-host=[Add a custom host-to-IP mapping]:host\:ip mapping: "
+        "($help)*--annotation=[Add an annotation to the container (passed through to the OCI runtime)]:annotations: "
         "($help)*--blkio-weight-device=[Block IO (relative device weight)]:device:Block IO weight: "
         "($help)*--cap-add=[Add Linux capabilities]:capability: "
         "($help)*--cap-drop=[Drop Linux capabilities]:capability: "
@@ -2527,6 +2528,8 @@ __docker_volume_subcommand() {
         (prune)
             _arguments $(__docker_arguments) \
                 $opts_help \
+                "($help -a --all)"{-a,--all}"[Remove all unused local volumes, not just anonymous ones]" \
+                "($help)*--filter=[Filter values]:filter:__docker_complete_prune_filters" \
                 "($help -f --force)"{-f,--force}"[Do not prompt for confirmation]" && ret=0
             ;;
         (rm)
@@ -2774,7 +2777,7 @@ __docker_subcommand() {
                 "($help)--raw-logs[Full timestamps without ANSI coloring]" \
                 "($help)*--registry-mirror=[Preferred registry mirror]:registry mirror: " \
                 "($help)--seccomp-profile=[Path to seccomp profile]:path:_files -g \"*.json\"" \
-                "($help -s --storage-driver)"{-s=,--storage-driver=}"[Storage driver to use]:driver:(aufs btrfs devicemapper overlay overlay2 vfs zfs)" \
+                "($help -s --storage-driver)"{-s=,--storage-driver=}"[Storage driver to use]:driver:(btrfs devicemapper overlay2 vfs zfs)" \
                 "($help)--selinux-enabled[Enable selinux support]" \
                 "($help)--shutdown-timeout=[Set the shutdown timeout value in seconds]:time: " \
                 "($help)*--storage-opt=[Storage driver options]:storage driver options: " \

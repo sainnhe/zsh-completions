@@ -30,10 +30,10 @@ cd "${_custom_dir}"
 [ -x "$(command -v rip)" ] && _genhelp rip
 [ -x "$(command -v axel)" ] && _genhelp axel
 curl -LO https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker
-curl -LO https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose
+# curl -LO https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman-remote
 curl -LO https://github.com/BurntSushi/ripgrep/raw/master/complete/_rg
 curl -LO https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd
-curl -LO https://github.com/rofl0r/proxychains-ng/raw/master/completions/_proxychains4
+curl -LO https://github.com/rofl0r/proxychains-ng/raw/master/completions/zsh/_proxychains4
 curl -L -o _tldr https://github.com/dbrgn/tealdeer/raw/main/completion/zsh_tealdeer

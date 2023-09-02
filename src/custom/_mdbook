@@ -15,10 +15,10 @@ _mdbook() {
 
     local context curcontext="$curcontext" state line
     _arguments "${_arguments_options[@]}" \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 ":: :_mdbook_commands" \
 "*::: :->mdbook" \
 && ret=0
@@ -34,10 +34,10 @@ _arguments "${_arguments_options[@]}" \
 '--ignore=[Creates a VCS ignore file (i.e. .gitignore)]:ignore:(none git)' \
 '--theme[Copies the default theme into your source folder]' \
 '--force[Skips confirmation prompts]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 '::dir -- Directory to create the book in
 (Defaults to the current directory when omitted):_files' \
 && ret=0
@@ -46,16 +46,16 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 '-d+[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 '::dir -- Root directory for the book
 (Defaults to the current directory when omitted):_files' \
 && ret=0
@@ -64,18 +64,18 @@ If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]
 _arguments "${_arguments_options[@]}" \
 '-d+[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-c+[]:chapter: ' \
 '--chapter=[]:chapter: ' \
 '*-L+[A comma-separated list of directories to add to the crate search path when building tests]:dir: ' \
 '*--library-path=[A comma-separated list of directories to add to the crate search path when building tests]:dir: ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 '::dir -- Root directory for the book
 (Defaults to the current directory when omitted):_files' \
 && ret=0
@@ -84,24 +84,24 @@ If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]
 _arguments "${_arguments_options[@]}" \
 '-d+[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 '::dir -- Root directory for the book
 (Defaults to the current directory when omitted):_files' \
 && ret=0
 ;;
 (completions)
 _arguments "${_arguments_options[@]}" \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 ':shell -- the shell to generate completions for:(bash elvish fish powershell zsh)' \
 && ret=0
 ;;
@@ -109,16 +109,16 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 '-d+[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 '::dir -- Root directory for the book
 (Defaults to the current directory when omitted):_files' \
 && ret=0
@@ -127,20 +127,20 @@ If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]
 _arguments "${_arguments_options[@]}" \
 '-d+[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book
 Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to `./book`.]:dest-dir:_files' \
+If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-n+[Hostname to listen on for HTTP connections]: : ' \
 '--hostname=[Hostname to listen on for HTTP connections]: : ' \
 '-p+[Port to use for HTTP connections]: : ' \
 '--port=[Port to use for HTTP connections]: : ' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 '::dir -- Root directory for the book
 (Defaults to the current directory when omitted):_files' \
 && ret=0
@@ -207,7 +207,7 @@ _mdbook_commands() {
 'clean:Deletes a built book' \
 'completions:Generate shell completions for your shell to stdout' \
 'watch:Watches a book'\''s files and rebuilds it on changes' \
-'serve:Serves a book at http://localhost:3000, and rebuilds it on changes' \
+'serve:Serves a book at http\://localhost\:3000, and rebuilds it on changes' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'mdbook commands' commands "$@"
@@ -251,7 +251,7 @@ _mdbook__help_commands() {
 'clean:Deletes a built book' \
 'completions:Generate shell completions for your shell to stdout' \
 'watch:Watches a book'\''s files and rebuilds it on changes' \
-'serve:Serves a book at http://localhost:3000, and rebuilds it on changes' \
+'serve:Serves a book at http\://localhost\:3000, and rebuilds it on changes' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'mdbook help commands' commands "$@"
@@ -302,4 +302,8 @@ _mdbook__watch_commands() {
     _describe -t commands 'mdbook watch commands' commands "$@"
 }
 
-_mdbook "$@"
+if [ "$funcstack[1]" = "_mdbook" ]; then
+    _mdbook "$@"
+else
+    compdef _mdbook mdbook
+fi

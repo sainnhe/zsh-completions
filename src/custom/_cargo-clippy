@@ -6,7 +6,7 @@ local arguments
 
 arguments=(
   '--no-deps[run Clippy only on the given crate, without linting the dependencies]'
-  '--fix[automatically apply lint suggestions. This flag implies `--no-deps`]'
+  '--fix[automatically apply lint suggestions. This flag implies `--no-deps` and `--all-targets`]'
   {-h,--help}'[print this message]'
   {-V,--version}'[print version info and exit]'
   '--explain[print the documentation for a given lint]'

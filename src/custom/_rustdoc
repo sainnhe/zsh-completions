@@ -85,6 +85,7 @@ arguments=(
   '--plugins[removed, see issue #44136]'
   '--no-defaults[removed, see issue #44136]'
   {-r,--input-format}'[removed, see issue #44136]'
+  '--html-no-source[disable HTML source code pages generation]'
   '*:filename:_files'
 )
 
