@@ -37,3 +37,4 @@ curl -LO https://github.com/BurntSushi/ripgrep/raw/master/complete/_rg
 curl -LO https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd
 curl -LO https://github.com/rofl0r/proxychains-ng/raw/master/completions/zsh/_proxychains4
 curl -L -o _tldr https://github.com/dbrgn/tealdeer/raw/main/completion/zsh_tealdeer
+curl -L -o _bun https://github.com/oven-sh/bun/raw/main/completions/bun.zsh
