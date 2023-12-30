@@ -61,7 +61,6 @@ arguments=(
   '--index-page[markdown file to be used as index page]'
   '--enable-index-page[to enable generation of the index page]'
   '--static-root-path[path string to force loading static files from in]'
-  '--disable-per-crate-search[disables generating the crate selector on the search]'
   '--persist-doctests[directory to persist doctest executables into]'
   '--show-coverage[calculate percentage of public items with]'
   '--enable-per-target-ignores[parse ignore-foo for ignoring doctests on a per-target]'

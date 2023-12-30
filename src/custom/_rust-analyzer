@@ -30,11 +30,13 @@ arguments=(
   '--skip-data-layout[skip data layout calculation]'
   '--skip-const-eval[skip const evaluation]'
   '--run-all-ide-things[runs several IDE features after analysis, including semantics highlighting, diagnostics]'
+  '--filter[only run tests with filter as substring]'
   '--disable-build-scripts[dont run build scripts or load `OUT_DIR` values by running `cargo check` before analysis.]'
   '--disable-proc-macros[dont use expand proc macros.]'
   '--proc-macro-srv[run a custom proc-macro-srv binary.]'
   '--debug[prints debug information for any nodes with source exactly equal to snippet.]'
   '--output[the output path where the SCIP file will be written to. Defaults to `index.scip`.]'
+  '--config-path[A path to an json configuration file that can be used to customize cargo behavior.]'
   '*:filename:_files'
 )
 
