@@ -44,12 +44,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (build)
 _arguments "${_arguments_options[@]}" \
-'-d+[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'--dest-dir=[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
 '-h[Print help]' \
@@ -62,12 +58,8 @@ If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`
 ;;
 (test)
 _arguments "${_arguments_options[@]}" \
-'-d+[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'--dest-dir=[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-c+[]:chapter: ' \
 '--chapter=[]:chapter: ' \
 '*-L+[A comma-separated list of directories to add to the crate search path when building tests]:dir: ' \
@@ -82,12 +74,8 @@ If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`
 ;;
 (clean)
 _arguments "${_arguments_options[@]}" \
-'-d+[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'--dest-dir=[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -107,12 +95,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (watch)
 _arguments "${_arguments_options[@]}" \
-'-d+[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'--dest-dir=[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
 '-h[Print help]' \
@@ -125,12 +109,8 @@ If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`
 ;;
 (serve)
 _arguments "${_arguments_options[@]}" \
-'-d+[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'--dest-dir=[Output directory for the book
-Relative paths are interpreted relative to the book'\''s root directory.
-If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-n+[Hostname to listen on for HTTP connections]: : ' \
 '--hostname=[Hostname to listen on for HTTP connections]: : ' \
 '-p+[Port to use for HTTP connections]: : ' \

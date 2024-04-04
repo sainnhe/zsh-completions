@@ -68,6 +68,12 @@ arguments=(
   '--sync[synchronous search for multi-staged filtering]'
   '--listen[start HTTP server to receive actions (POST /)]'
   '--version[display version information and exit]'
+  '--walker[\[file\]\[,dir\]\[,follow\]\[,hidden\] (default: file,follow,hidden)]'
+  '--walker-root[root directory from which to start walker (default: .)]'
+  '--walker-skip[comma-separated list of directory names to skip]'
+  '--bash[print script to set up Bash shell integration]'
+  '--zsh[print script to set up Zsh shell integration]'
+  '--fish[print script to set up Fish shell integration]'
   '*:filename:_files'
 )
 

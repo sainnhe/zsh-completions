@@ -14,6 +14,10 @@ arguments=(
   {-A,--allow}'[set lint allowed]'
   {-D,--deny}'[set lint denied]'
   {-F,--forbid}'[set lint forbidden]'
+  '--manifest-path[path to Cargo.toml]'
+  '--frozen[require Cargo.lock and cache are up to date]'
+  '--locked[require Cargo.lock is up to date]'
+  '--offline[run without accessing the network]'
   '*:filename:_files'
 )
 

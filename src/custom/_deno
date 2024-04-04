@@ -21,7 +21,6 @@ _deno() {
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -29,6 +28,7 @@ _deno() {
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -62,73 +62,73 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '--allow-read=[Allow file system read access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-read
   --allow-read="/etc,/var/log.txt"]' \
 '--deny-read=[Deny file system read access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-read
   --deny-read="/etc,/var/log.txt"]' \
 '--allow-write=[Allow file system write access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-write
   --allow-write="/etc,/var/log.txt"]' \
 '--deny-write=[Deny file system write access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-write
   --deny-write="/etc,/var/log.txt"]' \
 '--allow-net=[Allow network access. Optionally specify allowed IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-net
   --allow-net="localhost\:8080,deno.land"]' \
 '--deny-net=[Deny network access. Optionally specify denied IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-net
   --deny-net="localhost\:8080,deno.land"]' \
 '--unsafely-ignore-certificate-errors=[DANGER\: Disables verification of TLS certificates]' \
 '--allow-env=[Allow access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-env
   --allow-env="PORT,HOME,PATH"]' \
 '--deny-env=[Deny access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-env
   --deny-env="PORT,HOME,PATH"]' \
 '--allow-sys=[Allow access to OS information. Optionally allow specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-sys
   --allow-sys="systemMemoryInfo,osRelease"]' \
 '--deny-sys=[Deny access to OS information. Optionally deny specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-sys
   --deny-sys="systemMemoryInfo,osRelease"]' \
 '--allow-run=[Allow running subprocesses. Optionally specify allowed runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-run
   --allow-run="whoami,ps"]' \
 '--deny-run=[Deny running subprocesses. Optionally specify denied runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-run
   --deny-run="whoami,ps"]' \
 '--allow-ffi=[(Unstable) Allow loading dynamic libraries. Optionally specify allowed directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-ffi
   --allow-ffi="./libfoo.so"]' \
 '--deny-ffi=[(Unstable) Deny loading dynamic libraries. Optionally specify denied directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-ffi
   --deny-ffi="./libfoo.so"]' \
@@ -141,6 +141,7 @@ Examples\:
 '--strace-ops=[Trace low-level op calls]' \
 '(--no-check)--check=[Type-check modules]' \
 '--watch=[Watch for file changes and restart automatically]' \
+'--watch-exclude=[Exclude provided files/patterns from watch mode]' \
 '(--watch)--unstable-hmr=[UNSTABLE\: Watch for file changes and hot replace modules]' \
 '--ext=[Set content type of the supplied file]: :(ts tsx js jsx)' \
 '--env=[Load .env file]' \
@@ -152,18 +153,17 @@ Examples\:
 '(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--allow-hrtime[Allow high-resolution time measurement. Note\: this can enable timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--deny-hrtime[Deny high-resolution time measurement. Note\: this can prevent timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '-A[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--allow-all[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
-'--prompt[deprecated\: Fallback to prompt if required permission wasn'\''t passed]' \
 '--no-prompt[Always throw if required permission wasn'\''t passed]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
@@ -172,7 +172,6 @@ https\://deno.land/manual@v1.39.1/basics/permissions
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -180,6 +179,7 @@ https\://deno.land/manual@v1.39.1/basics/permissions
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -188,6 +188,32 @@ https\://deno.land/manual@v1.39.1/basics/permissions
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 '*::script_arg -- Script arg:_files' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" \
+'-L+[Set log level]: :(trace debug info)' \
+'--log-level=[Set log level]: :(trace debug info)' \
+'--unstable[Enable unstable features and APIs]' \
+'--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
+'--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
+'--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
+'--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
+'--unstable-cron[Enable unstable Deno.cron API]' \
+'--unstable-ffi[Enable unstable FFI APIs]' \
+'--unstable-fs[Enable unstable file system APIs]' \
+'--unstable-http[Enable unstable HTTP APIs]' \
+'--unstable-kv[Enable unstable Key-Value store APIs]' \
+'--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
+'--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
+'--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
+'--unstable-worker-options[Enable unstable Web Worker APIs]' \
+'-q[Suppress diagnostic output]' \
+'--quiet[Suppress diagnostic output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::packages -- List of packages to add:' \
 && ret=0
 ;;
 (bench)
@@ -207,73 +233,73 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '--allow-read=[Allow file system read access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-read
   --allow-read="/etc,/var/log.txt"]' \
 '--deny-read=[Deny file system read access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-read
   --deny-read="/etc,/var/log.txt"]' \
 '--allow-write=[Allow file system write access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-write
   --allow-write="/etc,/var/log.txt"]' \
 '--deny-write=[Deny file system write access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-write
   --deny-write="/etc,/var/log.txt"]' \
 '--allow-net=[Allow network access. Optionally specify allowed IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-net
   --allow-net="localhost\:8080,deno.land"]' \
 '--deny-net=[Deny network access. Optionally specify denied IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-net
   --deny-net="localhost\:8080,deno.land"]' \
 '--unsafely-ignore-certificate-errors=[DANGER\: Disables verification of TLS certificates]' \
 '--allow-env=[Allow access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-env
   --allow-env="PORT,HOME,PATH"]' \
 '--deny-env=[Deny access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-env
   --deny-env="PORT,HOME,PATH"]' \
 '--allow-sys=[Allow access to OS information. Optionally allow specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-sys
   --allow-sys="systemMemoryInfo,osRelease"]' \
 '--deny-sys=[Deny access to OS information. Optionally deny specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-sys
   --deny-sys="systemMemoryInfo,osRelease"]' \
 '--allow-run=[Allow running subprocesses. Optionally specify allowed runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-run
   --allow-run="whoami,ps"]' \
 '--deny-run=[Deny running subprocesses. Optionally specify denied runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-run
   --deny-run="whoami,ps"]' \
 '--allow-ffi=[(Unstable) Allow loading dynamic libraries. Optionally specify allowed directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-ffi
   --allow-ffi="./libfoo.so"]' \
 '--deny-ffi=[(Unstable) Deny loading dynamic libraries. Optionally specify denied directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-ffi
   --deny-ffi="./libfoo.so"]' \
@@ -282,14 +308,14 @@ Examples\:
 '--seed=[Set the random number generator seed]:NUMBER: ' \
 '--strace-ops=[Trace low-level op calls]' \
 '(--no-check)--check=[Type-check modules]' \
-'--ignore=[Ignore files]: :_files' \
+'--ignore=[Ignore files]: : ' \
 '--filter=[Run benchmarks with this string or pattern in the bench name]: : ' \
+'--watch-exclude=[Exclude provided files/patterns from watch mode]' \
 '--env=[Load .env file]' \
 '--unstable[Enable unstable features and APIs]' \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -297,6 +323,7 @@ Examples\:
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -308,18 +335,17 @@ Examples\:
 '(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--allow-hrtime[Allow high-resolution time measurement. Note\: this can enable timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--deny-hrtime[Deny high-resolution time measurement. Note\: this can prevent timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '-A[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--allow-all[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
-'--prompt[deprecated\: Fallback to prompt if required permission wasn'\''t passed]' \
 '--no-prompt[Always throw if required permission wasn'\''t passed]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
@@ -329,7 +355,7 @@ https\://deno.land/manual@v1.39.1/basics/permissions
 '--no-clear-screen[Do not clear terminal screen when under watch mode]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
-'*::files -- List of file names to run:_files' \
+'*::files -- List of file names to run:' \
 && ret=0
 ;;
 (bundle)
@@ -349,12 +375,12 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '(--no-check)--check=[Type-check modules]' \
+'--watch-exclude=[Exclude provided files/patterns from watch mode]' \
 '--ext=[Set content type of the supplied file]: :(ts tsx js jsx)' \
 '--unstable[Enable unstable features and APIs]' \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -362,6 +388,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -401,7 +428,6 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -409,6 +435,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -443,7 +470,6 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -451,6 +477,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -485,73 +512,73 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '--allow-read=[Allow file system read access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-read
   --allow-read="/etc,/var/log.txt"]' \
 '--deny-read=[Deny file system read access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-read
   --deny-read="/etc,/var/log.txt"]' \
 '--allow-write=[Allow file system write access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-write
   --allow-write="/etc,/var/log.txt"]' \
 '--deny-write=[Deny file system write access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-write
   --deny-write="/etc,/var/log.txt"]' \
 '--allow-net=[Allow network access. Optionally specify allowed IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-net
   --allow-net="localhost\:8080,deno.land"]' \
 '--deny-net=[Deny network access. Optionally specify denied IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-net
   --deny-net="localhost\:8080,deno.land"]' \
 '--unsafely-ignore-certificate-errors=[DANGER\: Disables verification of TLS certificates]' \
 '--allow-env=[Allow access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-env
   --allow-env="PORT,HOME,PATH"]' \
 '--deny-env=[Deny access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-env
   --deny-env="PORT,HOME,PATH"]' \
 '--allow-sys=[Allow access to OS information. Optionally allow specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-sys
   --allow-sys="systemMemoryInfo,osRelease"]' \
 '--deny-sys=[Deny access to OS information. Optionally deny specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-sys
   --deny-sys="systemMemoryInfo,osRelease"]' \
 '--allow-run=[Allow running subprocesses. Optionally specify allowed runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-run
   --allow-run="whoami,ps"]' \
 '--deny-run=[Deny running subprocesses. Optionally specify denied runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-run
   --deny-run="whoami,ps"]' \
 '--allow-ffi=[(Unstable) Allow loading dynamic libraries. Optionally specify allowed directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-ffi
   --allow-ffi="./libfoo.so"]' \
 '--deny-ffi=[(Unstable) Deny loading dynamic libraries. Optionally specify denied directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-ffi
   --deny-ffi="./libfoo.so"]' \
@@ -563,14 +590,13 @@ Examples\:
 '*--include=[Additional module to include in the module graph]: :_files' \
 '-o+[Output file (defaults to \$PWD/<inferred-name>)]: :_files' \
 '--output=[Output file (defaults to \$PWD/<inferred-name>)]: :_files' \
-'--target=[Target OS architecture]: :(x86_64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin aarch64-apple-darwin)' \
+'--target=[Target OS architecture]: :(x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu x86_64-pc-windows-msvc x86_64-apple-darwin aarch64-apple-darwin)' \
 '--ext=[Set content type of the supplied file]: :(ts tsx js jsx)' \
 '--env=[Load .env file]' \
 '--unstable[Enable unstable features and APIs]' \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -578,6 +604,7 @@ Examples\:
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -589,18 +616,17 @@ Examples\:
 '(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--allow-hrtime[Allow high-resolution time measurement. Note\: this can enable timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--deny-hrtime[Deny high-resolution time measurement. Note\: this can prevent timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '-A[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--allow-all[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
-'--prompt[deprecated\: Fallback to prompt if required permission wasn'\''t passed]' \
 '--no-prompt[Always throw if required permission wasn'\''t passed]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
@@ -618,7 +644,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -626,6 +651,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -648,7 +674,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -656,6 +681,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -686,7 +712,6 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -694,6 +719,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -741,7 +767,6 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -749,6 +774,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -761,8 +787,8 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
-'(--ext)-T[deprecated\: Treat eval input as TypeScript]' \
-'(--ext)--ts[deprecated\: Treat eval input as TypeScript]' \
+'(--ext)-T[deprecated\: Use \`--ext=ts\` instead. The \`--ts\` and \`-T\` flags are deprecated and will be removed in Deno 2.0.]' \
+'(--ext)--ts[deprecated\: Use \`--ext=ts\` instead. The \`--ts\` and \`-T\` flags are deprecated and will be removed in Deno 2.0.]' \
 '-p[print result to stdout]' \
 '--print[print result to stdout]' \
 '-h[Print help (see more with '\''--help'\'')]' \
@@ -778,6 +804,7 @@ _arguments "${_arguments_options[@]}" \
 '--config=[Specify the configuration file]:FILE:_files' \
 '--ext=[Set content type of the supplied file]: :(ts tsx js jsx md json jsonc ipynb)' \
 '--ignore=[Ignore formatting particular source files]: :_files' \
+'--watch-exclude=[Exclude provided files/patterns from watch mode]' \
 '--use-tabs=[Use tabs instead of spaces for indentation. Defaults to false.]' \
 '--line-width=[Define maximum line width. Defaults to 80.]: : ' \
 '--indent-width=[Define indentation width. Defaults to 2.]: : ' \
@@ -788,7 +815,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -796,6 +822,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -818,7 +845,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -826,6 +852,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -857,7 +884,6 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -865,6 +891,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -873,6 +900,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '(-c --config)--no-config[Disable automatic loading of the configuration file.]' \
 '--no-remote[Do not resolve remote modules]' \
 '--no-npm[Do not resolve npm modules]' \
+'(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--json[UNSTABLE\: Outputs the information in JSON format]' \
 '-h[Print help (see more with '\''--help'\'')]' \
@@ -898,73 +926,73 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '--allow-read=[Allow file system read access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-read
   --allow-read="/etc,/var/log.txt"]' \
 '--deny-read=[Deny file system read access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-read
   --deny-read="/etc,/var/log.txt"]' \
 '--allow-write=[Allow file system write access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-write
   --allow-write="/etc,/var/log.txt"]' \
 '--deny-write=[Deny file system write access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-write
   --deny-write="/etc,/var/log.txt"]' \
 '--allow-net=[Allow network access. Optionally specify allowed IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-net
   --allow-net="localhost\:8080,deno.land"]' \
 '--deny-net=[Deny network access. Optionally specify denied IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-net
   --deny-net="localhost\:8080,deno.land"]' \
 '--unsafely-ignore-certificate-errors=[DANGER\: Disables verification of TLS certificates]' \
 '--allow-env=[Allow access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-env
   --allow-env="PORT,HOME,PATH"]' \
 '--deny-env=[Deny access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-env
   --deny-env="PORT,HOME,PATH"]' \
 '--allow-sys=[Allow access to OS information. Optionally allow specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-sys
   --allow-sys="systemMemoryInfo,osRelease"]' \
 '--deny-sys=[Deny access to OS information. Optionally deny specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-sys
   --deny-sys="systemMemoryInfo,osRelease"]' \
 '--allow-run=[Allow running subprocesses. Optionally specify allowed runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-run
   --allow-run="whoami,ps"]' \
 '--deny-run=[Deny running subprocesses. Optionally specify denied runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-run
   --deny-run="whoami,ps"]' \
 '--allow-ffi=[(Unstable) Allow loading dynamic libraries. Optionally specify allowed directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-ffi
   --allow-ffi="./libfoo.so"]' \
 '--deny-ffi=[(Unstable) Deny loading dynamic libraries. Optionally specify denied directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-ffi
   --deny-ffi="./libfoo.so"]' \
@@ -979,11 +1007,12 @@ Examples\:
 '-n+[Executable file name]: : ' \
 '--name=[Executable file name]: : ' \
 '--root=[Installation root]: :_files -/' \
+'-g[Install a package or script as a globally available executable]' \
+'--global[Install a package or script as a globally available executable]' \
 '--unstable[Enable unstable features and APIs]' \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -991,6 +1020,7 @@ Examples\:
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1002,18 +1032,17 @@ Examples\:
 '(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--allow-hrtime[Allow high-resolution time measurement. Note\: this can enable timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--deny-hrtime[Deny high-resolution time measurement. Note\: this can prevent timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '-A[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--allow-all[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
-'--prompt[deprecated\: Fallback to prompt if required permission wasn'\''t passed]' \
 '--no-prompt[Always throw if required permission wasn'\''t passed]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
@@ -1035,7 +1064,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1043,6 +1071,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1061,7 +1090,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1069,11 +1097,14 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
 '-q[Suppress diagnostic output]' \
 '--quiet[Suppress diagnostic output]' \
+'-g[Remove globally installed package or module]' \
+'--global[Remove globally installed package or module]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 ':name:' \
@@ -1087,7 +1118,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1095,6 +1125,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1114,11 +1145,11 @@ _arguments "${_arguments_options[@]}" \
 '-c+[Specify the configuration file]:FILE:_files' \
 '--config=[Specify the configuration file]:FILE:_files' \
 '--ignore=[Ignore linting particular source files]: :_files' \
+'--watch-exclude=[Exclude provided files/patterns from watch mode]' \
 '--unstable[Enable unstable features and APIs]' \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1126,11 +1157,13 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
 '-q[Suppress diagnostic output]' \
 '--quiet[Suppress diagnostic output]' \
+'--fix[Fix any linting errors for rules that support it]' \
 '--rules[List available rules]' \
 '(-c --config)--no-config[Disable automatic loading of the configuration file.]' \
 '--json[Output lint result in JSON format]' \
@@ -1142,16 +1175,19 @@ _arguments "${_arguments_options[@]}" \
 '*::files:_files' \
 && ret=0
 ;;
-(do-not-use-publish)
+(publish)
 _arguments "${_arguments_options[@]}" \
 '-L+[Set log level]: :(trace debug info)' \
 '--log-level=[Set log level]: :(trace debug info)' \
 '--token=[The API token to use when publishing. If unset, interactive authentication is be used]: : ' \
+'-c+[Specify the configuration file]:FILE:_files' \
+'--config=[Specify the configuration file]:FILE:_files' \
+'(--no-check)--check=[Type-check modules]' \
+'--no-check=[Skip type-checking modules]' \
 '--unstable[Enable unstable features and APIs]' \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1159,14 +1195,19 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
 '-q[Suppress diagnostic output]' \
 '--quiet[Suppress diagnostic output]' \
-'-h[Print help]' \
-'--help[Print help]' \
-':directory -- The directory to the package, or workspace of packages to publish:_files -/' \
+'(-c --config)--no-config[Disable automatic loading of the configuration file.]' \
+'--dry-run[Prepare the package for publishing performing all checks and validations without uploading]' \
+'--allow-slow-types[Allow publishing with slow types]' \
+'--allow-dirty[Allow publishing if the repository has uncommitted changed]' \
+'--no-provenance[Disable provenance attestation. Enabled by default on Github actions, publicly links the package to where it was built and published from.]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
 && ret=0
 ;;
 (repl)
@@ -1187,73 +1228,73 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '--allow-read=[Allow file system read access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-read
   --allow-read="/etc,/var/log.txt"]' \
 '--deny-read=[Deny file system read access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-read
   --deny-read="/etc,/var/log.txt"]' \
 '--allow-write=[Allow file system write access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-write
   --allow-write="/etc,/var/log.txt"]' \
 '--deny-write=[Deny file system write access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-write
   --deny-write="/etc,/var/log.txt"]' \
 '--allow-net=[Allow network access. Optionally specify allowed IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-net
   --allow-net="localhost\:8080,deno.land"]' \
 '--deny-net=[Deny network access. Optionally specify denied IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-net
   --deny-net="localhost\:8080,deno.land"]' \
 '--unsafely-ignore-certificate-errors=[DANGER\: Disables verification of TLS certificates]' \
 '--allow-env=[Allow access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-env
   --allow-env="PORT,HOME,PATH"]' \
 '--deny-env=[Deny access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-env
   --deny-env="PORT,HOME,PATH"]' \
 '--allow-sys=[Allow access to OS information. Optionally allow specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-sys
   --allow-sys="systemMemoryInfo,osRelease"]' \
 '--deny-sys=[Deny access to OS information. Optionally deny specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-sys
   --deny-sys="systemMemoryInfo,osRelease"]' \
 '--allow-run=[Allow running subprocesses. Optionally specify allowed runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-run
   --allow-run="whoami,ps"]' \
 '--deny-run=[Deny running subprocesses. Optionally specify denied runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-run
   --deny-run="whoami,ps"]' \
 '--allow-ffi=[(Unstable) Allow loading dynamic libraries. Optionally specify allowed directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-ffi
   --allow-ffi="./libfoo.so"]' \
 '--deny-ffi=[(Unstable) Deny loading dynamic libraries. Optionally specify denied directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-ffi
   --deny-ffi="./libfoo.so"]' \
@@ -1271,7 +1312,6 @@ Examples\:
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1279,6 +1319,7 @@ Examples\:
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1290,18 +1331,17 @@ Examples\:
 '(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--allow-hrtime[Allow high-resolution time measurement. Note\: this can enable timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--deny-hrtime[Deny high-resolution time measurement. Note\: this can prevent timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '-A[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--allow-all[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
-'--prompt[deprecated\: Fallback to prompt if required permission wasn'\''t passed]' \
 '--no-prompt[Always throw if required permission wasn'\''t passed]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
@@ -1320,7 +1360,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1328,6 +1367,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1354,73 +1394,73 @@ _arguments "${_arguments_options[@]}" \
 If value is not provided, defaults to "deno.lock" in the current working directory.]' \
 '--cert=[Load certificate authority from PEM encoded file]:FILE:_files' \
 '--allow-read=[Allow file system read access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-read
   --allow-read="/etc,/var/log.txt"]' \
 '--deny-read=[Deny file system read access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-read
   --deny-read="/etc,/var/log.txt"]' \
 '--allow-write=[Allow file system write access. Optionally specify allowed paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-write
   --allow-write="/etc,/var/log.txt"]' \
 '--deny-write=[Deny file system write access. Optionally specify denied paths.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-write
   --deny-write="/etc,/var/log.txt"]' \
 '--allow-net=[Allow network access. Optionally specify allowed IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-net
   --allow-net="localhost\:8080,deno.land"]' \
 '--deny-net=[Deny network access. Optionally specify denied IP addresses and host names, with ports as necessary.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-net
   --deny-net="localhost\:8080,deno.land"]' \
 '--unsafely-ignore-certificate-errors=[DANGER\: Disables verification of TLS certificates]' \
 '--allow-env=[Allow access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-env
   --allow-env="PORT,HOME,PATH"]' \
 '--deny-env=[Deny access to system environment information. Optionally specify accessible environment variables.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-env
   --deny-env="PORT,HOME,PATH"]' \
 '--allow-sys=[Allow access to OS information. Optionally allow specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-sys
   --allow-sys="systemMemoryInfo,osRelease"]' \
 '--deny-sys=[Deny access to OS information. Optionally deny specific APIs by function name.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-sys
   --deny-sys="systemMemoryInfo,osRelease"]' \
 '--allow-run=[Allow running subprocesses. Optionally specify allowed runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-run
   --allow-run="whoami,ps"]' \
 '--deny-run=[Deny running subprocesses. Optionally specify denied runnable program names.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-run
   --deny-run="whoami,ps"]' \
 '--allow-ffi=[(Unstable) Allow loading dynamic libraries. Optionally specify allowed directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --allow-ffi
   --allow-ffi="./libfoo.so"]' \
 '--deny-ffi=[(Unstable) Deny loading dynamic libraries. Optionally specify denied directories or files.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 Examples\:
   --deny-ffi
   --deny-ffi="./libfoo.so"]' \
@@ -1437,8 +1477,9 @@ Examples\:
 '--filter=[Run tests with this string or pattern in the test name]: : ' \
 '--shuffle=[Shuffle the order in which the tests are run]' \
 '(--inspect --inspect-wait --inspect-brk)--coverage=[Collect coverage profile data into DIR. If DIR is not specified, it uses '\''coverage/'\''.]' \
-'-j+[deprecated\: Number of parallel workers, defaults to number of available CPUs when no value is provided. Defaults to 1 when the option is not present.]' \
-'--jobs=[deprecated\: Number of parallel workers, defaults to number of available CPUs when no value is provided. Defaults to 1 when the option is not present.]' \
+'-j+[deprecated\: The \`--jobs\` flag is deprecated and will be removed in Deno 2.0. Use the \`--parallel\` flag with possibly the \`DENO_JOBS\` environment variable instead.]' \
+'--jobs=[deprecated\: The \`--jobs\` flag is deprecated and will be removed in Deno 2.0. Use the \`--parallel\` flag with possibly the \`DENO_JOBS\` environment variable instead.]' \
+'--watch-exclude=[Exclude provided files/patterns from watch mode]' \
 '--junit-path=[Write a JUnit XML test report to PATH. Use '\''-'\'' to write to stdout which is the default when PATH is not provided.]:PATH:_files' \
 '--reporter=[Select reporter to use. Default to '\''pretty'\''.]: :(pretty dot junit tap)' \
 '--env=[Load .env file]' \
@@ -1446,7 +1487,6 @@ Examples\:
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1454,6 +1494,7 @@ Examples\:
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1465,23 +1506,23 @@ Examples\:
 '(--no-lock)--lock-write[Force overwriting the lock file.]' \
 '(--lock)--no-lock[Disable auto discovery of the lock file.]' \
 '--allow-hrtime[Allow high-resolution time measurement. Note\: this can enable timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--deny-hrtime[Deny high-resolution time measurement. Note\: this can prevent timing attacks and fingerprinting.
-Docs\: https\://deno.land/manual@v1.39.1/basics/permissions
+Docs\: https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '-A[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
 '--allow-all[Allow all permissions. Learn more about permissions in Deno\:
-https\://deno.land/manual@v1.39.1/basics/permissions
+https\://deno.land/manual@v1.42.1/basics/permissions
 ]' \
-'--prompt[deprecated\: Fallback to prompt if required permission wasn'\''t passed]' \
 '--no-prompt[Always throw if required permission wasn'\''t passed]' \
 '--cached-only[Require that remote dependencies are already cached]' \
 '--enable-testing-features-do-not-use[INTERNAL\: Enable internal features used during integration testing]' \
 '--no-run[Cache test modules, but don'\''t run tests]' \
-'--trace-ops[Enable tracing of async ops. Useful when debugging leaking ops in test, but impacts test execution time.]' \
+'--trace-ops[Deprecated alias for --trace-leaks.]' \
+'--trace-leaks[Enable tracing of leaks. Useful when debugging leaking ops in test, but impacts test execution time.]' \
 '--doc[Type-check code blocks in JSDoc and Markdown]' \
 '--allow-none[Don'\''t return error code if no test files are found]' \
 '(-j --jobs)--parallel[Run test modules in parallel. Parallelism defaults to the number of available CPUs or the value in the DENO_JOBS environment variable.]' \
@@ -1500,7 +1541,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1508,6 +1548,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1528,7 +1569,6 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1536,6 +1576,7 @@ _arguments "${_arguments_options[@]}" \
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1569,7 +1610,6 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-bare-node-builtins[Enable unstable bare node builtins feature]' \
 '--unstable-byonm[Enable unstable '\''bring your own node_modules'\'' feature]' \
 '--unstable-sloppy-imports[Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing.]' \
-'--unstable-workspaces[Enable unstable '\''workspaces'\'' feature]' \
 '--unstable-broadcast-channel[Enable unstable \`BroadcastChannel\` API]' \
 '--unstable-cron[Enable unstable Deno.cron API]' \
 '--unstable-ffi[Enable unstable FFI APIs]' \
@@ -1577,6 +1617,7 @@ If value is not provided, defaults to "deno.lock" in the current working directo
 '--unstable-http[Enable unstable HTTP APIs]' \
 '--unstable-kv[Enable unstable Key-Value store APIs]' \
 '--unstable-net[Enable unstable net APIs]' \
+'--unstable-temporal[Enable unstable Temporal API]' \
 '--unstable-unsafe-proto[Enable unsafe __proto__ support. This is a security risk.]' \
 '--unstable-webgpu[Enable unstable \`WebGPU\` API]' \
 '--unstable-worker-options[Enable unstable Web Worker APIs]' \
@@ -1604,6 +1645,7 @@ esac
 _deno_commands() {
     local commands; commands=(
 'run:Run a JavaScript or TypeScript program' \
+'add:Add dependencies' \
 'bench:Run benchmarks' \
 'bundle:Bundle module and dependencies into single file' \
 'cache:Cache the dependencies' \
@@ -1621,7 +1663,7 @@ _deno_commands() {
 'uninstall:Uninstall a script previously installed with deno install' \
 'lsp:Start the language server' \
 'lint:Lint source files' \
-'do-not-use-publish:Publish a package to the Deno registry' \
+'publish:Unstable preview feature\: Publish the current working directory'\''s package or workspace' \
 'repl:Read Eval Print Loop' \
 'task:Run a task defined in the configuration file' \
 'test:Run tests' \
@@ -1631,6 +1673,11 @@ _deno_commands() {
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'deno commands' commands "$@"
+}
+(( $+functions[_deno__add_commands] )) ||
+_deno__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'deno add commands' commands "$@"
 }
 (( $+functions[_deno__bench_commands] )) ||
 _deno__bench_commands() {
@@ -1666,11 +1713,6 @@ _deno__completions_commands() {
 _deno__coverage_commands() {
     local commands; commands=()
     _describe -t commands 'deno coverage commands' commands "$@"
-}
-(( $+functions[_deno__do-not-use-publish_commands] )) ||
-_deno__do-not-use-publish_commands() {
-    local commands; commands=()
-    _describe -t commands 'deno do-not-use-publish commands' commands "$@"
 }
 (( $+functions[_deno__doc_commands] )) ||
 _deno__doc_commands() {
@@ -1721,6 +1763,11 @@ _deno__lint_commands() {
 _deno__lsp_commands() {
     local commands; commands=()
     _describe -t commands 'deno lsp commands' commands "$@"
+}
+(( $+functions[_deno__publish_commands] )) ||
+_deno__publish_commands() {
+    local commands; commands=()
+    _describe -t commands 'deno publish commands' commands "$@"
 }
 (( $+functions[_deno__repl_commands] )) ||
 _deno__repl_commands() {
