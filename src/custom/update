@@ -13,6 +13,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rg)" ] && rg --generate complete-zsh > _rg
 # [ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
 [ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
+[ -x "$(command -v pnpm)" ] && pnpm completion zsh > pnpm.plugin.zsh
 [ -x "$(command -v deno)" ] && deno completions zsh > _deno
 [ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
@@ -31,7 +32,6 @@ cd "${_custom_dir}"
 [ -x "$(command -v rip)" ] && _genhelp rip
 [ -x "$(command -v axel)" ] && _genhelp axel
 curl -LO https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker
-# curl -LO https://github.com/docker/compose/raw/master/contrib/completion/zsh/_docker-compose
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman-remote
 curl -LO https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd

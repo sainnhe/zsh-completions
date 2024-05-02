@@ -7,6 +7,7 @@ local arguments
 arguments=(
   {-h,--help}'[display this message]'
   '--cfg[configure the compilation environment.]'
+  '--check-cfg[provide list of expected cfgs for checking]'
   '-L[\]PATH      Add a directory to the library search path. The]'
   '-l[\]NAME\[:RENAME\]]'
   '--crate-type[comma separated list of types of crates]'

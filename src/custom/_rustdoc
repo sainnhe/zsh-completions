@@ -67,6 +67,7 @@ arguments=(
   '--runtool[tool to run tests with when building for a different target than host]'
   '--runtool-arg[(of possibly many) arguments to pass to the runtool]'
   '--test-builder[the rustc-like binary to use as the test builder]'
+  '--test-builder-wrapper[wrapper program to pass test-builder and arguments]'
   '--check[run rustdoc checks]'
   '--generate-redirect-map[generate JSON file at the top level instead of]'
   '--emit[toolchain-shared-resources,invocation-specific\]]'
