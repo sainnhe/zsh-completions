@@ -97,6 +97,7 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 '-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
+'--watcher=[The filesystem watching technique]: :(poll native)' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
 '-h[Print help]' \
@@ -115,6 +116,7 @@ _arguments "${_arguments_options[@]}" \
 '--hostname=[Hostname to listen on for HTTP connections]: : ' \
 '-p+[Port to use for HTTP connections]: : ' \
 '--port=[Port to use for HTTP connections]: : ' \
+'--watcher=[The filesystem watching technique]: :(poll native)' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
 '-h[Print help]' \
