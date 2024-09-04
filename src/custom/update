@@ -18,6 +18,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v kubectl)" ] && kubectl completion zsh > _kubectl
+[ -x "$(command -v helm)" ] && helm completion zsh > _helm
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
 [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer

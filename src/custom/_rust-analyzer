@@ -22,7 +22,6 @@ arguments=(
   {-o,--only}'[only analyze items matching this path.]'
   '--with-deps[also analyze all dependencies.]'
   '--no-sysroot[dont load sysroot crates (`std`, `core` & friends).]'
-  '--query-sysroot-metadata[run cargo metadata on the sysroot to analyze its third-party dependencies.]'
   '--disable-build-scripts[dont run build scripts or load `OUT_DIR` values by running `cargo check` before analysis.]'
   '--disable-proc-macros[dont use expand proc macros.]'
   '--skip-lowering[skip body lowering.]'
@@ -38,8 +37,10 @@ arguments=(
   '--disable-proc-macros[dont use expand proc macros.]'
   '--proc-macro-srv[run a custom proc-macro-srv binary.]'
   '--debug[prints debug information for any nodes with source exactly equal to snippet.]'
+  '--exclude-vendored-libraries[exclude code from vendored libraries from the resulting index.]'
   '--output[the output path where the SCIP file will be written to. Defaults to `index.scip`.]'
   '--config-path[A path to an json configuration file that can be used to customize cargo behavior.]'
+  '--exclude-vendored-libraries[exclude code from vendored libraries from the resulting index.]'
   '*:filename:_files'
 )
 
