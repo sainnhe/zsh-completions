@@ -9,7 +9,7 @@ arguments=(
   '--emit[what data to emit and how]'
   '--backup[backup any modified files.]'
   '--config-path[for the configuration file\]]'
-  '--edition[2015|2018|2021\]]'
+  '--edition[2015|2018|2021|2024\]]'
   '--color[use colored output (if supported)]'
   '--print-config[PATH]'
   {-l,--files-with-diff}'[prints the names of mismatched files that were]'
