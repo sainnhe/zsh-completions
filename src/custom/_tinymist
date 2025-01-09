@@ -1,0 +1,382 @@
+#compdef tinymist
+
+autoload -U is-at-least
+
+_tinymist() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_tinymist_commands" \
+"*::: :->tinymist" \
+&& ret=0
+    case $state in
+    (tinymist)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:tinymist-command-$line[1]:"
+        case $line[1] in
+            (completion)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::shell -- The shell to generate the completion script for. If not provided, it will be inferred from the environment:(bash elvish fig fish powershell zsh nushell)' \
+&& ret=0
+;;
+(lsp)
+_arguments "${_arguments_options[@]}" : \
+'--mirror=[Mirror the stdin to the file]:FILE:_default' \
+'--replay=[Replay input from the file]:FILE:_default' \
+'*--font-path=[Font paths]:DIR:_files' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(query)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_tinymist__query_commands" \
+"*::: :->query" \
+&& ret=0
+
+    case $state in
+    (query)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:tinymist-query-command-$line[1]:"
+        case $line[1] in
+            (packageDocs)
+_arguments "${_arguments_options[@]}" : \
+'--path=[The path of the package to request docs for]:PATH:_default' \
+'--id=[The package of the package to request docs for]:ID:_default' \
+'-o+[The output path for the requested docs]:OUTPUT:_default' \
+'--output=[The output path for the requested docs]:OUTPUT:_default' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(checkPackage)
+_arguments "${_arguments_options[@]}" : \
+'--path=[The path of the package to request docs for]:PATH:_default' \
+'--id=[The package of the package to request docs for]:ID:_default' \
+'-o+[The output path for the requested docs]:OUTPUT:_default' \
+'--output=[The output path for the requested docs]:OUTPUT:_default' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_tinymist__query__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:tinymist-query-help-command-$line[1]:"
+        case $line[1] in
+            (packageDocs)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(checkPackage)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(trace-lsp)
+_arguments "${_arguments_options[@]}" : \
+'--rpc-kind=[]:RPC_KIND:_default' \
+'--mirror=[Mirror the stdin to the file]:FILE:_default' \
+'--replay=[Replay input from the file]:FILE:_default' \
+'--root=[Configures the project root (for absolute paths)]:DIR:_files' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
+'*--font-path=[Font paths]:DIR:_files' \
+'--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
+'--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp]:UNIX_TIMESTAMP:_default' \
+'--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
+'--persist[]' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::input -- Path to input Typst file:_default' \
+&& ret=0
+;;
+(preview)
+_arguments "${_arguments_options[@]}" : \
+'--invert-colors=[Invert colors of the preview (useful for dark themes without cost). Please note you could see the origin colors when you hover elements in the preview]:INVERT_COLORS:_default' \
+'--task-id=[Used by lsp for identifying the task]:TASK_ID:_default' \
+'--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((onSave\:"Refresh preview on save"
+onType\:"Refresh preview on type"))' \
+'--root=[Configures the project root (for absolute paths)]:DIR:_files' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
+'*--font-path=[Font paths]:DIR:_files' \
+'--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
+'--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp]:UNIX_TIMESTAMP:_default' \
+'--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
+'--preview-mode=[Preview mode]:MODE:((document\:"Preview mode for regular document"
+slide\:"Preview mode for slide"))' \
+'--data-plane-host=[Data plane server will bind to this address. Note\: if it equals to \`static_file_host\`, same address will be used]:HOST:_default' \
+'--control-plane-host=[Control plane server will bind to this address]:HOST:_default' \
+'--host=[(File) Host for the preview server. Note\: if it equals to \`data_plane_host\`, same address will be used]:HOST:_default' \
+'--partial-rendering[Only render visible part of the document. This can improve performance but still being experimental]' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'--not-primary[Let it not be the primary instance]' \
+'--no-open[Don'\''t open the preview in the browser after compilation]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::input -- Path to input Typst file:_default' \
+&& ret=0
+;;
+(probe)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_tinymist__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:tinymist-help-command-$line[1]:"
+        case $line[1] in
+            (completion)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(lsp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(query)
+_arguments "${_arguments_options[@]}" : \
+":: :_tinymist__help__query_commands" \
+"*::: :->query" \
+&& ret=0
+
+    case $state in
+    (query)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:tinymist-help-query-command-$line[1]:"
+        case $line[1] in
+            (packageDocs)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(checkPackage)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(trace-lsp)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(preview)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(probe)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_tinymist_commands] )) ||
+_tinymist_commands() {
+    local commands; commands=(
+'completion:Generates completion script to stdout' \
+'lsp:Runs language server' \
+'query:Runs language query' \
+'trace-lsp:Runs language server for tracing some typst program' \
+'preview:Runs preview server' \
+'probe:Probes existence (Nop run)' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'tinymist commands' commands "$@"
+}
+(( $+functions[_tinymist__completion_commands] )) ||
+_tinymist__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist completion commands' commands "$@"
+}
+(( $+functions[_tinymist__help_commands] )) ||
+_tinymist__help_commands() {
+    local commands; commands=(
+'completion:Generates completion script to stdout' \
+'lsp:Runs language server' \
+'query:Runs language query' \
+'trace-lsp:Runs language server for tracing some typst program' \
+'preview:Runs preview server' \
+'probe:Probes existence (Nop run)' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'tinymist help commands' commands "$@"
+}
+(( $+functions[_tinymist__help__completion_commands] )) ||
+_tinymist__help__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help completion commands' commands "$@"
+}
+(( $+functions[_tinymist__help__help_commands] )) ||
+_tinymist__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help help commands' commands "$@"
+}
+(( $+functions[_tinymist__help__lsp_commands] )) ||
+_tinymist__help__lsp_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help lsp commands' commands "$@"
+}
+(( $+functions[_tinymist__help__preview_commands] )) ||
+_tinymist__help__preview_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help preview commands' commands "$@"
+}
+(( $+functions[_tinymist__help__probe_commands] )) ||
+_tinymist__help__probe_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help probe commands' commands "$@"
+}
+(( $+functions[_tinymist__help__query_commands] )) ||
+_tinymist__help__query_commands() {
+    local commands; commands=(
+'packageDocs:Get the documentation for a specific package' \
+'checkPackage:Check a specific package' \
+    )
+    _describe -t commands 'tinymist help query commands' commands "$@"
+}
+(( $+functions[_tinymist__help__query__checkPackage_commands] )) ||
+_tinymist__help__query__checkPackage_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help query checkPackage commands' commands "$@"
+}
+(( $+functions[_tinymist__help__query__packageDocs_commands] )) ||
+_tinymist__help__query__packageDocs_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help query packageDocs commands' commands "$@"
+}
+(( $+functions[_tinymist__help__trace-lsp_commands] )) ||
+_tinymist__help__trace-lsp_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help trace-lsp commands' commands "$@"
+}
+(( $+functions[_tinymist__lsp_commands] )) ||
+_tinymist__lsp_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist lsp commands' commands "$@"
+}
+(( $+functions[_tinymist__preview_commands] )) ||
+_tinymist__preview_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist preview commands' commands "$@"
+}
+(( $+functions[_tinymist__probe_commands] )) ||
+_tinymist__probe_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist probe commands' commands "$@"
+}
+(( $+functions[_tinymist__query_commands] )) ||
+_tinymist__query_commands() {
+    local commands; commands=(
+'packageDocs:Get the documentation for a specific package' \
+'checkPackage:Check a specific package' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'tinymist query commands' commands "$@"
+}
+(( $+functions[_tinymist__query__checkPackage_commands] )) ||
+_tinymist__query__checkPackage_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query checkPackage commands' commands "$@"
+}
+(( $+functions[_tinymist__query__help_commands] )) ||
+_tinymist__query__help_commands() {
+    local commands; commands=(
+'packageDocs:Get the documentation for a specific package' \
+'checkPackage:Check a specific package' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'tinymist query help commands' commands "$@"
+}
+(( $+functions[_tinymist__query__help__checkPackage_commands] )) ||
+_tinymist__query__help__checkPackage_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query help checkPackage commands' commands "$@"
+}
+(( $+functions[_tinymist__query__help__help_commands] )) ||
+_tinymist__query__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query help help commands' commands "$@"
+}
+(( $+functions[_tinymist__query__help__packageDocs_commands] )) ||
+_tinymist__query__help__packageDocs_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query help packageDocs commands' commands "$@"
+}
+(( $+functions[_tinymist__query__packageDocs_commands] )) ||
+_tinymist__query__packageDocs_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query packageDocs commands' commands "$@"
+}
+(( $+functions[_tinymist__trace-lsp_commands] )) ||
+_tinymist__trace-lsp_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist trace-lsp commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_tinymist" ]; then
+    _tinymist "$@"
+else
+    compdef _tinymist tinymist
+fi
