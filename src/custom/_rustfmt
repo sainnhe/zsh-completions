@@ -14,6 +14,7 @@ arguments=(
   '--print-config[PATH]'
   {-l,--files-with-diff}'[prints the names of mismatched files that were]'
   '--config[1=val1,key2=val2...\]]'
+  '--style-edition[2015|2018|2021|2024\]]'
   {-v,--verbose}'[print verbose output]'
   {-q,--quiet}'[print less output]'
   {-V,--version}'[show version information]'

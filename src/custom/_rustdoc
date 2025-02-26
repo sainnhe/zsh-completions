@@ -86,13 +86,14 @@ arguments=(
   '--parts-out-dir[/to/doc.parts/<crate-name>]'
   '--merge[]'
   '--include-parts-dir[/to/doc.parts/<crate-name>]'
+  '--html-no-source[disable HTML source code pages generation]'
+  '--doctest-compilation-args[arguments to be used when compiling doctests]'
   '--disable-minification[removed]'
   '--plugin-path[removed, see issue #44136]'
   '--passes[removed, see issue #44136]'
   '--plugins[removed, see issue #44136]'
   '--no-defaults[removed, see issue #44136]'
   {-r,--input-format}'[removed, see issue #44136]'
-  '--html-no-source[disable HTML source code pages generation]'
   '*:filename:_files'
 )
 
