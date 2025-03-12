@@ -87,11 +87,12 @@ onType\:"Refresh preview on type"))' \
 slide\:"Preview mode for slide"))' \
 '--data-plane-host=[Data plane server will bind to this address. Note\: if it equals to \`static_file_host\`, same address will be used]:HOST:_default' \
 '--control-plane-host=[Control plane server will bind to this address]:HOST:_default' \
-'--host=[(File) Host for the preview server. Note\: if it equals to \`data_plane_host\`, same address will be used]:HOST:_default' \
+'--host=[(Deprecated) (File) Host for the preview server. Note\: if it equals to \`data_plane_host\`, same address will be used]:HOST:_default' \
 '--partial-rendering[Only render visible part of the document. This can improve performance but still being experimental]' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
 '--not-primary[Let it not be the primary instance]' \
-'--no-open[Don'\''t open the preview in the browser after compilation]' \
+'--open[Open the preview in the browser after compilation. If \`--no-open\` is set, this flag will be ignored]' \
+'--no-open[Don'\''t open the preview in the browser after compilation. If \`--open\` is set as well, this flag will win]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 '::input -- Path to input Typst file:_default' \
