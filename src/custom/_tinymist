@@ -51,6 +51,16 @@ _arguments "${_arguments_options[@]}" : \
 '--help[Print help]' \
 && ret=0
 ;;
+(dap)
+_arguments "${_arguments_options[@]}" : \
+'--mirror=[Mirror the stdin to the file]:FILE:_default' \
+'--replay=[Replay input from the file]:FILE:_default' \
+'*--font-path=[Font paths]:DIR:_files' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
 (trace-lsp)
 _arguments "${_arguments_options[@]}" : \
 '--rpc-kind=[]:RPC_KIND:_default' \
@@ -93,6 +103,44 @@ slide\:"Preview mode for slide"))' \
 '--not-primary[Let it not be the primary instance]' \
 '--open[Open the preview in the browser after compilation. If \`--no-open\` is set, this flag will be ignored]' \
 '--no-open[Don'\''t open the preview in the browser after compilation. If \`--open\` is set as well, this flag will win]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::input -- Path to input Typst file:_default' \
+&& ret=0
+;;
+(cov)
+_arguments "${_arguments_options[@]}" : \
+'--root=[Configures the project root (for absolute paths)]:DIR:_files' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
+'*--font-path=[Font paths]:DIR:_files' \
+'--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
+'--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::input -- Path to input Typst file:_default' \
+&& ret=0
+;;
+(test)
+_arguments "${_arguments_options[@]}" : \
+'--root=[Configures the project root (for absolute paths)]:DIR:_files' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
+'*--font-path=[Font paths]:DIR:_files' \
+'--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
+'--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
+'--ppi=[The PPI (pixels per inch) to use for PNG export]:PPI:_default' \
+'--print-coverage=[Style of printing coverage]:PRINT_COVERAGE:((never\:"Don'\''t print the coverage"
+short\:"Prints the coverage in a short format"
+full\:"Prints the coverage in a full format"))' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'--update[Whether to update the reference images]' \
+'--coverage[Whether to collect coverage]' \
+'--watch[Whether to run in watch mode]' \
+'--verbose[Whether to log verbose information]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 '::input -- Path to input Typst file:_default' \
@@ -365,11 +413,23 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(dap)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (trace-lsp)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (preview)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(cov)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(test)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -468,8 +528,11 @@ _tinymist_commands() {
 'probe:Probes existence (Nop run)' \
 'completion:Generates completion script to stdout' \
 'lsp:Runs language server' \
+'dap:Runs debug adapter' \
 'trace-lsp:Runs language server for tracing some typst program' \
 'preview:Runs preview server' \
+'cov:Execute a document and collect coverage' \
+'test:Test a document and gives summary' \
 'compile:Runs compile command like \`typst-cli compile\`' \
 'generate-script:Generates build script for compilation' \
 'query:Runs language query' \
@@ -488,6 +551,16 @@ _tinymist__compile_commands() {
 _tinymist__completion_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist completion commands' commands "$@"
+}
+(( $+functions[_tinymist__cov_commands] )) ||
+_tinymist__cov_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist cov commands' commands "$@"
+}
+(( $+functions[_tinymist__dap_commands] )) ||
+_tinymist__dap_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist dap commands' commands "$@"
 }
 (( $+functions[_tinymist__doc_commands] )) ||
 _tinymist__doc_commands() {
@@ -543,8 +616,11 @@ _tinymist__help_commands() {
 'probe:Probes existence (Nop run)' \
 'completion:Generates completion script to stdout' \
 'lsp:Runs language server' \
+'dap:Runs debug adapter' \
 'trace-lsp:Runs language server for tracing some typst program' \
 'preview:Runs preview server' \
+'cov:Execute a document and collect coverage' \
+'test:Test a document and gives summary' \
 'compile:Runs compile command like \`typst-cli compile\`' \
 'generate-script:Generates build script for compilation' \
 'query:Runs language query' \
@@ -563,6 +639,16 @@ _tinymist__help__compile_commands() {
 _tinymist__help__completion_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help completion commands' commands "$@"
+}
+(( $+functions[_tinymist__help__cov_commands] )) ||
+_tinymist__help__cov_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help cov commands' commands "$@"
+}
+(( $+functions[_tinymist__help__dap_commands] )) ||
+_tinymist__help__dap_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help dap commands' commands "$@"
 }
 (( $+functions[_tinymist__help__doc_commands] )) ||
 _tinymist__help__doc_commands() {
@@ -636,6 +722,11 @@ _tinymist__help__task_commands() {
 _tinymist__help__task__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help task preview commands' commands "$@"
+}
+(( $+functions[_tinymist__help__test_commands] )) ||
+_tinymist__help__test_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help test commands' commands "$@"
 }
 (( $+functions[_tinymist__help__trace-lsp_commands] )) ||
 _tinymist__help__trace-lsp_commands() {
@@ -730,6 +821,11 @@ _tinymist__task__help__preview_commands() {
 _tinymist__task__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist task preview commands' commands "$@"
+}
+(( $+functions[_tinymist__test_commands] )) ||
+_tinymist__test_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist test commands' commands "$@"
 }
 (( $+functions[_tinymist__trace-lsp_commands] )) ||
 _tinymist__trace-lsp_commands() {
