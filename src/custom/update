@@ -21,6 +21,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v helm)" ] && helm completion zsh > _helm
 [ -x "$(command -v tinymist)" ] && tinymist completion > _tinymist
 [ -x "$(command -v trpc-cli)" ] && trpc-cli completion zsh > _trpc-cli
+[ -x "$(command -v asdf)" ] && asdf completion zsh > _asdf
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
 [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
