@@ -140,6 +140,8 @@ full\:"Prints the coverage in a full format"))' \
 '--update[Whether to update the reference images]' \
 '--coverage[Whether to collect coverage]' \
 '--watch[Whether to run in watch mode]' \
+'--dashboard[Whether to render the dashboard]' \
+'--no-dashboard[Whether not to render the dashboard]' \
 '--verbose[Whether to log verbose information]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \

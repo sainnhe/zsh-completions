@@ -27,7 +27,6 @@ arguments=(
   '-w[use the GUI interface.]'
   '--nw[do not use the GUI interface.]'
   '--tui[use a terminal user interface.]'
-  '--dbx[DBX compatibility mode.]'
   {-q,--quiet,--silent}'[do not print version number on startup.]'
   '--batch[exit after processing options.]'
   '--batch-silent[like --batch, but suppress all gdb stdout output.]'
