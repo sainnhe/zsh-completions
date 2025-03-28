@@ -67,16 +67,20 @@ _arguments "${_arguments_options[@]}" : \
 '--mirror=[Mirror the stdin to the file]:FILE:_default' \
 '--replay=[Replay input from the file]:FILE:_default' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
-'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Font paths]:DIR:_files' \
 '--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html)' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'*--pdf-standard=[One (or multiple comma-separated) PDF standards that Typst will enforce conformance with]:PDF_STANDARD:((1.7\:"PDF 1.7"
+a-2b\:"PDF/A-2b"
+a-3b\:"PDF/A-3b"))' \
 '--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
 '--persist[]' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
-'-h[Print help]' \
-'--help[Print help]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
 '::input -- Path to input Typst file:_default' \
 && ret=0
 ;;
@@ -87,11 +91,15 @@ _arguments "${_arguments_options[@]}" : \
 '--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((onSave\:"Refresh preview on save"
 onType\:"Refresh preview on type"))' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
-'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Font paths]:DIR:_files' \
 '--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html)' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'*--pdf-standard=[One (or multiple comma-separated) PDF standards that Typst will enforce conformance with]:PDF_STANDARD:((1.7\:"PDF 1.7"
+a-2b\:"PDF/A-2b"
+a-3b\:"PDF/A-3b"))' \
 '--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
 '--preview-mode=[Preview mode]:MODE:((document\:"Preview mode for regular document"
 slide\:"Preview mode for slide"))' \
@@ -111,26 +119,34 @@ slide\:"Preview mode for slide"))' \
 (cov)
 _arguments "${_arguments_options[@]}" : \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
-'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Font paths]:DIR:_files' \
 '--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html)' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'*--pdf-standard=[One (or multiple comma-separated) PDF standards that Typst will enforce conformance with]:PDF_STANDARD:((1.7\:"PDF 1.7"
+a-2b\:"PDF/A-2b"
+a-3b\:"PDF/A-3b"))' \
 '--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
-'-h[Print help]' \
-'--help[Print help]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
 '::input -- Path to input Typst file:_default' \
 && ret=0
 ;;
 (test)
 _arguments "${_arguments_options[@]}" : \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
-'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Font paths]:DIR:_files' \
 '--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html)' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'*--pdf-standard=[One (or multiple comma-separated) PDF standards that Typst will enforce conformance with]:PDF_STANDARD:((1.7\:"PDF 1.7"
+a-2b\:"PDF/A-2b"
+a-3b\:"PDF/A-3b"))' \
 '--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
 '--ppi=[The PPI (pixels per inch) to use for PNG export]:PPI:_default' \
 '--print-coverage=[Style of printing coverage]:PRINT_COVERAGE:((never\:"Don'\''t print the coverage"
@@ -170,7 +186,8 @@ svg\:"Export to SVG"
 html\:"Export to HTML"))' \
 '*--pages=[Which pages to export. When unspecified, all pages are exported]:PAGES:_default' \
 '*--pdf-standard=[One (or multiple comma-separated) PDF standards that Typst will enforce conformance with]:PDF_STANDARD:((1.7\:"PDF 1.7"
-a-2b\:"PDF/A-2b"))' \
+a-2b\:"PDF/A-2b"
+a-3b\:"PDF/A-3b"))' \
 '--ppi=[The PPI (pixels per inch) to use for PNG export]:PPI:_default' \
 '--lockfile=[Specifies the path to the lock file. If the path is set, the lock file will be saved]:LOCKFILE:_files' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
