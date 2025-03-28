@@ -13,7 +13,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rg)" ] && rg --generate complete-zsh > _rg
 # [ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
 [ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
-[ -x "$(command -v pnpm)" ] && pnpm completion zsh > pnpm.plugin.zsh
+[ -x "$(command -v pnpm)" ] && pnpm completion zsh > _pnpm
 [ -x "$(command -v deno)" ] && deno completions zsh > _deno
 [ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
