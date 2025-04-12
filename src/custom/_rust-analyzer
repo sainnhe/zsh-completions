@@ -18,7 +18,6 @@ arguments=(
   '--output[]'
   '--randomize[randomize order in which crates, modules, and items are processed.]'
   '--parallel[run type inference in parallel.]'
-  '--source-stats[print the total length of all source and macro files (whitespace is not counted).]'
   {-o,--only}'[only analyze items matching this path.]'
   '--with-deps[also analyze all dependencies.]'
   '--no-sysroot[dont load sysroot crates (`std`, `core` & friends).]'
