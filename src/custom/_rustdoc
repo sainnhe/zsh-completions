@@ -70,7 +70,7 @@ arguments=(
   '--test-builder-wrapper[wrapper program to pass test-builder and arguments]'
   '--check[run rustdoc checks]'
   '--generate-redirect-map[generate JSON file at the top level instead of]'
-  '--emit[toolchain-shared-resources,invocation-specific\]]'
+  '--emit[toolchain-shared-resources,invocation-specific,dep-info\]]'
   '--no-run[compile doctests without running them]'
   '--remap-path-prefix[TO]'
   '--show-type-layout[include the memory layout of types in the docs]'

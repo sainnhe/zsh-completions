@@ -65,6 +65,7 @@ arguments=(
   '--info-command[command to generate info line]'
   '--separator[draw horizontal separator on info line using the string]'
   '--no-separator[hide info line separator]'
+  '--ghost[ghost text to display when the input is empty]'
   '--filepath-word[make word-wise movements respect path separators]'
   '--input-border[draw border around the input section]'
   '--input-label[label to print on the input border]'
