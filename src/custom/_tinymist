@@ -86,10 +86,12 @@ a-3b\:"PDF/A-3b"))' \
 ;;
 (preview)
 _arguments "${_arguments_options[@]}" : \
+'--preview-mode=[Preview mode]:MODE:((document\:"Preview mode for regular document"
+slide\:"Preview mode for slide"))' \
+'--partial-rendering=[Only render visible part of the document. This can improve performance but still being experimental]:ENABLE_PARTIAL_RENDERING:(true false)' \
 '--invert-colors=[Invert colors of the preview (useful for dark themes without cost). Please note you could see the origin colors when you hover elements in the preview]:INVERT_COLORS:_default' \
-'--task-id=[Used by lsp for identifying the task]:TASK_ID:_default' \
-'--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((onSave\:"Refresh preview on save"
-onType\:"Refresh preview on type"))' \
+'--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((on-save\:"Refresh preview on save"
+on-type\:"Refresh preview on type"))' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
 '*--font-path=[Font paths]:DIR:_files' \
 '--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
@@ -101,12 +103,10 @@ onType\:"Refresh preview on type"))' \
 a-2b\:"PDF/A-2b"
 a-3b\:"PDF/A-3b"))' \
 '--cert=[Path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
-'--preview-mode=[Preview mode]:MODE:((document\:"Preview mode for regular document"
-slide\:"Preview mode for slide"))' \
+'--task-id=[Used by lsp for identifying the task]:TASK_ID:_default' \
 '--data-plane-host=[Data plane server will bind to this address. Note\: if it equals to \`static_file_host\`, same address will be used]:HOST:_default' \
 '--control-plane-host=[Control plane server will bind to this address]:HOST:_default' \
 '--host=[(Deprecated) (File) Host for the preview server. Note\: if it equals to \`data_plane_host\`, same address will be used]:HOST:_default' \
-'--partial-rendering[Only render visible part of the document. This can improve performance but still being experimental]' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
 '--not-primary[Let it not be the primary instance]' \
 '--open[Open the preview in the browser after compilation. If \`--no-open\` is set, this flag will be ignored]' \
@@ -175,7 +175,8 @@ _arguments "${_arguments_options[@]}" : \
 '--when=[When to run the task]:WHEN:((never\:"Never watch to run task"
 onSave\:"Run task on saving the document, i.e. on \`textDocument/didSave\` events"
 onType\:"Run task on typing, i.e. on \`textDocument/didChange\` events"
-onDocumentHasTitle\:"*DEPRECATED* Run task when a document has a title and on saved, which is useful to filter out template files"))' \
+onDocumentHasTitle\:"*DEPRECATED* Run task when a document has a title and on saved, which is useful to filter out template files"
+script\:"Checks by running a typst script"))' \
 '-f+[The format of the output file, inferred from the extension by default]:FORMAT:((pdf\:"Export to PDF"
 png\:"Export to PNG"
 svg\:"Export to SVG"
@@ -366,15 +367,15 @@ _arguments "${_arguments_options[@]}" : \
 '--when=[When to run the task]:WHEN:((never\:"Never watch to run task"
 onSave\:"Run task on saving the document, i.e. on \`textDocument/didSave\` events"
 onType\:"Run task on typing, i.e. on \`textDocument/didChange\` events"
-onDocumentHasTitle\:"*DEPRECATED* Run task when a document has a title and on saved, which is useful to filter out template files"))' \
-'--invert-colors=[Invert colors of the preview (useful for dark themes without cost). Please note you could see the origin colors when you hover elements in the preview]:INVERT_COLORS:_default' \
-'--task-id=[Used by lsp for identifying the task]:TASK_ID:_default' \
-'--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((onSave\:"Refresh preview on save"
-onType\:"Refresh preview on type"))' \
+onDocumentHasTitle\:"*DEPRECATED* Run task when a document has a title and on saved, which is useful to filter out template files"
+script\:"Checks by running a typst script"))' \
 '--preview-mode=[Preview mode]:MODE:((document\:"Preview mode for regular document"
 slide\:"Preview mode for slide"))' \
+'--partial-rendering=[Only render visible part of the document. This can improve performance but still being experimental]:ENABLE_PARTIAL_RENDERING:(true false)' \
+'--invert-colors=[Invert colors of the preview (useful for dark themes without cost). Please note you could see the origin colors when you hover elements in the preview]:INVERT_COLORS:_default' \
+'--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((on-save\:"Refresh preview on save"
+on-type\:"Refresh preview on type"))' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
-'--partial-rendering[Only render visible part of the document. This can improve performance but still being experimental]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 ':input -- Path to input Typst file:_files' \
