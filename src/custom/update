@@ -9,7 +9,6 @@ _genhelp() {
 cd "${_custom_dir}"
 [ -x "$(command -v limactl)" ] && limactl completion zsh > _limactl
 [ -x "$(command -v mdbook)" ] && mdbook completions zsh > _mdbook
-[ -x "$(command -v hugo)" ] && hugo completion zsh > _hugo
 [ -x "$(command -v rg)" ] && rg --generate complete-zsh > _rg
 [ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
 [ -x "$(command -v pnpm)" ] && pnpm completion zsh > _pnpm
@@ -19,7 +18,6 @@ cd "${_custom_dir}"
 [ -x "$(command -v kubectl)" ] && kubectl completion zsh > _kubectl
 [ -x "$(command -v helm)" ] && helm completion zsh > _helm
 [ -x "$(command -v tinymist)" ] && tinymist completion > _tinymist
-[ -x "$(command -v asdf)" ] && asdf completion zsh > _asdf
 [ -x "$(command -v rip)" ] && rip completions zsh > _rip
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
