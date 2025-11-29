@@ -14,7 +14,7 @@ _mdbook() {
     fi
 
     local context curcontext="$curcontext" state line
-    _arguments "${_arguments_options[@]}" \
+    _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -29,8 +29,8 @@ _mdbook() {
         curcontext="${curcontext%:*:*}:mdbook-command-$line[1]:"
         case $line[1] in
             (init)
-_arguments "${_arguments_options[@]}" \
-'--title=[Sets the book title]:title: ' \
+_arguments "${_arguments_options[@]}" : \
+'--title=[Sets the book title]:title:_default' \
 '--ignore=[Creates a VCS ignore file (i.e. .gitignore)]:ignore:(none git)' \
 '--theme[Copies the default theme into your source folder]' \
 '--force[Skips confirmation prompts]' \
@@ -43,7 +43,7 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (build)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 '-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-o[Opens the compiled book in a web browser]' \
@@ -57,13 +57,13 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (test)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 '-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'-c+[]:chapter: ' \
-'--chapter=[]:chapter: ' \
-'*-L+[A comma-separated list of directories to add to the crate search path when building tests]:dir: ' \
-'*--library-path=[A comma-separated list of directories to add to the crate search path when building tests]:dir: ' \
+'-c+[]:chapter:_default' \
+'--chapter=[]:chapter:_default' \
+'*-L+[A comma-separated list of directories to add to the crate search path when building tests]:dir:_default' \
+'*--library-path=[A comma-separated list of directories to add to the crate search path when building tests]:dir:_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -73,7 +73,7 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (clean)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 '-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '-h[Print help]' \
@@ -85,7 +85,7 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (completions)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -94,7 +94,7 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (watch)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 '-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--watcher=[The filesystem watching technique]: :(poll native)' \
@@ -109,13 +109,13 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (serve)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 '-d+[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
 '--dest-dir=[Output directory for the book Relative paths are interpreted relative to the book'\''s root directory. If omitted, mdBook uses build.build-dir from book.toml or defaults to \`./book\`.]:dest-dir:_files' \
-'-n+[Hostname to listen on for HTTP connections]: : ' \
-'--hostname=[Hostname to listen on for HTTP connections]: : ' \
-'-p+[Port to use for HTTP connections]: : ' \
-'--port=[Port to use for HTTP connections]: : ' \
+'-n+[Hostname to listen on for HTTP connections]: :_default' \
+'--hostname=[Hostname to listen on for HTTP connections]: :_default' \
+'-p+[Port to use for HTTP connections]: :_default' \
+'--port=[Port to use for HTTP connections]: :_default' \
 '--watcher=[The filesystem watching technique]: :(poll native)' \
 '-o[Opens the compiled book in a web browser]' \
 '--open[Opens the compiled book in a web browser]' \
@@ -128,7 +128,7 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (help)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 ":: :_mdbook__help_commands" \
 "*::: :->help" \
 && ret=0
@@ -140,35 +140,35 @@ _arguments "${_arguments_options[@]}" \
         curcontext="${curcontext%:*:*}:mdbook-help-command-$line[1]:"
         case $line[1] in
             (init)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (build)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (test)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (clean)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (completions)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (watch)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (serve)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (help)
-_arguments "${_arguments_options[@]}" \
+_arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
         esac
@@ -199,30 +199,15 @@ _mdbook__build_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook build commands' commands "$@"
 }
-(( $+functions[_mdbook__help__build_commands] )) ||
-_mdbook__help__build_commands() {
-    local commands; commands=()
-    _describe -t commands 'mdbook help build commands' commands "$@"
-}
 (( $+functions[_mdbook__clean_commands] )) ||
 _mdbook__clean_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook clean commands' commands "$@"
 }
-(( $+functions[_mdbook__help__clean_commands] )) ||
-_mdbook__help__clean_commands() {
-    local commands; commands=()
-    _describe -t commands 'mdbook help clean commands' commands "$@"
-}
 (( $+functions[_mdbook__completions_commands] )) ||
 _mdbook__completions_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook completions commands' commands "$@"
-}
-(( $+functions[_mdbook__help__completions_commands] )) ||
-_mdbook__help__completions_commands() {
-    local commands; commands=()
-    _describe -t commands 'mdbook help completions commands' commands "$@"
 }
 (( $+functions[_mdbook__help_commands] )) ||
 _mdbook__help_commands() {
@@ -238,6 +223,21 @@ _mdbook__help_commands() {
     )
     _describe -t commands 'mdbook help commands' commands "$@"
 }
+(( $+functions[_mdbook__help__build_commands] )) ||
+_mdbook__help__build_commands() {
+    local commands; commands=()
+    _describe -t commands 'mdbook help build commands' commands "$@"
+}
+(( $+functions[_mdbook__help__clean_commands] )) ||
+_mdbook__help__clean_commands() {
+    local commands; commands=()
+    _describe -t commands 'mdbook help clean commands' commands "$@"
+}
+(( $+functions[_mdbook__help__completions_commands] )) ||
+_mdbook__help__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'mdbook help completions commands' commands "$@"
+}
 (( $+functions[_mdbook__help__help_commands] )) ||
 _mdbook__help__help_commands() {
     local commands; commands=()
@@ -248,35 +248,35 @@ _mdbook__help__init_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook help init commands' commands "$@"
 }
-(( $+functions[_mdbook__init_commands] )) ||
-_mdbook__init_commands() {
-    local commands; commands=()
-    _describe -t commands 'mdbook init commands' commands "$@"
-}
 (( $+functions[_mdbook__help__serve_commands] )) ||
 _mdbook__help__serve_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook help serve commands' commands "$@"
-}
-(( $+functions[_mdbook__serve_commands] )) ||
-_mdbook__serve_commands() {
-    local commands; commands=()
-    _describe -t commands 'mdbook serve commands' commands "$@"
 }
 (( $+functions[_mdbook__help__test_commands] )) ||
 _mdbook__help__test_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook help test commands' commands "$@"
 }
-(( $+functions[_mdbook__test_commands] )) ||
-_mdbook__test_commands() {
-    local commands; commands=()
-    _describe -t commands 'mdbook test commands' commands "$@"
-}
 (( $+functions[_mdbook__help__watch_commands] )) ||
 _mdbook__help__watch_commands() {
     local commands; commands=()
     _describe -t commands 'mdbook help watch commands' commands "$@"
+}
+(( $+functions[_mdbook__init_commands] )) ||
+_mdbook__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'mdbook init commands' commands "$@"
+}
+(( $+functions[_mdbook__serve_commands] )) ||
+_mdbook__serve_commands() {
+    local commands; commands=()
+    _describe -t commands 'mdbook serve commands' commands "$@"
+}
+(( $+functions[_mdbook__test_commands] )) ||
+_mdbook__test_commands() {
+    local commands; commands=()
+    _describe -t commands 'mdbook test commands' commands "$@"
 }
 (( $+functions[_mdbook__watch_commands] )) ||
 _mdbook__watch_commands() {

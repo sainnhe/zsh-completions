@@ -45,6 +45,8 @@ arguments=(
   '--tac[reverse the order of the input]'
   '--gap[render empty lines between each item]'
   '--gap-line[draw horizontal line on each gap using the string]'
+  '--freeze-left[number of fields to freeze on the left]'
+  '--freeze-right[number of fields to freeze on the right]'
   '--keep-right[keep the right end of the line visible on overflow]'
   '--scroll-off[number of screen lines to keep above or below when]'
   '--no-hscroll[disable horizontal scroll]'

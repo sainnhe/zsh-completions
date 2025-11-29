@@ -19,8 +19,8 @@ cd "${_custom_dir}"
 [ -x "$(command -v kubectl)" ] && kubectl completion zsh > _kubectl
 [ -x "$(command -v helm)" ] && helm completion zsh > _helm
 [ -x "$(command -v tinymist)" ] && tinymist completion > _tinymist
-[ -x "$(command -v trpc-cli)" ] && trpc-cli completion zsh > _trpc-cli
 [ -x "$(command -v asdf)" ] && asdf completion zsh > _asdf
+[ -x "$(command -v rip)" ] && rip completions zsh > _rip
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
 [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
@@ -31,9 +31,6 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustfmt)" ] && _genhelp rustfmt
 [ -x "$(command -v rustc)" ] && _genhelp rustc
 [ -x "$(command -v fzf)" ] && _genhelp fzf
-[ -x "$(command -v youtube-dl)" ] && _genhelp youtube-dl
-[ -x "$(command -v yt-dlp)" ] && _genhelp yt-dlp
-[ -x "$(command -v rip)" ] && _genhelp rip
 [ -x "$(command -v axel)" ] && _genhelp axel
 curl -LO https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman
