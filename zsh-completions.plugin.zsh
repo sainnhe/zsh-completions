@@ -6,4 +6,3 @@ source "${0:h}/src/zchee.zsh-completions/zsh-completions.plugin.zsh"
 [ -x "$(command -v npm)" ] && source "${0:h}/src/custom/npm.plugin.zsh"
 [ -x "$(command -v pip)" ] && source "${0:h}/src/custom/pip.plugin.zsh"
 fpath+="${0:h}/src/custom"
-

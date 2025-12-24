@@ -19,6 +19,8 @@ cd "${_custom_dir}"
 [ -x "$(command -v helm)" ] && helm completion zsh > _helm
 [ -x "$(command -v tinymist)" ] && tinymist completion > _tinymist
 [ -x "$(command -v rip)" ] && rip completions zsh > _rip
+[ -x "$(command -v uv)" ] && uv generate-shell-completion zsh > _uv
+[ -x "$(command -v uvx)" ] && uvx --generate-shell-completion zsh > _uvx
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
 [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
@@ -35,5 +37,6 @@ curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman
 curl -LO https://github.com/containers/podman/raw/main/completions/zsh/_podman-remote
 curl -LO https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd
 curl -LO https://github.com/rofl0r/proxychains-ng/raw/master/completions/zsh/_proxychains4
+curl -LO https://github.com/bazelbuild/bazel/raw/refs/heads/master/scripts/zsh_completion/_bazel
 curl -L -o _tldr https://github.com/dbrgn/tealdeer/raw/main/completion/zsh_tealdeer
 curl -L -o _bun https://github.com/oven-sh/bun/raw/main/completions/bun.zsh
