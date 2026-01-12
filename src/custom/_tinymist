@@ -317,6 +317,7 @@ a11y-extras\:"The A11yExtras feature"))' \
 _arguments "${_arguments_options[@]}" : \
 '--name=[Give a task name to the document]:NAME:_default' \
 '--root=[Configure the project root (for absolute paths). If the path is relative, it will be resolved relative to the current working directory (PWD)]:DIR:_default' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Add additional directories that are recursively searched for fonts]:DIR:_files' \
 '--package-path=[Specify a custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Specify a custom path to package cache, defaults to system-dependent location]:DIR:_files' \
@@ -396,6 +397,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '--name=[Give a task name to the document]:NAME:_default' \
 '--root=[Configure the project root (for absolute paths). If the path is relative, it will be resolved relative to the current working directory (PWD)]:DIR:_default' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Add additional directories that are recursively searched for fonts]:DIR:_files' \
 '--package-path=[Specify a custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Specify a custom path to package cache, defaults to system-dependent location]:DIR:_files' \
@@ -464,6 +466,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '--name=[Give a task name to the document]:NAME:_default' \
 '--root=[Configure the project root (for absolute paths). If the path is relative, it will be resolved relative to the current working directory (PWD)]:DIR:_default' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Add additional directories that are recursively searched for fonts]:DIR:_files' \
 '--package-path=[Specify a custom path to local packages, defaults to system-dependent location]:DIR:_files' \
 '--package-cache-path=[Specify a custom path to package cache, defaults to system-dependent location]:DIR:_files' \

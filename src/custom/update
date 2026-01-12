@@ -21,6 +21,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rip)" ] && rip completions zsh > _rip
 [ -x "$(command -v uv)" ] && uv generate-shell-completion zsh > _uv
 [ -x "$(command -v uvx)" ] && uvx --generate-shell-completion zsh > _uvx
+[ -x "$(command -v gup)" ] && gup completion zsh > _gup
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
 [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer

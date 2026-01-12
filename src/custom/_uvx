@@ -111,6 +111,52 @@ wasm32-pyodide2024\:"A wasm32 target using the Pyodide 2024 platform. Meant for 
 arm64-apple-ios\:"An ARM64 target for iOS device"
 arm64-apple-ios-simulator\:"An ARM64 target for iOS simulator"
 x86_64-apple-ios-simulator\:"An \`x86_64\` target for iOS simulator"))' \
+'--torch-backend=[The backend to use when fetching packages in the PyTorch ecosystem (e.g., \`cpu\`, \`cu126\`, or \`auto\`)]:TORCH_BACKEND:((auto\:"Select the appropriate PyTorch index based on the operating system and CUDA driver version"
+cpu\:"Use the CPU-only PyTorch index"
+cu130\:"Use the PyTorch index for CUDA 13.0"
+cu129\:"Use the PyTorch index for CUDA 12.9"
+cu128\:"Use the PyTorch index for CUDA 12.8"
+cu126\:"Use the PyTorch index for CUDA 12.6"
+cu125\:"Use the PyTorch index for CUDA 12.5"
+cu124\:"Use the PyTorch index for CUDA 12.4"
+cu123\:"Use the PyTorch index for CUDA 12.3"
+cu122\:"Use the PyTorch index for CUDA 12.2"
+cu121\:"Use the PyTorch index for CUDA 12.1"
+cu120\:"Use the PyTorch index for CUDA 12.0"
+cu118\:"Use the PyTorch index for CUDA 11.8"
+cu117\:"Use the PyTorch index for CUDA 11.7"
+cu116\:"Use the PyTorch index for CUDA 11.6"
+cu115\:"Use the PyTorch index for CUDA 11.5"
+cu114\:"Use the PyTorch index for CUDA 11.4"
+cu113\:"Use the PyTorch index for CUDA 11.3"
+cu112\:"Use the PyTorch index for CUDA 11.2"
+cu111\:"Use the PyTorch index for CUDA 11.1"
+cu110\:"Use the PyTorch index for CUDA 11.0"
+cu102\:"Use the PyTorch index for CUDA 10.2"
+cu101\:"Use the PyTorch index for CUDA 10.1"
+cu100\:"Use the PyTorch index for CUDA 10.0"
+cu92\:"Use the PyTorch index for CUDA 9.2"
+cu91\:"Use the PyTorch index for CUDA 9.1"
+cu90\:"Use the PyTorch index for CUDA 9.0"
+cu80\:"Use the PyTorch index for CUDA 8.0"
+rocm6.4\:"Use the PyTorch index for ROCm 6.4"
+rocm6.3\:"Use the PyTorch index for ROCm 6.3"
+rocm6.2.4\:"Use the PyTorch index for ROCm 6.2.4"
+rocm6.2\:"Use the PyTorch index for ROCm 6.2"
+rocm6.1\:"Use the PyTorch index for ROCm 6.1"
+rocm6.0\:"Use the PyTorch index for ROCm 6.0"
+rocm5.7\:"Use the PyTorch index for ROCm 5.7"
+rocm5.6\:"Use the PyTorch index for ROCm 5.6"
+rocm5.5\:"Use the PyTorch index for ROCm 5.5"
+rocm5.4.2\:"Use the PyTorch index for ROCm 5.4.2"
+rocm5.4\:"Use the PyTorch index for ROCm 5.4"
+rocm5.3\:"Use the PyTorch index for ROCm 5.3"
+rocm5.2\:"Use the PyTorch index for ROCm 5.2"
+rocm5.1.1\:"Use the PyTorch index for ROCm 5.1.1"
+rocm4.2\:"Use the PyTorch index for ROCm 4.2"
+rocm4.1\:"Use the PyTorch index for ROCm 4.1"
+rocm4.0.1\:"Use the PyTorch index for ROCm 4.0.1"
+xpu\:"Use the PyTorch index for Intel XPU"))' \
 '--generate-shell-completion=[]:GENERATE_SHELL_COMPLETION:(bash elvish fish nushell powershell zsh)' \
 '--cache-dir=[Path to the cache directory]:CACHE_DIR:_files -/' \
 '--python-preference=[]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
@@ -128,8 +174,8 @@ never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
-'--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools]' \
-'--no-env-file[Avoid reading environment variables from a \`.env\` file]' \
+'--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools \[env\: UV_ISOLATED=\]]' \
+'--no-env-file[Avoid reading environment variables from a \`.env\` file \[env\: UV_NO_ENV_FILE=\]]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -146,16 +192,16 @@ never\:"Disables colored output"))' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
 '--binary[]' \
-'(--offline)--refresh[Refresh all cached data]' \
-'(--offline)--no-refresh[]' \
+'--refresh[Refresh all cached data]' \
+'--no-refresh[]' \
 '--lfs[Whether to use Git LFS when adding a dependency from Git]' \
-'--show-resolution[Whether to show resolver and installer output from any environment modifications]' \
+'--show-resolution[Whether to show resolver and installer output from any environment modifications \[env\: UV_SHOW_RESOLUTION=\]]' \
 '-V[Display the uvx version]' \
 '--version[Display the uvx version]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
-'(--python-preference)--managed-python[Require use of uv-managed Python versions]' \
-'(--python-preference)--no-managed-python[Disable use of uv-managed Python versions]' \
+'--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \
+'--no-managed-python[Disable use of uv-managed Python versions \[env\: UV_NO_MANAGED_PYTHON=\]]' \
 '--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
 '--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
 '(-v --verbose)*-q[Use quiet output]' \
@@ -163,15 +209,15 @@ never\:"Disables colored output"))' \
 '(-q --quiet)*-v[Use verbose output]' \
 '(-q --quiet)*--verbose[Use verbose output]' \
 '(--color)--no-color[Disable colors]' \
-'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native store \[env\: UV_NATIVE_TLS=\]]' \
 '--no-native-tls[]' \
-'--offline[Disable network access]' \
+'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
 '--no-offline[]' \
-'--preview[Whether to enable all experimental preview features]' \
+'--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
 '--no-preview[]' \
 '--show-settings[Show the resolved settings for the current command]' \
-'--no-progress[Hide all progress outputs]' \
-'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories]' \
+'--no-progress[Hide all progress outputs \[env\: UV_NO_PROGRESS=\]]' \
+'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories \[env\: UV_NO_INSTALLER_METADATA=\]]' \
 '--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
 '-h[Display the concise help for this command]' \
 '--help[Display the concise help for this command]' \
