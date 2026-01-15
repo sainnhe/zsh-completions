@@ -17,8 +17,10 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v kubectl)" ] && kubectl completion zsh > _kubectl
 [ -x "$(command -v helm)" ] && helm completion zsh > _helm
-[ -x "$(command -v tinymist)" ] && tinymist completion > _tinymist
+[ -x "$(command -v typst)" ] && typst completions zsh > _typst
+[ -x "$(command -v tinymist)" ] && tinymist completion zsh > _tinymist
 [ -x "$(command -v rip)" ] && rip completions zsh > _rip
+[ -x "$(command -v asdf)" ] && asdf completion zsh > _asdf
 [ -x "$(command -v uv)" ] && uv generate-shell-completion zsh > _uv
 [ -x "$(command -v uvx)" ] && uvx --generate-shell-completion zsh > _uvx
 [ -x "$(command -v gup)" ] && gup completion zsh > _gup

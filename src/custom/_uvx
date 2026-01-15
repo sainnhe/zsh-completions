@@ -174,8 +174,8 @@ never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
-'--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools \[env\: UV_ISOLATED=\]]' \
-'--no-env-file[Avoid reading environment variables from a \`.env\` file \[env\: UV_NO_ENV_FILE=\]]' \
+'--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools]' \
+'--no-env-file[Avoid reading environment variables from a \`.env\` file]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -192,16 +192,16 @@ never\:"Disables colored output"))' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
 '--binary[]' \
-'--refresh[Refresh all cached data]' \
-'--no-refresh[]' \
+'(--offline)--refresh[Refresh all cached data]' \
+'(--offline)--no-refresh[]' \
 '--lfs[Whether to use Git LFS when adding a dependency from Git]' \
-'--show-resolution[Whether to show resolver and installer output from any environment modifications \[env\: UV_SHOW_RESOLUTION=\]]' \
+'--show-resolution[Whether to show resolver and installer output from any environment modifications]' \
 '-V[Display the uvx version]' \
 '--version[Display the uvx version]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
-'--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \
-'--no-managed-python[Disable use of uv-managed Python versions \[env\: UV_NO_MANAGED_PYTHON=\]]' \
+'(--python-preference)--managed-python[Require use of uv-managed Python versions]' \
+'(--python-preference)--no-managed-python[Disable use of uv-managed Python versions]' \
 '--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
 '--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
 '(-v --verbose)*-q[Use quiet output]' \
@@ -209,15 +209,15 @@ never\:"Disables colored output"))' \
 '(-q --quiet)*-v[Use verbose output]' \
 '(-q --quiet)*--verbose[Use verbose output]' \
 '(--color)--no-color[Disable colors]' \
-'--native-tls[Whether to load TLS certificates from the platform'\''s native store \[env\: UV_NATIVE_TLS=\]]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
 '--no-native-tls[]' \
-'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
+'--offline[Disable network access]' \
 '--no-offline[]' \
-'--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
+'--preview[Whether to enable all experimental preview features]' \
 '--no-preview[]' \
 '--show-settings[Show the resolved settings for the current command]' \
-'--no-progress[Hide all progress outputs \[env\: UV_NO_PROGRESS=\]]' \
-'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories \[env\: UV_NO_INSTALLER_METADATA=\]]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories]' \
 '--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
 '-h[Display the concise help for this command]' \
 '--help[Display the concise help for this command]' \
