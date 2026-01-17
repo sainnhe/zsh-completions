@@ -25,6 +25,7 @@ arguments=(
   '--disable-build-scripts[dont run build scripts or load `OUT_DIR` values by running `cargo check` before analysis.]'
   '--disable-proc-macros[dont expand proc macros.]'
   '--proc-macro-srv[run the proc-macro-srv binary at the specified path.]'
+  '--skip-lang-items[skip lang items fetching.]'
   '--skip-lowering[skip body lowering.]'
   '--skip-inference[skip type inference.]'
   '--skip-mir-stats[skip lowering to mir]'
