@@ -21,7 +21,7 @@ arguments=(
   '--out-dir[write output to compiler-chosen filename in DIR]'
   '--explain[provide a detailed explanation of an error message]'
   '--test[build a test harness]'
-  '--target[target triple for which the code is compiled]'
+  '--target[target tuple for which the code is compiled]'
   {-A,--allow}'[set lint allowed]'
   {-W,--warn}'[set lint warnings]'
   '--force-warn[set lint force-warn]'

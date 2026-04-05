@@ -57,10 +57,11 @@ requires-python\:"Optimize for selecting latest supported version of each packag
 '*--no-build-isolation-package=[Disable isolation when building source distributions for a specific package]:NO_BUILD_ISOLATION_PACKAGE:' \
 '--exclude-newer=[Limit candidate packages to those that were uploaded prior to the given date]:EXCLUDE_NEWER:' \
 '*--exclude-newer-package=[Limit candidate packages for specific packages to those that were uploaded prior to the given date]:EXCLUDE_NEWER_PACKAGE:' \
-'--link-mode=[The method to use when installing packages from the global cache]:LINK_MODE:((clone\:"Clone (i.e., copy-on-write) packages from the wheel into the \`site-packages\` directory"
-copy\:"Copy packages from the wheel into the \`site-packages\` directory"
-hardlink\:"Hard link packages from the wheel into the \`site-packages\` directory"
-symlink\:"Symbolically link packages from the wheel into the \`site-packages\` directory"))' \
+'--link-mode=[The method to use when installing packages from the global cache]:LINK_MODE:((clone\:"Clone (i.e., copy-on-write) packages from the source into the destination"
+copy\:"Copy packages from the source into the destination"
+hardlink\:"Hard link packages from the source into the destination"
+symlink\:"Symbolically link packages from the source into the destination"))' \
+'*--no-sources-package=[Don'\''t use sources from the \`tool.uv.sources\` table for the specified packages]:NO_SOURCES_PACKAGE:_default' \
 '*--no-build-package=[Don'\''t build source distributions for a specific package]:NO_BUILD_PACKAGE:' \
 '*--no-binary-package=[Don'\''t install pre-built wheels for a specific package]:NO_BINARY_PACKAGE:' \
 '*--refresh-package=[Refresh cached data for a specific package]:REFRESH_PACKAGE:' \
@@ -139,6 +140,9 @@ cu92\:"Use the PyTorch index for CUDA 9.2"
 cu91\:"Use the PyTorch index for CUDA 9.1"
 cu90\:"Use the PyTorch index for CUDA 9.0"
 cu80\:"Use the PyTorch index for CUDA 8.0"
+rocm7.2\:"Use the PyTorch index for ROCm 7.2"
+rocm7.1\:"Use the PyTorch index for ROCm 7.1"
+rocm7.0\:"Use the PyTorch index for ROCm 7.0"
 rocm6.4\:"Use the PyTorch index for ROCm 6.4"
 rocm6.3\:"Use the PyTorch index for ROCm 6.3"
 rocm6.2.4\:"Use the PyTorch index for ROCm 6.2.4"
@@ -174,8 +178,8 @@ never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files -/' \
 '--project=[Discover a project in the given directory]:PROJECT:_files -/' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
-'--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools]' \
-'--no-env-file[Avoid reading environment variables from a \`.env\` file]' \
+'--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools \[env\: UV_ISOLATED=\]]' \
+'--no-env-file[Avoid reading environment variables from a \`.env\` file \[env\: UV_NO_ENV_FILE=\]]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -192,16 +196,16 @@ never\:"Disables colored output"))' \
 '--build[]' \
 '--no-binary[Don'\''t install pre-built wheels]' \
 '--binary[]' \
-'(--offline)--refresh[Refresh all cached data]' \
-'(--offline)--no-refresh[]' \
+'--refresh[Refresh all cached data]' \
+'--no-refresh[]' \
 '--lfs[Whether to use Git LFS when adding a dependency from Git]' \
-'--show-resolution[Whether to show resolver and installer output from any environment modifications]' \
+'--show-resolution[Whether to show resolver and installer output from any environment modifications \[env\: UV_SHOW_RESOLUTION=\]]' \
 '-V[Display the uvx version]' \
 '--version[Display the uvx version]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
-'(--python-preference)--managed-python[Require use of uv-managed Python versions]' \
-'(--python-preference)--no-managed-python[Disable use of uv-managed Python versions]' \
+'--managed-python[Require use of uv-managed Python versions \[env\: UV_MANAGED_PYTHON=\]]' \
+'--no-managed-python[Disable use of uv-managed Python versions \[env\: UV_NO_MANAGED_PYTHON=\]]' \
 '--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
 '--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
 '(-v --verbose)*-q[Use quiet output]' \
@@ -209,15 +213,17 @@ never\:"Disables colored output"))' \
 '(-q --quiet)*-v[Use verbose output]' \
 '(-q --quiet)*--verbose[Use verbose output]' \
 '(--color)--no-color[Disable colors]' \
-'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_NATIVE_TLS=\]]' \
 '--no-native-tls[]' \
-'--offline[Disable network access]' \
+'--system-certs[Whether to load TLS certificates from the platform'\''s native certificate store \[env\: UV_SYSTEM_CERTS=\]]' \
+'--no-system-certs[]' \
+'--offline[Disable network access \[env\: UV_OFFLINE=\]]' \
 '--no-offline[]' \
-'--preview[Whether to enable all experimental preview features]' \
+'--preview[Whether to enable all experimental preview features \[env\: UV_PREVIEW=\]]' \
 '--no-preview[]' \
 '--show-settings[Show the resolved settings for the current command]' \
-'--no-progress[Hide all progress outputs]' \
-'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories]' \
+'--no-progress[Hide all progress outputs \[env\: UV_NO_PROGRESS=\]]' \
+'--no-installer-metadata[Skip writing \`uv\` installer metadata files (e.g., \`INSTALLER\`, \`REQUESTED\`, and \`direct_url.json\`) to site-packages \`.dist-info\` directories \[env\: UV_NO_INSTALLER_METADATA=\]]' \
 '--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
 '-h[Display the concise help for this command]' \
 '--help[Display the concise help for this command]' \
