@@ -98,7 +98,7 @@ a11y-extras\:"The A11yExtras feature"))' \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_tinymist__query_commands" \
+":: :_tinymist__subcmd__query_commands" \
 "*::: :->query" \
 && ret=0
 
@@ -230,7 +230,7 @@ a11y-extras\:"The A11yExtras feature"))' \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__query__help_commands" \
+":: :_tinymist__subcmd__query__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -268,6 +268,7 @@ esac
 _arguments "${_arguments_options[@]}" : \
 '--preview-mode=[Configure the preview mode]:MODE:((document\:"Would like to preview a regular document"
 slide\:"Would like to preview slides"))' \
+'--page-title=[Set the preview page title]:TITLE:_default' \
 '--partial-rendering=[Only render visible part of the document]:ENABLE_PARTIAL_RENDERING:(true false)' \
 '--invert-colors=[Configure the way to invert colors of the preview]:INVERT_COLORS:_default' \
 '--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((on-save\:"Refresh preview on save"
@@ -383,7 +384,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_tinymist__doc_commands" \
+":: :_tinymist__subcmd__doc_commands" \
 "*::: :->doc" \
 && ret=0
 
@@ -418,7 +419,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__doc__help_commands" \
+":: :_tinymist__subcmd__doc__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -452,7 +453,7 @@ esac
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_tinymist__task_commands" \
+":: :_tinymist__subcmd__task_commands" \
 "*::: :->task" \
 && ret=0
 
@@ -478,6 +479,7 @@ onDocumentHasTitle\:"*DEPRECATED* Run task when a document has a title and on sa
 script\:"Checks by running a typst script"))' \
 '--preview-mode=[Configure the preview mode]:MODE:((document\:"Would like to preview a regular document"
 slide\:"Would like to preview slides"))' \
+'--page-title=[Set the preview page title]:TITLE:_default' \
 '--partial-rendering=[Only render visible part of the document]:ENABLE_PARTIAL_RENDERING:(true false)' \
 '--invert-colors=[Configure the way to invert colors of the preview]:INVERT_COLORS:_default' \
 '--refresh-style=[Used by lsp for controlling the preview refresh style]:REFRESH_STYLE:((on-save\:"Refresh preview on save"
@@ -490,7 +492,7 @@ on-type\:"Refresh preview on type"))' \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__task__help_commands" \
+":: :_tinymist__subcmd__task__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -599,7 +601,7 @@ full\:"Prints the coverage in a full format"))' \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__help_commands" \
+":: :_tinymist__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -627,7 +629,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (query)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__help__query_commands" \
+":: :_tinymist__subcmd__help__subcmd__query_commands" \
 "*::: :->query" \
 && ret=0
 
@@ -671,7 +673,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (doc)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__help__doc_commands" \
+":: :_tinymist__subcmd__help__subcmd__doc_commands" \
 "*::: :->doc" \
 && ret=0
 
@@ -695,7 +697,7 @@ esac
 ;;
 (task)
 _arguments "${_arguments_options[@]}" : \
-":: :_tinymist__help__task_commands" \
+":: :_tinymist__subcmd__help__subcmd__task_commands" \
 "*::: :->task" \
 && ret=0
 
@@ -754,28 +756,28 @@ _tinymist_commands() {
     )
     _describe -t commands 'tinymist commands' commands "$@"
 }
-(( $+functions[_tinymist__compile_commands] )) ||
-_tinymist__compile_commands() {
+(( $+functions[_tinymist__subcmd__compile_commands] )) ||
+_tinymist__subcmd__compile_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist compile commands' commands "$@"
 }
-(( $+functions[_tinymist__completion_commands] )) ||
-_tinymist__completion_commands() {
+(( $+functions[_tinymist__subcmd__completion_commands] )) ||
+_tinymist__subcmd__completion_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist completion commands' commands "$@"
 }
-(( $+functions[_tinymist__cov_commands] )) ||
-_tinymist__cov_commands() {
+(( $+functions[_tinymist__subcmd__cov_commands] )) ||
+_tinymist__subcmd__cov_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist cov commands' commands "$@"
 }
-(( $+functions[_tinymist__dap_commands] )) ||
-_tinymist__dap_commands() {
+(( $+functions[_tinymist__subcmd__dap_commands] )) ||
+_tinymist__subcmd__dap_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist dap commands' commands "$@"
 }
-(( $+functions[_tinymist__doc_commands] )) ||
-_tinymist__doc_commands() {
+(( $+functions[_tinymist__subcmd__doc_commands] )) ||
+_tinymist__subcmd__doc_commands() {
     local commands; commands=(
 'new:Declare a document (project input)' \
 'configure:Configure document priority in workspace' \
@@ -783,13 +785,13 @@ _tinymist__doc_commands() {
     )
     _describe -t commands 'tinymist doc commands' commands "$@"
 }
-(( $+functions[_tinymist__doc__configure_commands] )) ||
-_tinymist__doc__configure_commands() {
+(( $+functions[_tinymist__subcmd__doc__subcmd__configure_commands] )) ||
+_tinymist__subcmd__doc__subcmd__configure_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist doc configure commands' commands "$@"
 }
-(( $+functions[_tinymist__doc__help_commands] )) ||
-_tinymist__doc__help_commands() {
+(( $+functions[_tinymist__subcmd__doc__subcmd__help_commands] )) ||
+_tinymist__subcmd__doc__subcmd__help_commands() {
     local commands; commands=(
 'new:Declare a document (project input)' \
 'configure:Configure document priority in workspace' \
@@ -797,33 +799,33 @@ _tinymist__doc__help_commands() {
     )
     _describe -t commands 'tinymist doc help commands' commands "$@"
 }
-(( $+functions[_tinymist__doc__help__configure_commands] )) ||
-_tinymist__doc__help__configure_commands() {
+(( $+functions[_tinymist__subcmd__doc__subcmd__help__subcmd__configure_commands] )) ||
+_tinymist__subcmd__doc__subcmd__help__subcmd__configure_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist doc help configure commands' commands "$@"
 }
-(( $+functions[_tinymist__doc__help__help_commands] )) ||
-_tinymist__doc__help__help_commands() {
+(( $+functions[_tinymist__subcmd__doc__subcmd__help__subcmd__help_commands] )) ||
+_tinymist__subcmd__doc__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist doc help help commands' commands "$@"
 }
-(( $+functions[_tinymist__doc__help__new_commands] )) ||
-_tinymist__doc__help__new_commands() {
+(( $+functions[_tinymist__subcmd__doc__subcmd__help__subcmd__new_commands] )) ||
+_tinymist__subcmd__doc__subcmd__help__subcmd__new_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist doc help new commands' commands "$@"
 }
-(( $+functions[_tinymist__doc__new_commands] )) ||
-_tinymist__doc__new_commands() {
+(( $+functions[_tinymist__subcmd__doc__subcmd__new_commands] )) ||
+_tinymist__subcmd__doc__subcmd__new_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist doc new commands' commands "$@"
 }
-(( $+functions[_tinymist__generate-script_commands] )) ||
-_tinymist__generate-script_commands() {
+(( $+functions[_tinymist__subcmd__generate-script_commands] )) ||
+_tinymist__subcmd__generate-script_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist generate-script commands' commands "$@"
 }
-(( $+functions[_tinymist__help_commands] )) ||
-_tinymist__help_commands() {
+(( $+functions[_tinymist__subcmd__help_commands] )) ||
+_tinymist__subcmd__help_commands() {
     local commands; commands=(
 'probe:Probe existence (Nop run)' \
 'lsp:Run language server' \
@@ -842,71 +844,71 @@ _tinymist__help_commands() {
     )
     _describe -t commands 'tinymist help commands' commands "$@"
 }
-(( $+functions[_tinymist__help__compile_commands] )) ||
-_tinymist__help__compile_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__compile_commands] )) ||
+_tinymist__subcmd__help__subcmd__compile_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help compile commands' commands "$@"
 }
-(( $+functions[_tinymist__help__completion_commands] )) ||
-_tinymist__help__completion_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__completion_commands] )) ||
+_tinymist__subcmd__help__subcmd__completion_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help completion commands' commands "$@"
 }
-(( $+functions[_tinymist__help__cov_commands] )) ||
-_tinymist__help__cov_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__cov_commands] )) ||
+_tinymist__subcmd__help__subcmd__cov_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help cov commands' commands "$@"
 }
-(( $+functions[_tinymist__help__dap_commands] )) ||
-_tinymist__help__dap_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__dap_commands] )) ||
+_tinymist__subcmd__help__subcmd__dap_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help dap commands' commands "$@"
 }
-(( $+functions[_tinymist__help__doc_commands] )) ||
-_tinymist__help__doc_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__doc_commands] )) ||
+_tinymist__subcmd__help__subcmd__doc_commands() {
     local commands; commands=(
 'new:Declare a document (project input)' \
 'configure:Configure document priority in workspace' \
     )
     _describe -t commands 'tinymist help doc commands' commands "$@"
 }
-(( $+functions[_tinymist__help__doc__configure_commands] )) ||
-_tinymist__help__doc__configure_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__doc__subcmd__configure_commands] )) ||
+_tinymist__subcmd__help__subcmd__doc__subcmd__configure_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help doc configure commands' commands "$@"
 }
-(( $+functions[_tinymist__help__doc__new_commands] )) ||
-_tinymist__help__doc__new_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__doc__subcmd__new_commands] )) ||
+_tinymist__subcmd__help__subcmd__doc__subcmd__new_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help doc new commands' commands "$@"
 }
-(( $+functions[_tinymist__help__generate-script_commands] )) ||
-_tinymist__help__generate-script_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__generate-script_commands] )) ||
+_tinymist__subcmd__help__subcmd__generate-script_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help generate-script commands' commands "$@"
 }
-(( $+functions[_tinymist__help__help_commands] )) ||
-_tinymist__help__help_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__help_commands] )) ||
+_tinymist__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help help commands' commands "$@"
 }
-(( $+functions[_tinymist__help__lsp_commands] )) ||
-_tinymist__help__lsp_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__lsp_commands] )) ||
+_tinymist__subcmd__help__subcmd__lsp_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help lsp commands' commands "$@"
 }
-(( $+functions[_tinymist__help__preview_commands] )) ||
-_tinymist__help__preview_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__preview_commands] )) ||
+_tinymist__subcmd__help__subcmd__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help preview commands' commands "$@"
 }
-(( $+functions[_tinymist__help__probe_commands] )) ||
-_tinymist__help__probe_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__probe_commands] )) ||
+_tinymist__subcmd__help__subcmd__probe_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help probe commands' commands "$@"
 }
-(( $+functions[_tinymist__help__query_commands] )) ||
-_tinymist__help__query_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__query_commands] )) ||
+_tinymist__subcmd__help__subcmd__query_commands() {
     local commands; commands=(
 'lsif:Get the lsif for a specific package' \
 'packageDocs:Get the documentation for a specific package' \
@@ -914,60 +916,60 @@ _tinymist__help__query_commands() {
     )
     _describe -t commands 'tinymist help query commands' commands "$@"
 }
-(( $+functions[_tinymist__help__query__checkPackage_commands] )) ||
-_tinymist__help__query__checkPackage_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__query__subcmd__checkPackage_commands] )) ||
+_tinymist__subcmd__help__subcmd__query__subcmd__checkPackage_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help query checkPackage commands' commands "$@"
 }
-(( $+functions[_tinymist__help__query__lsif_commands] )) ||
-_tinymist__help__query__lsif_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__query__subcmd__lsif_commands] )) ||
+_tinymist__subcmd__help__subcmd__query__subcmd__lsif_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help query lsif commands' commands "$@"
 }
-(( $+functions[_tinymist__help__query__packageDocs_commands] )) ||
-_tinymist__help__query__packageDocs_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__query__subcmd__packageDocs_commands] )) ||
+_tinymist__subcmd__help__subcmd__query__subcmd__packageDocs_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help query packageDocs commands' commands "$@"
 }
-(( $+functions[_tinymist__help__task_commands] )) ||
-_tinymist__help__task_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__task_commands] )) ||
+_tinymist__subcmd__help__subcmd__task_commands() {
     local commands; commands=(
 'preview:Declare a preview task' \
     )
     _describe -t commands 'tinymist help task commands' commands "$@"
 }
-(( $+functions[_tinymist__help__task__preview_commands] )) ||
-_tinymist__help__task__preview_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__task__subcmd__preview_commands] )) ||
+_tinymist__subcmd__help__subcmd__task__subcmd__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help task preview commands' commands "$@"
 }
-(( $+functions[_tinymist__help__test_commands] )) ||
-_tinymist__help__test_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__test_commands] )) ||
+_tinymist__subcmd__help__subcmd__test_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help test commands' commands "$@"
 }
-(( $+functions[_tinymist__help__trace-lsp_commands] )) ||
-_tinymist__help__trace-lsp_commands() {
+(( $+functions[_tinymist__subcmd__help__subcmd__trace-lsp_commands] )) ||
+_tinymist__subcmd__help__subcmd__trace-lsp_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help trace-lsp commands' commands "$@"
 }
-(( $+functions[_tinymist__lsp_commands] )) ||
-_tinymist__lsp_commands() {
+(( $+functions[_tinymist__subcmd__lsp_commands] )) ||
+_tinymist__subcmd__lsp_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist lsp commands' commands "$@"
 }
-(( $+functions[_tinymist__preview_commands] )) ||
-_tinymist__preview_commands() {
+(( $+functions[_tinymist__subcmd__preview_commands] )) ||
+_tinymist__subcmd__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist preview commands' commands "$@"
 }
-(( $+functions[_tinymist__probe_commands] )) ||
-_tinymist__probe_commands() {
+(( $+functions[_tinymist__subcmd__probe_commands] )) ||
+_tinymist__subcmd__probe_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist probe commands' commands "$@"
 }
-(( $+functions[_tinymist__query_commands] )) ||
-_tinymist__query_commands() {
+(( $+functions[_tinymist__subcmd__query_commands] )) ||
+_tinymist__subcmd__query_commands() {
     local commands; commands=(
 'lsif:Get the lsif for a specific package' \
 'packageDocs:Get the documentation for a specific package' \
@@ -976,13 +978,13 @@ _tinymist__query_commands() {
     )
     _describe -t commands 'tinymist query commands' commands "$@"
 }
-(( $+functions[_tinymist__query__checkPackage_commands] )) ||
-_tinymist__query__checkPackage_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__checkPackage_commands] )) ||
+_tinymist__subcmd__query__subcmd__checkPackage_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query checkPackage commands' commands "$@"
 }
-(( $+functions[_tinymist__query__help_commands] )) ||
-_tinymist__query__help_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__help_commands] )) ||
+_tinymist__subcmd__query__subcmd__help_commands() {
     local commands; commands=(
 'lsif:Get the lsif for a specific package' \
 'packageDocs:Get the documentation for a specific package' \
@@ -991,74 +993,74 @@ _tinymist__query__help_commands() {
     )
     _describe -t commands 'tinymist query help commands' commands "$@"
 }
-(( $+functions[_tinymist__query__help__checkPackage_commands] )) ||
-_tinymist__query__help__checkPackage_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__help__subcmd__checkPackage_commands] )) ||
+_tinymist__subcmd__query__subcmd__help__subcmd__checkPackage_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query help checkPackage commands' commands "$@"
 }
-(( $+functions[_tinymist__query__help__help_commands] )) ||
-_tinymist__query__help__help_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__help__subcmd__help_commands] )) ||
+_tinymist__subcmd__query__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query help help commands' commands "$@"
 }
-(( $+functions[_tinymist__query__help__lsif_commands] )) ||
-_tinymist__query__help__lsif_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__help__subcmd__lsif_commands] )) ||
+_tinymist__subcmd__query__subcmd__help__subcmd__lsif_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query help lsif commands' commands "$@"
 }
-(( $+functions[_tinymist__query__help__packageDocs_commands] )) ||
-_tinymist__query__help__packageDocs_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__help__subcmd__packageDocs_commands] )) ||
+_tinymist__subcmd__query__subcmd__help__subcmd__packageDocs_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query help packageDocs commands' commands "$@"
 }
-(( $+functions[_tinymist__query__lsif_commands] )) ||
-_tinymist__query__lsif_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__lsif_commands] )) ||
+_tinymist__subcmd__query__subcmd__lsif_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query lsif commands' commands "$@"
 }
-(( $+functions[_tinymist__query__packageDocs_commands] )) ||
-_tinymist__query__packageDocs_commands() {
+(( $+functions[_tinymist__subcmd__query__subcmd__packageDocs_commands] )) ||
+_tinymist__subcmd__query__subcmd__packageDocs_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query packageDocs commands' commands "$@"
 }
-(( $+functions[_tinymist__task_commands] )) ||
-_tinymist__task_commands() {
+(( $+functions[_tinymist__subcmd__task_commands] )) ||
+_tinymist__subcmd__task_commands() {
     local commands; commands=(
 'preview:Declare a preview task' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'tinymist task commands' commands "$@"
 }
-(( $+functions[_tinymist__task__help_commands] )) ||
-_tinymist__task__help_commands() {
+(( $+functions[_tinymist__subcmd__task__subcmd__help_commands] )) ||
+_tinymist__subcmd__task__subcmd__help_commands() {
     local commands; commands=(
 'preview:Declare a preview task' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'tinymist task help commands' commands "$@"
 }
-(( $+functions[_tinymist__task__help__help_commands] )) ||
-_tinymist__task__help__help_commands() {
+(( $+functions[_tinymist__subcmd__task__subcmd__help__subcmd__help_commands] )) ||
+_tinymist__subcmd__task__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist task help help commands' commands "$@"
 }
-(( $+functions[_tinymist__task__help__preview_commands] )) ||
-_tinymist__task__help__preview_commands() {
+(( $+functions[_tinymist__subcmd__task__subcmd__help__subcmd__preview_commands] )) ||
+_tinymist__subcmd__task__subcmd__help__subcmd__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist task help preview commands' commands "$@"
 }
-(( $+functions[_tinymist__task__preview_commands] )) ||
-_tinymist__task__preview_commands() {
+(( $+functions[_tinymist__subcmd__task__subcmd__preview_commands] )) ||
+_tinymist__subcmd__task__subcmd__preview_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist task preview commands' commands "$@"
 }
-(( $+functions[_tinymist__test_commands] )) ||
-_tinymist__test_commands() {
+(( $+functions[_tinymist__subcmd__test_commands] )) ||
+_tinymist__subcmd__test_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist test commands' commands "$@"
 }
-(( $+functions[_tinymist__trace-lsp_commands] )) ||
-_tinymist__trace-lsp_commands() {
+(( $+functions[_tinymist__subcmd__trace-lsp_commands] )) ||
+_tinymist__subcmd__trace-lsp_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist trace-lsp commands' commands "$@"
 }

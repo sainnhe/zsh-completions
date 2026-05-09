@@ -35,6 +35,7 @@ _uvx() {
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS:_default' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE:' \
 '*--upgrade-package=[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE:' \
+'*--upgrade-group=[Allow upgrades for all packages in a dependency group, ignoring pinned versions in any existing output file]:UPGRADE_GROUP:_default' \
 '*--reinstall-package=[Reinstall a specific package, regardless of whether it'\''s already installed. Implies \`--refresh-package\`]:REINSTALL_PACKAGE:' \
 '--index-strategy=[The strategy to use when resolving against multiple index URLs]:INDEX_STRATEGY:((first-index\:"Only use results from the first index that returns a match for a given package name"
 unsafe-first-match\:"Search for every package name across all indexes, exhausting the versions from the first index before moving on to the next"

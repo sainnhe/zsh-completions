@@ -14,7 +14,6 @@ arguments=(
   {-V,--version}'[print version.]'
   '--print-config-schema[dump a LSP config JSON schema.]'
   '--no-dump[suppress printing.]'
-  '--json[output as JSON.]'
   '--rainbow[enable rainbow highlighting of identifiers.]'
   '--output[]'
   '--randomize[randomize order in which crates, modules, and items are processed.]'
@@ -52,7 +51,6 @@ arguments=(
   '--output[the output path where the SCIP file will be written to. Defaults to `index.scip`.]'
   '--config-path[A path to an json configuration file that can be used to customize cargo behavior.]'
   '--exclude-vendored-libraries[exclude code from vendored libraries from the resulting index.]'
-  '--num-threads[the number of worker threads for cache priming. Defaults to the number of physical cores.]'
   '*:filename:_files'
 )
 
