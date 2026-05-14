@@ -15,6 +15,7 @@ _tinymist() {
 
     local context curcontext="$curcontext" state line
     _arguments "${_arguments_options[@]}" : \
+'--log-filter=[Configure log filter of tinymist]:LOG_FILTER:_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -309,6 +310,7 @@ a11y-extras\:"The A11yExtras feature"))' \
 '--not-primary[Let it not be the primary instance]' \
 '--open[Open the preview in the browser after compilation. If \`--no-open\` is set, this flag will be ignored]' \
 '--no-open[Don'\''t open the preview in the browser after compilation. If \`--open\` is set as well, this flag will win]' \
+'--verbose[Emit INFO level logging. The default is WARN]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
 '::input -- Specify the path to input Typst file. If the path is relative, it will be resolved relative to the current working directory (PWD):_default' \
