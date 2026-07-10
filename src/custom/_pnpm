@@ -1,4 +1,4 @@
-#compdef pnpm
+#compdef pnpm pn
 ###-begin-pnpm-completion-###
 if type compdef &>/dev/null; then
   _pnpm_completion () {
@@ -21,7 +21,7 @@ if type compdef &>/dev/null; then
   if [[ $zsh_eval_context == *func ]]; then
     _pnpm_completion "$@"
   else
-    compdef _pnpm_completion pnpm
+    compdef _pnpm_completion pnpm pn
   fi
 fi
 ###-end-pnpm-completion-###

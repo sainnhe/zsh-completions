@@ -62,9 +62,9 @@ requires-python\:"Optimize for selecting latest supported version of each packag
 copy\:"Copy packages from the source into the destination"
 hardlink\:"Hard link packages from the source into the destination"
 symlink\:"Symbolically link packages from the source into the destination"))' \
-'*--no-sources-package=[Don'\''t use sources from the \`tool.uv.sources\` table for the specified packages]:NO_SOURCES_PACKAGE:_default' \
-'*--no-build-package=[Don'\''t build source distributions for a specific package]:NO_BUILD_PACKAGE:' \
-'*--no-binary-package=[Don'\''t install pre-built wheels for a specific package]:NO_BINARY_PACKAGE:' \
+'*--no-sources-package=[Don'\''t use sources from the \`tool.uv.sources\` table for the specified packages \[env\: \`UV_NO_SOURCES_PACKAGE\`=\]]:NO_SOURCES_PACKAGE:_default' \
+'*--no-build-package=[Don'\''t build source distributions for a specific package \[env\: \`UV_NO_BUILD_PACKAGE\`=\]]:NO_BUILD_PACKAGE:' \
+'*--no-binary-package=[Don'\''t install pre-built wheels for a specific package \[env\: \`UV_NO_BINARY_PACKAGE\`=\]]:NO_BINARY_PACKAGE:' \
 '*--refresh-package=[Refresh cached data for a specific package]:REFRESH_PACKAGE:' \
 '-p+[The Python interpreter to use to build the run environment.]:PYTHON:' \
 '--python=[The Python interpreter to use to build the run environment.]:PYTHON:' \
@@ -109,7 +109,8 @@ aarch64-manylinux_2_39\:"An ARM64 target for the \`manylinux_2_39\` platform"
 aarch64-manylinux_2_40\:"An ARM64 target for the \`manylinux_2_40\` platform"
 aarch64-linux-android\:"An ARM64 Android target"
 x86_64-linux-android\:"An \`x86_64\` Android target"
-wasm32-pyodide2024\:"A wasm32 target using the Pyodide 2024 platform. Meant for use with Python 3.12"
+wasm32-pyodide2024\:"A wasm32 target using the Pyodide 2024 platform. Meant for use with Python 3.12. See <https\://pyodide.org/en/stable/development/abi/312.html>"
+wasm32-pyodide2025\:"A wasm32 target using the Pyodide 2025 platform. Meant for use with Python 3.13. See <https\://pyodide.org/en/stable/development/abi/313.html>"
 arm64-apple-ios\:"An ARM64 target for iOS device"
 arm64-apple-ios-simulator\:"An ARM64 target for iOS simulator"
 x86_64-apple-ios-simulator\:"An \`x86_64\` target for iOS simulator"))' \
