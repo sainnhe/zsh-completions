@@ -276,6 +276,48 @@ bundle\:"The bundle export feature"))' \
 '::input -- Specify the path to input Typst file. If the path is relative, it will be resolved relative to the current working directory (PWD):_default' \
 && ret=0
 ;;
+(tyckScope)
+_arguments "${_arguments_options[@]}" : \
+'--root=[Configure the project root (for absolute paths)]:DIR:_files' \
+'*--font-path=[Add additional directories that are recursively searched for fonts]:DIR:_files' \
+'--package-path=[Specify a custom path to local packages, defaults to system-dependent location]:DIR:_files' \
+'--package-cache-path=[Specify a custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'*--pdf-standard=[Specify the PDF standards that Typst will enforce conformance with]:STANDARD:((1.4\:"PDF 1.4"
+1.5\:"PDF 1.5"
+1.6\:"PDF 1.6"
+1.7\:"PDF 1.7"
+2.0\:"PDF 2.0"
+a-1b\:"PDF/A-1b"
+a-1a\:"PDF/A-1a"
+a-2b\:"PDF/A-2b"
+a-2u\:"PDF/A-2u"
+a-2a\:"PDF/A-2a"
+a-3b\:"PDF/A-3b"
+a-3u\:"PDF/A-3u"
+a-3a\:"PDF/A-3a"
+a-4\:"PDF/A-4"
+a-4f\:"PDF/A-4f"
+a-4e\:"PDF/A-4e"
+ua-1\:"PDF/UA-1"))' \
+'--ppi=[Specify the PPI (pixels per inch) to use for PNG export]:PPI:_default' \
+'*--features=[Enable in-development features that may be changed or removed at any time]:FEATURES:((html\:"The HTML feature"
+a11y-extras\:"The A11yExtras feature"
+bundle\:"The bundle export feature"))' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
+'--creation-timestamp=[Configure the document'\''s creation date formatted as a UNIX timestamp (in seconds)]:UNIX_TIMESTAMP:_default' \
+'--cert=[Specify the path to CA certificate file for network access, especially for downloading typst packages]:CERT_PATH:_files' \
+'--path=[The path of the package to request tyck scopes for]:PATH:_default' \
+'--id=[The package to request tyck scopes for]:ID:_default' \
+'-o+[The output path for the requested tyck scope dump]:OUTPUT:_default' \
+'--output=[The output path for the requested tyck scope dump]:OUTPUT:_default' \
+'--max-type-chars=[Maximum characters kept for each dumped type string. Set to 0 to keep full strings]:MAX_TYPE_CHARS:_default' \
+'--ignore-system-fonts[Ensure system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'--no-pdf-tags[By default, even when not producing a \`PDF/UA-1\` document, a tagged PDF document is written to provide a baseline of accessibility. In some circumstances (for example when trying to reduce the size of a document) it can be desirable to disable tagged PDF]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::input -- Specify the path to input Typst file. If the path is relative, it will be resolved relative to the current working directory (PWD):_default' \
+&& ret=0
+;;
 (help)
 _arguments "${_arguments_options[@]}" : \
 ":: :_tinymist__subcmd__query__subcmd__help_commands" \
@@ -301,6 +343,10 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (checkPackage)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(tyckScope)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
@@ -841,6 +887,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(tyckScope)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
         esac
     ;;
 esac
@@ -1149,6 +1199,7 @@ _tinymist__subcmd__help__subcmd__query_commands() {
 'scip:Get the SCIP index for a specific package' \
 'packageDocs:Get the documentation for a specific package' \
 'checkPackage:Check a specific package' \
+'tyckScope:Dump package scopes and type-checker results' \
     )
     _describe -t commands 'tinymist help query commands' commands "$@"
 }
@@ -1171,6 +1222,11 @@ _tinymist__subcmd__help__subcmd__query__subcmd__packageDocs_commands() {
 _tinymist__subcmd__help__subcmd__query__subcmd__scip_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist help query scip commands' commands "$@"
+}
+(( $+functions[_tinymist__subcmd__help__subcmd__query__subcmd__tyckScope_commands] )) ||
+_tinymist__subcmd__help__subcmd__query__subcmd__tyckScope_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist help query tyckScope commands' commands "$@"
 }
 (( $+functions[_tinymist__subcmd__help__subcmd__task_commands] )) ||
 _tinymist__subcmd__help__subcmd__task_commands() {
@@ -1252,6 +1308,7 @@ _tinymist__subcmd__query_commands() {
 'scip:Get the SCIP index for a specific package' \
 'packageDocs:Get the documentation for a specific package' \
 'checkPackage:Check a specific package' \
+'tyckScope:Dump package scopes and type-checker results' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'tinymist query commands' commands "$@"
@@ -1268,6 +1325,7 @@ _tinymist__subcmd__query__subcmd__help_commands() {
 'scip:Get the SCIP index for a specific package' \
 'packageDocs:Get the documentation for a specific package' \
 'checkPackage:Check a specific package' \
+'tyckScope:Dump package scopes and type-checker results' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'tinymist query help commands' commands "$@"
@@ -1297,6 +1355,11 @@ _tinymist__subcmd__query__subcmd__help__subcmd__scip_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query help scip commands' commands "$@"
 }
+(( $+functions[_tinymist__subcmd__query__subcmd__help__subcmd__tyckScope_commands] )) ||
+_tinymist__subcmd__query__subcmd__help__subcmd__tyckScope_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query help tyckScope commands' commands "$@"
+}
 (( $+functions[_tinymist__subcmd__query__subcmd__lsif_commands] )) ||
 _tinymist__subcmd__query__subcmd__lsif_commands() {
     local commands; commands=()
@@ -1311,6 +1374,11 @@ _tinymist__subcmd__query__subcmd__packageDocs_commands() {
 _tinymist__subcmd__query__subcmd__scip_commands() {
     local commands; commands=()
     _describe -t commands 'tinymist query scip commands' commands "$@"
+}
+(( $+functions[_tinymist__subcmd__query__subcmd__tyckScope_commands] )) ||
+_tinymist__subcmd__query__subcmd__tyckScope_commands() {
+    local commands; commands=()
+    _describe -t commands 'tinymist query tyckScope commands' commands "$@"
 }
 (( $+functions[_tinymist__subcmd__task_commands] )) ||
 _tinymist__subcmd__task_commands() {

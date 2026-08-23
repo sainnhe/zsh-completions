@@ -27,7 +27,7 @@ arguments=(
   '--no-bold[do not use bold text]'
   '--height[~\]\[-\]HEIGHT\[%\] Display fzf window below the cursor with the given]'
   '--min-height[+\]   Minimum height when --height is given as a percentage.]'
-  '--popup[start fzf in a popup window (requires tmux 3.3+ or Zellij 0.44+)]'
+  '--popup[start fzf in a floating pane (requires tmux 3.3+ or Zellij 0.44+)]'
   '--tmux[alias for --popup]'
   '--layout[choose layout: \[default|reverse|reverse-list\]]'
   '--margin[screen margin (TRBL | TB,RL | T,RL,B | T,R,B,L)]'

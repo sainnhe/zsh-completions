@@ -32,8 +32,8 @@ _typst() {
         case $line[1] in
             (compile)
 _arguments "${_arguments_options[@]}" : \
-'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
-'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
+'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
+'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
 '*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Adds additional directories that are recursively searched for fonts]:DIR:_files' \
@@ -66,12 +66,13 @@ zero\:"Separates paths with NULL bytes and can express all paths"
 make\:"Emits in Make format, omitting inexpressible paths"))' \
 '-j+[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
 '--jobs=[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
-'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html a11y-extras)' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html bundle a11y-extras)' \
 '--diagnostic-format=[The format to emit diagnostics in]:DIAGNOSTIC_FORMAT:(human short)' \
 '--open=[Opens the output file with the default viewer or a specific program after compilation. Ignored if output is stdout]' \
-'--timings=[Produces performance timings of the compilation process. (experimental)]' \
+'--timings=[Produces performance timings of the compilation process. (experimental)]:OUTPUT_JSON:_files' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
 '--ignore-embedded-fonts[Ensures fonts embedded into Typst won'\''t be considered]' \
+'--pretty[Whether to pretty-print produced output]' \
 '--no-pdf-tags[By default, even when not producing a \`PDF/UA-1\` document, a tagged PDF document is written to provide a baseline of accessibility. In some circumstances (for example when trying to reduce the size of a document) it can be desirable to disable tagged PDF]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
@@ -81,8 +82,8 @@ make\:"Emits in Make format, omitting inexpressible paths"))' \
 ;;
 (c)
 _arguments "${_arguments_options[@]}" : \
-'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
-'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
+'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
+'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
 '*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Adds additional directories that are recursively searched for fonts]:DIR:_files' \
@@ -115,12 +116,13 @@ zero\:"Separates paths with NULL bytes and can express all paths"
 make\:"Emits in Make format, omitting inexpressible paths"))' \
 '-j+[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
 '--jobs=[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
-'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html a11y-extras)' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html bundle a11y-extras)' \
 '--diagnostic-format=[The format to emit diagnostics in]:DIAGNOSTIC_FORMAT:(human short)' \
 '--open=[Opens the output file with the default viewer or a specific program after compilation. Ignored if output is stdout]' \
-'--timings=[Produces performance timings of the compilation process. (experimental)]' \
+'--timings=[Produces performance timings of the compilation process. (experimental)]:OUTPUT_JSON:_files' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
 '--ignore-embedded-fonts[Ensures fonts embedded into Typst won'\''t be considered]' \
+'--pretty[Whether to pretty-print produced output]' \
 '--no-pdf-tags[By default, even when not producing a \`PDF/UA-1\` document, a tagged PDF document is written to provide a baseline of accessibility. In some circumstances (for example when trying to reduce the size of a document) it can be desirable to disable tagged PDF]' \
 '-h[Print help (see more with '\''--help'\'')]' \
 '--help[Print help (see more with '\''--help'\'')]' \
@@ -130,8 +132,8 @@ make\:"Emits in Make format, omitting inexpressible paths"))' \
 ;;
 (watch)
 _arguments "${_arguments_options[@]}" : \
-'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
-'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
+'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
+'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
 '*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Adds additional directories that are recursively searched for fonts]:DIR:_files' \
@@ -164,13 +166,14 @@ zero\:"Separates paths with NULL bytes and can express all paths"
 make\:"Emits in Make format, omitting inexpressible paths"))' \
 '-j+[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
 '--jobs=[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
-'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html a11y-extras)' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html bundle a11y-extras)' \
 '--diagnostic-format=[The format to emit diagnostics in]:DIAGNOSTIC_FORMAT:(human short)' \
 '--open=[Opens the output file with the default viewer or a specific program after compilation. Ignored if output is stdout]' \
-'--timings=[Produces performance timings of the compilation process. (experimental)]' \
+'--timings=[Produces performance timings of the compilation process. (experimental)]:OUTPUT_JSON:_files' \
 '--port=[The port where HTML is served]:PORT:_default' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
 '--ignore-embedded-fonts[Ensures fonts embedded into Typst won'\''t be considered]' \
+'--pretty[Whether to pretty-print produced output]' \
 '--no-pdf-tags[By default, even when not producing a \`PDF/UA-1\` document, a tagged PDF document is written to provide a baseline of accessibility. In some circumstances (for example when trying to reduce the size of a document) it can be desirable to disable tagged PDF]' \
 '--no-serve[Disables the built-in HTTP server for HTML export]' \
 '--no-reload[Disables the injected live reload script for HTML export. The HTML that is written to disk isn'\''t affected either way]' \
@@ -182,8 +185,8 @@ make\:"Emits in Make format, omitting inexpressible paths"))' \
 ;;
 (w)
 _arguments "${_arguments_options[@]}" : \
-'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
-'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html)' \
+'-f+[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
+'--format=[The format of the output file, inferred from the extension by default]:FORMAT:(pdf png svg html bundle)' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
 '*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Adds additional directories that are recursively searched for fonts]:DIR:_files' \
@@ -216,13 +219,14 @@ zero\:"Separates paths with NULL bytes and can express all paths"
 make\:"Emits in Make format, omitting inexpressible paths"))' \
 '-j+[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
 '--jobs=[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
-'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html a11y-extras)' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html bundle a11y-extras)' \
 '--diagnostic-format=[The format to emit diagnostics in]:DIAGNOSTIC_FORMAT:(human short)' \
 '--open=[Opens the output file with the default viewer or a specific program after compilation. Ignored if output is stdout]' \
-'--timings=[Produces performance timings of the compilation process. (experimental)]' \
+'--timings=[Produces performance timings of the compilation process. (experimental)]:OUTPUT_JSON:_files' \
 '--port=[The port where HTML is served]:PORT:_default' \
 '--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
 '--ignore-embedded-fonts[Ensures fonts embedded into Typst won'\''t be considered]' \
+'--pretty[Whether to pretty-print produced output]' \
 '--no-pdf-tags[By default, even when not producing a \`PDF/UA-1\` document, a tagged PDF document is written to provide a baseline of accessibility. In some circumstances (for example when trying to reduce the size of a document) it can be desirable to disable tagged PDF]' \
 '--no-serve[Disables the built-in HTTP server for HTML export]' \
 '--no-reload[Disables the injected live reload script for HTML export. The HTML that is written to disk isn'\''t affected either way]' \
@@ -247,7 +251,8 @@ _arguments "${_arguments_options[@]}" : \
 '--field=[Extracts just one field from all retrieved elements]:FIELD:_default' \
 '--format=[The format to serialize in]:FORMAT:(json yaml)' \
 '--target=[The target to compile for]:TARGET:((paged\:"PDF and image formats"
-html\:"HTML"))' \
+html\:"HTML"
+bundle\:"Bundle"))' \
 '--root=[Configures the project root (for absolute paths)]:DIR:_files' \
 '*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
 '*--font-path=[Adds additional directories that are recursively searched for fonts]:DIR:_files' \
@@ -256,7 +261,7 @@ html\:"HTML"))' \
 '--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp]:UNIX_TIMESTAMP:_default' \
 '-j+[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
 '--jobs=[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
-'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html a11y-extras)' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html bundle a11y-extras)' \
 '--diagnostic-format=[The format to emit diagnostics in]:DIAGNOSTIC_FORMAT:(human short)' \
 '--one[Expects and retrieves exactly one element]' \
 '--pretty[Whether to pretty-print the serialized output]' \
@@ -266,6 +271,31 @@ html\:"HTML"))' \
 '--help[Print help (see more with '\''--help'\'')]' \
 ':input -- Path to input Typst file. Use `-` to read input from stdin:_files' \
 ':selector -- Defines which elements to retrieve:_default' \
+&& ret=0
+;;
+(eval)
+_arguments "${_arguments_options[@]}" : \
+'--in=[A file in whose context to evaluate the code. Can be used to introspect the document. Use \`-\` to read input from stdin]:IN:_files' \
+'--target=[The target to compile for]:TARGET:((paged\:"PDF and image formats"
+html\:"HTML"
+bundle\:"Bundle"))' \
+'--format=[The format to serialize in]:FORMAT:(json yaml)' \
+'--root=[Configures the project root (for absolute paths)]:DIR:_files' \
+'*--input=[Add a string key-value pair visible through \`sys.inputs\`]:key=value:_default' \
+'*--font-path=[Adds additional directories that are recursively searched for fonts]:DIR:_files' \
+'--package-path=[Custom path to local packages, defaults to system-dependent location]:DIR:_files' \
+'--package-cache-path=[Custom path to package cache, defaults to system-dependent location]:DIR:_files' \
+'--creation-timestamp=[The document'\''s creation date formatted as a UNIX timestamp]:UNIX_TIMESTAMP:_default' \
+'-j+[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
+'--jobs=[Number of parallel jobs spawned during compilation. Defaults to number of CPUs. Setting it to 1 disables parallelism]:JOBS:_default' \
+'*--features=[Enables in-development features that may be changed or removed at any time]:FEATURES:(html bundle a11y-extras)' \
+'--diagnostic-format=[The format to emit diagnostics in]:DIAGNOSTIC_FORMAT:(human short)' \
+'--pretty[Whether to pretty-print the serialized output]' \
+'--ignore-system-fonts[Ensures system fonts won'\''t be searched, unless explicitly included via \`--font-path\`]' \
+'--ignore-embedded-fonts[Ensures fonts embedded into Typst won'\''t be considered]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':expression -- The piece of Typst code to evaluate:_default' \
 && ret=0
 ;;
 (fonts)
@@ -332,6 +362,10 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
+(eval)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
 (fonts)
 _arguments "${_arguments_options[@]}" : \
 && ret=0
@@ -369,7 +403,8 @@ _typst_commands() {
 'watch:Watches an input file and recompiles on changes' \
 'w:Watches an input file and recompiles on changes' \
 'init:Initializes a new project from a template' \
-'query:Processes an input file to extract provided metadata' \
+'query:Processes an input file to extract provided metadata (deprecated, use \`eval\` instead)' \
+'eval:Evaluates a piece of Typst code, optionally in the context of a document' \
 'fonts:Lists all discovered fonts in system and custom font paths' \
 'update:Self update the Typst CLI' \
 'completions:Generates shell completion scripts' \
@@ -388,6 +423,11 @@ _typst__completions_commands() {
     local commands; commands=()
     _describe -t commands 'typst completions commands' commands "$@"
 }
+(( $+functions[_typst__eval_commands] )) ||
+_typst__eval_commands() {
+    local commands; commands=()
+    _describe -t commands 'typst eval commands' commands "$@"
+}
 (( $+functions[_typst__fonts_commands] )) ||
 _typst__fonts_commands() {
     local commands; commands=()
@@ -399,7 +439,8 @@ _typst__help_commands() {
 'compile:Compiles an input file into a supported output format' \
 'watch:Watches an input file and recompiles on changes' \
 'init:Initializes a new project from a template' \
-'query:Processes an input file to extract provided metadata' \
+'query:Processes an input file to extract provided metadata (deprecated, use \`eval\` instead)' \
+'eval:Evaluates a piece of Typst code, optionally in the context of a document' \
 'fonts:Lists all discovered fonts in system and custom font paths' \
 'update:Self update the Typst CLI' \
 'completions:Generates shell completion scripts' \
@@ -417,6 +458,11 @@ _typst__help__compile_commands() {
 _typst__help__completions_commands() {
     local commands; commands=()
     _describe -t commands 'typst help completions commands' commands "$@"
+}
+(( $+functions[_typst__help__eval_commands] )) ||
+_typst__help__eval_commands() {
+    local commands; commands=()
+    _describe -t commands 'typst help eval commands' commands "$@"
 }
 (( $+functions[_typst__help__fonts_commands] )) ||
 _typst__help__fonts_commands() {

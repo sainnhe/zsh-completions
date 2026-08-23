@@ -41,9 +41,11 @@ _arguments "${_arguments_options[@]}" : \
 '*-t+[Comma-separated list of targets to be added on installation]:TARGET:_default' \
 '*--target=[Comma-separated list of targets to be added on installation]:TARGET:_default' \
 '--no-self-update[Don'\''t perform self update when running the \`rustup toolchain install\` command]' \
+'--no-update[Don'\''t try to update the installed toolchain]' \
 '--force[Force an update, even if some components are missing]' \
 '--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
 '--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
+'--override[Set the installed toolchain as the override for the current directory]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
@@ -94,9 +96,11 @@ _arguments "${_arguments_options[@]}" : \
 '*-t+[Comma-separated list of targets to be added on installation]:TARGET:_default' \
 '*--target=[Comma-separated list of targets to be added on installation]:TARGET:_default' \
 '--no-self-update[Don'\''t perform self update when running the \`rustup toolchain install\` command]' \
+'--no-update[Don'\''t try to update the installed toolchain]' \
 '--force[Force an update, even if some components are missing]' \
 '--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
 '--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
+'--override[Set the installed toolchain as the override for the current directory]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
@@ -249,6 +253,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (check)
 _arguments "${_arguments_options[@]}" : \
+'--no-self-update[Don'\''t check for self update when running the \`rustup check\` command]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
@@ -511,8 +516,10 @@ _arguments "${_arguments_options[@]}" : \
 '--nomicon[The Dark Arts of Advanced and Unsafe Rust Programming]' \
 '--proc_macro[A support library for macro authors when defining new macros]' \
 '--reference[The Rust Reference]' \
+'--releases[Rust Release Notes]' \
 '--rust-by-example[A collection of runnable examples that illustrate various Rust concepts and standard libraries]' \
 '--rustc[The compiler for the Rust programming language]' \
+'--rustc-docs[The API documentation for the Rust compiler and other toolchain components]' \
 '--rustdoc[Documentation generator for Rust projects]' \
 '--std[Standard library API documentation]' \
 '--style-guide[The Rust Style Guide]' \
@@ -553,7 +560,8 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (uninstall)
 _arguments "${_arguments_options[@]}" : \
-'-y[]' \
+'-y[Disable confirmation prompt]' \
+'--no-modify-path[Do not clean up the \`PATH\` environment variable]' \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0

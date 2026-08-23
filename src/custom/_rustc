@@ -33,6 +33,7 @@ arguments=(
   {-v,--verbose}'[use verbose output]'
   '-C[print codegen options]'
   '-W[print lint options and default settings]'
+  '-Z[print unstable compiler options]'
   {--help,-v}'[print the full set of options rustc accepts]'
   '*:filename:_files'
 )
