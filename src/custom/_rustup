@@ -23,7 +23,7 @@ _rustup() {
 '--help[Print help]' \
 '-V[Print version]' \
 '--version[Print version]' \
-'::+toolchain -- Release channel (e.g. +stable) or custom toolchain to set override:_default' \
+'::+toolchain -- Release channel (e.g. +stable) or custom toolchain to set override:' \
 ":: :_rustup_commands" \
 "*::: :->rustup" \
 && ret=0
@@ -46,6 +46,7 @@ _arguments "${_arguments_options[@]}" : \
 '--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
 '--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
 '--override[Set the installed toolchain as the override for the current directory]' \
+'--default[Set the installed toolchain as the default toolchain]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
@@ -68,7 +69,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__toolchain_commands" \
+":: :_rustup__subcmd__toolchain_commands" \
 "*::: :->toolchain" \
 && ret=0
 
@@ -101,6 +102,7 @@ _arguments "${_arguments_options[@]}" : \
 '--allow-downgrade[Allow rustup to downgrade the toolchain to satisfy your component choice]' \
 '--force-non-host[Install toolchains that require an emulator. See https\://github.com/rust-lang/rustup/wiki/Non-host-toolchains]' \
 '--override[Set the installed toolchain as the override for the current directory]' \
+'--default[Set the installed toolchain as the default toolchain]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::toolchain -- Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see `rustup help toolchain`:_default' \
@@ -123,7 +125,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__toolchain__help_commands" \
+":: :_rustup__subcmd__toolchain__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -175,7 +177,7 @@ _arguments "${_arguments_options[@]}" : \
 '--verbose[Enable verbose output with rustc information for all installed toolchains]' \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__show_commands" \
+":: :_rustup__subcmd__show_commands" \
 "*::: :->show" \
 && ret=0
 
@@ -207,7 +209,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__show__help_commands" \
+":: :_rustup__subcmd__show__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -262,7 +264,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__target_commands" \
+":: :_rustup__subcmd__target_commands" \
 "*::: :->target" \
 && ret=0
 
@@ -300,7 +302,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__target__help_commands" \
+":: :_rustup__subcmd__target__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -338,7 +340,7 @@ esac
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__component_commands" \
+":: :_rustup__subcmd__component_commands" \
 "*::: :->component" \
 && ret=0
 
@@ -378,7 +380,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__component__help_commands" \
+":: :_rustup__subcmd__component__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -416,7 +418,7 @@ esac
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__override_commands" \
+":: :_rustup__subcmd__override_commands" \
 "*::: :->override" \
 && ret=0
 
@@ -450,7 +452,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__override__help_commands" \
+":: :_rustup__subcmd__override__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -505,6 +507,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '--toolchain=[Toolchain name, such as '\''stable'\'', '\''nightly'\'', or '\''1.8.0'\''. For more information see \`rustup help toolchain\`]:TOOLCHAIN:_default' \
 '--path[Only print the path to the documentation]' \
+'(--path)--serve[Serve the documentation over a local HTTP server instead of opening it directly as a \`file\://\` URL]' \
 '--alloc[The Rust core allocation and collections library]' \
 '--book[The Rust Programming Language book]' \
 '--cargo[The Cargo Book]' \
@@ -542,7 +545,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__self_commands" \
+":: :_rustup__subcmd__self_commands" \
 "*::: :->self" \
 && ret=0
 
@@ -561,6 +564,7 @@ _arguments "${_arguments_options[@]}" : \
 (uninstall)
 _arguments "${_arguments_options[@]}" : \
 '-y[Disable confirmation prompt]' \
+'--yes[Disable confirmation prompt]' \
 '--no-modify-path[Do not clean up the \`PATH\` environment variable]' \
 '-h[Print help]' \
 '--help[Print help]' \
@@ -574,7 +578,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__self__help_commands" \
+":: :_rustup__subcmd__self__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -612,7 +616,7 @@ esac
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-":: :_rustup__set_commands" \
+":: :_rustup__subcmd__set_commands" \
 "*::: :->set" \
 && ret=0
 
@@ -626,7 +630,7 @@ _arguments "${_arguments_options[@]}" : \
 _arguments "${_arguments_options[@]}" : \
 '-h[Print help]' \
 '--help[Print help]' \
-':host_triple:_default' \
+':host_tuple:_default' \
 && ret=0
 ;;
 (profile)
@@ -652,7 +656,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__set__help_commands" \
+":: :_rustup__subcmd__set__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -700,7 +704,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (help)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help_commands" \
+":: :_rustup__subcmd__help_commands" \
 "*::: :->help" \
 && ret=0
 
@@ -724,7 +728,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (toolchain)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__toolchain_commands" \
+":: :_rustup__subcmd__help__subcmd__toolchain_commands" \
 "*::: :->toolchain" \
 && ret=0
 
@@ -760,7 +764,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (show)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__show_commands" \
+":: :_rustup__subcmd__help__subcmd__show_commands" \
 "*::: :->show" \
 && ret=0
 
@@ -796,7 +800,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (target)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__target_commands" \
+":: :_rustup__subcmd__help__subcmd__target_commands" \
 "*::: :->target" \
 && ret=0
 
@@ -824,7 +828,7 @@ esac
 ;;
 (component)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__component_commands" \
+":: :_rustup__subcmd__help__subcmd__component_commands" \
 "*::: :->component" \
 && ret=0
 
@@ -852,7 +856,7 @@ esac
 ;;
 (override)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__override_commands" \
+":: :_rustup__subcmd__help__subcmd__override_commands" \
 "*::: :->override" \
 && ret=0
 
@@ -896,7 +900,7 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (self)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__self_commands" \
+":: :_rustup__subcmd__help__subcmd__self_commands" \
 "*::: :->self" \
 && ret=0
 
@@ -924,7 +928,7 @@ esac
 ;;
 (set)
 _arguments "${_arguments_options[@]}" : \
-":: :_rustup__help__set_commands" \
+":: :_rustup__subcmd__help__subcmd__set_commands" \
 "*::: :->set" \
 && ret=0
 
@@ -996,18 +1000,18 @@ _rustup_commands() {
     )
     _describe -t commands 'rustup commands' commands "$@"
 }
-(( $+functions[_rustup__check_commands] )) ||
-_rustup__check_commands() {
+(( $+functions[_rustup__subcmd__check_commands] )) ||
+_rustup__subcmd__check_commands() {
     local commands; commands=()
     _describe -t commands 'rustup check commands' commands "$@"
 }
-(( $+functions[_rustup__completions_commands] )) ||
-_rustup__completions_commands() {
+(( $+functions[_rustup__subcmd__completions_commands] )) ||
+_rustup__subcmd__completions_commands() {
     local commands; commands=()
     _describe -t commands 'rustup completions commands' commands "$@"
 }
-(( $+functions[_rustup__component_commands] )) ||
-_rustup__component_commands() {
+(( $+functions[_rustup__subcmd__component_commands] )) ||
+_rustup__subcmd__component_commands() {
     local commands; commands=(
 'list:List installed and available components' \
 'add:Add a component to a Rust toolchain' \
@@ -1016,13 +1020,13 @@ _rustup__component_commands() {
     )
     _describe -t commands 'rustup component commands' commands "$@"
 }
-(( $+functions[_rustup__component__add_commands] )) ||
-_rustup__component__add_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__add_commands] )) ||
+_rustup__subcmd__component__subcmd__add_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component add commands' commands "$@"
 }
-(( $+functions[_rustup__component__help_commands] )) ||
-_rustup__component__help_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__help_commands] )) ||
+_rustup__subcmd__component__subcmd__help_commands() {
     local commands; commands=(
 'list:List installed and available components' \
 'add:Add a component to a Rust toolchain' \
@@ -1031,53 +1035,53 @@ _rustup__component__help_commands() {
     )
     _describe -t commands 'rustup component help commands' commands "$@"
 }
-(( $+functions[_rustup__component__help__add_commands] )) ||
-_rustup__component__help__add_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__help__subcmd__add_commands] )) ||
+_rustup__subcmd__component__subcmd__help__subcmd__add_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component help add commands' commands "$@"
 }
-(( $+functions[_rustup__component__help__help_commands] )) ||
-_rustup__component__help__help_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__component__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component help help commands' commands "$@"
 }
-(( $+functions[_rustup__component__help__list_commands] )) ||
-_rustup__component__help__list_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__help__subcmd__list_commands] )) ||
+_rustup__subcmd__component__subcmd__help__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component help list commands' commands "$@"
 }
-(( $+functions[_rustup__component__help__remove_commands] )) ||
-_rustup__component__help__remove_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__help__subcmd__remove_commands] )) ||
+_rustup__subcmd__component__subcmd__help__subcmd__remove_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component help remove commands' commands "$@"
 }
-(( $+functions[_rustup__component__list_commands] )) ||
-_rustup__component__list_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__list_commands] )) ||
+_rustup__subcmd__component__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component list commands' commands "$@"
 }
-(( $+functions[_rustup__component__remove_commands] )) ||
-_rustup__component__remove_commands() {
+(( $+functions[_rustup__subcmd__component__subcmd__remove_commands] )) ||
+_rustup__subcmd__component__subcmd__remove_commands() {
     local commands; commands=()
     _describe -t commands 'rustup component remove commands' commands "$@"
 }
-(( $+functions[_rustup__default_commands] )) ||
-_rustup__default_commands() {
+(( $+functions[_rustup__subcmd__default_commands] )) ||
+_rustup__subcmd__default_commands() {
     local commands; commands=()
     _describe -t commands 'rustup default commands' commands "$@"
 }
-(( $+functions[_rustup__doc_commands] )) ||
-_rustup__doc_commands() {
+(( $+functions[_rustup__subcmd__doc_commands] )) ||
+_rustup__subcmd__doc_commands() {
     local commands; commands=()
     _describe -t commands 'rustup doc commands' commands "$@"
 }
-(( $+functions[_rustup__dump-testament_commands] )) ||
-_rustup__dump-testament_commands() {
+(( $+functions[_rustup__subcmd__dump-testament_commands] )) ||
+_rustup__subcmd__dump-testament_commands() {
     local commands; commands=()
     _describe -t commands 'rustup dump-testament commands' commands "$@"
 }
-(( $+functions[_rustup__help_commands] )) ||
-_rustup__help_commands() {
+(( $+functions[_rustup__subcmd__help_commands] )) ||
+_rustup__subcmd__help_commands() {
     local commands; commands=(
 'install:Install or update the given toolchains, or by default the active toolchain' \
 'uninstall:Uninstall the given toolchains' \
@@ -1101,18 +1105,18 @@ _rustup__help_commands() {
     )
     _describe -t commands 'rustup help commands' commands "$@"
 }
-(( $+functions[_rustup__help__check_commands] )) ||
-_rustup__help__check_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__check_commands] )) ||
+_rustup__subcmd__help__subcmd__check_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help check commands' commands "$@"
 }
-(( $+functions[_rustup__help__completions_commands] )) ||
-_rustup__help__completions_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__completions_commands] )) ||
+_rustup__subcmd__help__subcmd__completions_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help completions commands' commands "$@"
 }
-(( $+functions[_rustup__help__component_commands] )) ||
-_rustup__help__component_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__component_commands] )) ||
+_rustup__subcmd__help__subcmd__component_commands() {
     local commands; commands=(
 'list:List installed and available components' \
 'add:Add a component to a Rust toolchain' \
@@ -1120,53 +1124,53 @@ _rustup__help__component_commands() {
     )
     _describe -t commands 'rustup help component commands' commands "$@"
 }
-(( $+functions[_rustup__help__component__add_commands] )) ||
-_rustup__help__component__add_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__component__subcmd__add_commands] )) ||
+_rustup__subcmd__help__subcmd__component__subcmd__add_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help component add commands' commands "$@"
 }
-(( $+functions[_rustup__help__component__list_commands] )) ||
-_rustup__help__component__list_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__component__subcmd__list_commands] )) ||
+_rustup__subcmd__help__subcmd__component__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help component list commands' commands "$@"
 }
-(( $+functions[_rustup__help__component__remove_commands] )) ||
-_rustup__help__component__remove_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__component__subcmd__remove_commands] )) ||
+_rustup__subcmd__help__subcmd__component__subcmd__remove_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help component remove commands' commands "$@"
 }
-(( $+functions[_rustup__help__default_commands] )) ||
-_rustup__help__default_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__default_commands] )) ||
+_rustup__subcmd__help__subcmd__default_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help default commands' commands "$@"
 }
-(( $+functions[_rustup__help__doc_commands] )) ||
-_rustup__help__doc_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__doc_commands] )) ||
+_rustup__subcmd__help__subcmd__doc_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help doc commands' commands "$@"
 }
-(( $+functions[_rustup__help__dump-testament_commands] )) ||
-_rustup__help__dump-testament_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__dump-testament_commands] )) ||
+_rustup__subcmd__help__subcmd__dump-testament_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help dump-testament commands' commands "$@"
 }
-(( $+functions[_rustup__help__help_commands] )) ||
-_rustup__help__help_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help help commands' commands "$@"
 }
-(( $+functions[_rustup__help__install_commands] )) ||
-_rustup__help__install_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__install_commands] )) ||
+_rustup__subcmd__help__subcmd__install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help install commands' commands "$@"
 }
-(( $+functions[_rustup__help__man_commands] )) ||
-_rustup__help__man_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__man_commands] )) ||
+_rustup__subcmd__help__subcmd__man_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help man commands' commands "$@"
 }
-(( $+functions[_rustup__help__override_commands] )) ||
-_rustup__help__override_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__override_commands] )) ||
+_rustup__subcmd__help__subcmd__override_commands() {
     local commands; commands=(
 'list:List directory toolchain overrides' \
 'set:Set the override toolchain for a directory' \
@@ -1174,28 +1178,28 @@ _rustup__help__override_commands() {
     )
     _describe -t commands 'rustup help override commands' commands "$@"
 }
-(( $+functions[_rustup__help__override__list_commands] )) ||
-_rustup__help__override__list_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__override__subcmd__list_commands] )) ||
+_rustup__subcmd__help__subcmd__override__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help override list commands' commands "$@"
 }
-(( $+functions[_rustup__help__override__set_commands] )) ||
-_rustup__help__override__set_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__override__subcmd__set_commands] )) ||
+_rustup__subcmd__help__subcmd__override__subcmd__set_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help override set commands' commands "$@"
 }
-(( $+functions[_rustup__help__override__unset_commands] )) ||
-_rustup__help__override__unset_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__override__subcmd__unset_commands] )) ||
+_rustup__subcmd__help__subcmd__override__subcmd__unset_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help override unset commands' commands "$@"
 }
-(( $+functions[_rustup__help__run_commands] )) ||
-_rustup__help__run_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__run_commands] )) ||
+_rustup__subcmd__help__subcmd__run_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help run commands' commands "$@"
 }
-(( $+functions[_rustup__help__self_commands] )) ||
-_rustup__help__self_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__self_commands] )) ||
+_rustup__subcmd__help__subcmd__self_commands() {
     local commands; commands=(
 'update:Download and install updates to rustup' \
 'uninstall:Uninstall rustup' \
@@ -1203,53 +1207,53 @@ _rustup__help__self_commands() {
     )
     _describe -t commands 'rustup help self commands' commands "$@"
 }
-(( $+functions[_rustup__help__self__uninstall_commands] )) ||
-_rustup__help__self__uninstall_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__self__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__help__subcmd__self__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help self uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__help__self__update_commands] )) ||
-_rustup__help__self__update_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__self__subcmd__update_commands] )) ||
+_rustup__subcmd__help__subcmd__self__subcmd__update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help self update commands' commands "$@"
 }
-(( $+functions[_rustup__help__self__upgrade-data_commands] )) ||
-_rustup__help__self__upgrade-data_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__self__subcmd__upgrade-data_commands] )) ||
+_rustup__subcmd__help__subcmd__self__subcmd__upgrade-data_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help self upgrade-data commands' commands "$@"
 }
-(( $+functions[_rustup__help__set_commands] )) ||
-_rustup__help__set_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__set_commands] )) ||
+_rustup__subcmd__help__subcmd__set_commands() {
     local commands; commands=(
-'default-host:The triple used to identify toolchains when not specified' \
+'default-host:The tuple used to identify toolchains when not specified' \
 'profile:The default components installed with a toolchain' \
 'auto-self-update:The rustup auto self update mode' \
 'auto-install:The auto toolchain install mode' \
     )
     _describe -t commands 'rustup help set commands' commands "$@"
 }
-(( $+functions[_rustup__help__set__auto-install_commands] )) ||
-_rustup__help__set__auto-install_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__set__subcmd__auto-install_commands] )) ||
+_rustup__subcmd__help__subcmd__set__subcmd__auto-install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help set auto-install commands' commands "$@"
 }
-(( $+functions[_rustup__help__set__auto-self-update_commands] )) ||
-_rustup__help__set__auto-self-update_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__set__subcmd__auto-self-update_commands] )) ||
+_rustup__subcmd__help__subcmd__set__subcmd__auto-self-update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help set auto-self-update commands' commands "$@"
 }
-(( $+functions[_rustup__help__set__default-host_commands] )) ||
-_rustup__help__set__default-host_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__set__subcmd__default-host_commands] )) ||
+_rustup__subcmd__help__subcmd__set__subcmd__default-host_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help set default-host commands' commands "$@"
 }
-(( $+functions[_rustup__help__set__profile_commands] )) ||
-_rustup__help__set__profile_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__set__subcmd__profile_commands] )) ||
+_rustup__subcmd__help__subcmd__set__subcmd__profile_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help set profile commands' commands "$@"
 }
-(( $+functions[_rustup__help__show_commands] )) ||
-_rustup__help__show_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__show_commands] )) ||
+_rustup__subcmd__help__subcmd__show_commands() {
     local commands; commands=(
 'active-toolchain:Show the active toolchain' \
 'home:Display the computed value of RUSTUP_HOME' \
@@ -1257,23 +1261,23 @@ _rustup__help__show_commands() {
     )
     _describe -t commands 'rustup help show commands' commands "$@"
 }
-(( $+functions[_rustup__help__show__active-toolchain_commands] )) ||
-_rustup__help__show__active-toolchain_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__show__subcmd__active-toolchain_commands] )) ||
+_rustup__subcmd__help__subcmd__show__subcmd__active-toolchain_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help show active-toolchain commands' commands "$@"
 }
-(( $+functions[_rustup__help__show__home_commands] )) ||
-_rustup__help__show__home_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__show__subcmd__home_commands] )) ||
+_rustup__subcmd__help__subcmd__show__subcmd__home_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help show home commands' commands "$@"
 }
-(( $+functions[_rustup__help__show__profile_commands] )) ||
-_rustup__help__show__profile_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__show__subcmd__profile_commands] )) ||
+_rustup__subcmd__help__subcmd__show__subcmd__profile_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help show profile commands' commands "$@"
 }
-(( $+functions[_rustup__help__target_commands] )) ||
-_rustup__help__target_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__target_commands] )) ||
+_rustup__subcmd__help__subcmd__target_commands() {
     local commands; commands=(
 'list:List installed and available targets' \
 'add:Add a target to a Rust toolchain' \
@@ -1281,23 +1285,23 @@ _rustup__help__target_commands() {
     )
     _describe -t commands 'rustup help target commands' commands "$@"
 }
-(( $+functions[_rustup__help__target__add_commands] )) ||
-_rustup__help__target__add_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__target__subcmd__add_commands] )) ||
+_rustup__subcmd__help__subcmd__target__subcmd__add_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help target add commands' commands "$@"
 }
-(( $+functions[_rustup__help__target__list_commands] )) ||
-_rustup__help__target__list_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__target__subcmd__list_commands] )) ||
+_rustup__subcmd__help__subcmd__target__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help target list commands' commands "$@"
 }
-(( $+functions[_rustup__help__target__remove_commands] )) ||
-_rustup__help__target__remove_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__target__subcmd__remove_commands] )) ||
+_rustup__subcmd__help__subcmd__target__subcmd__remove_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help target remove commands' commands "$@"
 }
-(( $+functions[_rustup__help__toolchain_commands] )) ||
-_rustup__help__toolchain_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__toolchain_commands] )) ||
+_rustup__subcmd__help__subcmd__toolchain_commands() {
     local commands; commands=(
 'list:List installed toolchains' \
 'install:Install or update the given toolchains, or by default the active toolchain' \
@@ -1306,53 +1310,53 @@ _rustup__help__toolchain_commands() {
     )
     _describe -t commands 'rustup help toolchain commands' commands "$@"
 }
-(( $+functions[_rustup__help__toolchain__install_commands] )) ||
-_rustup__help__toolchain__install_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__toolchain__subcmd__install_commands] )) ||
+_rustup__subcmd__help__subcmd__toolchain__subcmd__install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help toolchain install commands' commands "$@"
 }
-(( $+functions[_rustup__help__toolchain__link_commands] )) ||
-_rustup__help__toolchain__link_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__toolchain__subcmd__link_commands] )) ||
+_rustup__subcmd__help__subcmd__toolchain__subcmd__link_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help toolchain link commands' commands "$@"
 }
-(( $+functions[_rustup__help__toolchain__list_commands] )) ||
-_rustup__help__toolchain__list_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__toolchain__subcmd__list_commands] )) ||
+_rustup__subcmd__help__subcmd__toolchain__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help toolchain list commands' commands "$@"
 }
-(( $+functions[_rustup__help__toolchain__uninstall_commands] )) ||
-_rustup__help__toolchain__uninstall_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__toolchain__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__help__subcmd__toolchain__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help toolchain uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__help__uninstall_commands] )) ||
-_rustup__help__uninstall_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__help__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__help__update_commands] )) ||
-_rustup__help__update_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__update_commands] )) ||
+_rustup__subcmd__help__subcmd__update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help update commands' commands "$@"
 }
-(( $+functions[_rustup__help__which_commands] )) ||
-_rustup__help__which_commands() {
+(( $+functions[_rustup__subcmd__help__subcmd__which_commands] )) ||
+_rustup__subcmd__help__subcmd__which_commands() {
     local commands; commands=()
     _describe -t commands 'rustup help which commands' commands "$@"
 }
-(( $+functions[_rustup__install_commands] )) ||
-_rustup__install_commands() {
+(( $+functions[_rustup__subcmd__install_commands] )) ||
+_rustup__subcmd__install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup install commands' commands "$@"
 }
-(( $+functions[_rustup__man_commands] )) ||
-_rustup__man_commands() {
+(( $+functions[_rustup__subcmd__man_commands] )) ||
+_rustup__subcmd__man_commands() {
     local commands; commands=()
     _describe -t commands 'rustup man commands' commands "$@"
 }
-(( $+functions[_rustup__override_commands] )) ||
-_rustup__override_commands() {
+(( $+functions[_rustup__subcmd__override_commands] )) ||
+_rustup__subcmd__override_commands() {
     local commands; commands=(
 'list:List directory toolchain overrides' \
 'set:Set the override toolchain for a directory' \
@@ -1361,8 +1365,8 @@ _rustup__override_commands() {
     )
     _describe -t commands 'rustup override commands' commands "$@"
 }
-(( $+functions[_rustup__override__help_commands] )) ||
-_rustup__override__help_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__help_commands] )) ||
+_rustup__subcmd__override__subcmd__help_commands() {
     local commands; commands=(
 'list:List directory toolchain overrides' \
 'set:Set the override toolchain for a directory' \
@@ -1371,48 +1375,48 @@ _rustup__override__help_commands() {
     )
     _describe -t commands 'rustup override help commands' commands "$@"
 }
-(( $+functions[_rustup__override__help__help_commands] )) ||
-_rustup__override__help__help_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__override__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override help help commands' commands "$@"
 }
-(( $+functions[_rustup__override__help__list_commands] )) ||
-_rustup__override__help__list_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__help__subcmd__list_commands] )) ||
+_rustup__subcmd__override__subcmd__help__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override help list commands' commands "$@"
 }
-(( $+functions[_rustup__override__help__set_commands] )) ||
-_rustup__override__help__set_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__help__subcmd__set_commands] )) ||
+_rustup__subcmd__override__subcmd__help__subcmd__set_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override help set commands' commands "$@"
 }
-(( $+functions[_rustup__override__help__unset_commands] )) ||
-_rustup__override__help__unset_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__help__subcmd__unset_commands] )) ||
+_rustup__subcmd__override__subcmd__help__subcmd__unset_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override help unset commands' commands "$@"
 }
-(( $+functions[_rustup__override__list_commands] )) ||
-_rustup__override__list_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__list_commands] )) ||
+_rustup__subcmd__override__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override list commands' commands "$@"
 }
-(( $+functions[_rustup__override__set_commands] )) ||
-_rustup__override__set_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__set_commands] )) ||
+_rustup__subcmd__override__subcmd__set_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override set commands' commands "$@"
 }
-(( $+functions[_rustup__override__unset_commands] )) ||
-_rustup__override__unset_commands() {
+(( $+functions[_rustup__subcmd__override__subcmd__unset_commands] )) ||
+_rustup__subcmd__override__subcmd__unset_commands() {
     local commands; commands=()
     _describe -t commands 'rustup override unset commands' commands "$@"
 }
-(( $+functions[_rustup__run_commands] )) ||
-_rustup__run_commands() {
+(( $+functions[_rustup__subcmd__run_commands] )) ||
+_rustup__subcmd__run_commands() {
     local commands; commands=()
     _describe -t commands 'rustup run commands' commands "$@"
 }
-(( $+functions[_rustup__self_commands] )) ||
-_rustup__self_commands() {
+(( $+functions[_rustup__subcmd__self_commands] )) ||
+_rustup__subcmd__self_commands() {
     local commands; commands=(
 'update:Download and install updates to rustup' \
 'uninstall:Uninstall rustup' \
@@ -1421,8 +1425,8 @@ _rustup__self_commands() {
     )
     _describe -t commands 'rustup self commands' commands "$@"
 }
-(( $+functions[_rustup__self__help_commands] )) ||
-_rustup__self__help_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__help_commands] )) ||
+_rustup__subcmd__self__subcmd__help_commands() {
     local commands; commands=(
 'update:Download and install updates to rustup' \
 'uninstall:Uninstall rustup' \
@@ -1431,45 +1435,45 @@ _rustup__self__help_commands() {
     )
     _describe -t commands 'rustup self help commands' commands "$@"
 }
-(( $+functions[_rustup__self__help__help_commands] )) ||
-_rustup__self__help__help_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__self__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self help help commands' commands "$@"
 }
-(( $+functions[_rustup__self__help__uninstall_commands] )) ||
-_rustup__self__help__uninstall_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__help__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__self__subcmd__help__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self help uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__self__help__update_commands] )) ||
-_rustup__self__help__update_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__help__subcmd__update_commands] )) ||
+_rustup__subcmd__self__subcmd__help__subcmd__update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self help update commands' commands "$@"
 }
-(( $+functions[_rustup__self__help__upgrade-data_commands] )) ||
-_rustup__self__help__upgrade-data_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__help__subcmd__upgrade-data_commands] )) ||
+_rustup__subcmd__self__subcmd__help__subcmd__upgrade-data_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self help upgrade-data commands' commands "$@"
 }
-(( $+functions[_rustup__self__uninstall_commands] )) ||
-_rustup__self__uninstall_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__self__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__self__update_commands] )) ||
-_rustup__self__update_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__update_commands] )) ||
+_rustup__subcmd__self__subcmd__update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self update commands' commands "$@"
 }
-(( $+functions[_rustup__self__upgrade-data_commands] )) ||
-_rustup__self__upgrade-data_commands() {
+(( $+functions[_rustup__subcmd__self__subcmd__upgrade-data_commands] )) ||
+_rustup__subcmd__self__subcmd__upgrade-data_commands() {
     local commands; commands=()
     _describe -t commands 'rustup self upgrade-data commands' commands "$@"
 }
-(( $+functions[_rustup__set_commands] )) ||
-_rustup__set_commands() {
+(( $+functions[_rustup__subcmd__set_commands] )) ||
+_rustup__subcmd__set_commands() {
     local commands; commands=(
-'default-host:The triple used to identify toolchains when not specified' \
+'default-host:The tuple used to identify toolchains when not specified' \
 'profile:The default components installed with a toolchain' \
 'auto-self-update:The rustup auto self update mode' \
 'auto-install:The auto toolchain install mode' \
@@ -1477,25 +1481,25 @@ _rustup__set_commands() {
     )
     _describe -t commands 'rustup set commands' commands "$@"
 }
-(( $+functions[_rustup__set__auto-install_commands] )) ||
-_rustup__set__auto-install_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__auto-install_commands] )) ||
+_rustup__subcmd__set__subcmd__auto-install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set auto-install commands' commands "$@"
 }
-(( $+functions[_rustup__set__auto-self-update_commands] )) ||
-_rustup__set__auto-self-update_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__auto-self-update_commands] )) ||
+_rustup__subcmd__set__subcmd__auto-self-update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set auto-self-update commands' commands "$@"
 }
-(( $+functions[_rustup__set__default-host_commands] )) ||
-_rustup__set__default-host_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__default-host_commands] )) ||
+_rustup__subcmd__set__subcmd__default-host_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set default-host commands' commands "$@"
 }
-(( $+functions[_rustup__set__help_commands] )) ||
-_rustup__set__help_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__help_commands] )) ||
+_rustup__subcmd__set__subcmd__help_commands() {
     local commands; commands=(
-'default-host:The triple used to identify toolchains when not specified' \
+'default-host:The tuple used to identify toolchains when not specified' \
 'profile:The default components installed with a toolchain' \
 'auto-self-update:The rustup auto self update mode' \
 'auto-install:The auto toolchain install mode' \
@@ -1503,38 +1507,38 @@ _rustup__set__help_commands() {
     )
     _describe -t commands 'rustup set help commands' commands "$@"
 }
-(( $+functions[_rustup__set__help__auto-install_commands] )) ||
-_rustup__set__help__auto-install_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__help__subcmd__auto-install_commands] )) ||
+_rustup__subcmd__set__subcmd__help__subcmd__auto-install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set help auto-install commands' commands "$@"
 }
-(( $+functions[_rustup__set__help__auto-self-update_commands] )) ||
-_rustup__set__help__auto-self-update_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__help__subcmd__auto-self-update_commands] )) ||
+_rustup__subcmd__set__subcmd__help__subcmd__auto-self-update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set help auto-self-update commands' commands "$@"
 }
-(( $+functions[_rustup__set__help__default-host_commands] )) ||
-_rustup__set__help__default-host_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__help__subcmd__default-host_commands] )) ||
+_rustup__subcmd__set__subcmd__help__subcmd__default-host_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set help default-host commands' commands "$@"
 }
-(( $+functions[_rustup__set__help__help_commands] )) ||
-_rustup__set__help__help_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__set__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set help help commands' commands "$@"
 }
-(( $+functions[_rustup__set__help__profile_commands] )) ||
-_rustup__set__help__profile_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__help__subcmd__profile_commands] )) ||
+_rustup__subcmd__set__subcmd__help__subcmd__profile_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set help profile commands' commands "$@"
 }
-(( $+functions[_rustup__set__profile_commands] )) ||
-_rustup__set__profile_commands() {
+(( $+functions[_rustup__subcmd__set__subcmd__profile_commands] )) ||
+_rustup__subcmd__set__subcmd__profile_commands() {
     local commands; commands=()
     _describe -t commands 'rustup set profile commands' commands "$@"
 }
-(( $+functions[_rustup__show_commands] )) ||
-_rustup__show_commands() {
+(( $+functions[_rustup__subcmd__show_commands] )) ||
+_rustup__subcmd__show_commands() {
     local commands; commands=(
 'active-toolchain:Show the active toolchain' \
 'home:Display the computed value of RUSTUP_HOME' \
@@ -1543,13 +1547,13 @@ _rustup__show_commands() {
     )
     _describe -t commands 'rustup show commands' commands "$@"
 }
-(( $+functions[_rustup__show__active-toolchain_commands] )) ||
-_rustup__show__active-toolchain_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__active-toolchain_commands] )) ||
+_rustup__subcmd__show__subcmd__active-toolchain_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show active-toolchain commands' commands "$@"
 }
-(( $+functions[_rustup__show__help_commands] )) ||
-_rustup__show__help_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__help_commands] )) ||
+_rustup__subcmd__show__subcmd__help_commands() {
     local commands; commands=(
 'active-toolchain:Show the active toolchain' \
 'home:Display the computed value of RUSTUP_HOME' \
@@ -1558,38 +1562,38 @@ _rustup__show__help_commands() {
     )
     _describe -t commands 'rustup show help commands' commands "$@"
 }
-(( $+functions[_rustup__show__help__active-toolchain_commands] )) ||
-_rustup__show__help__active-toolchain_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__help__subcmd__active-toolchain_commands] )) ||
+_rustup__subcmd__show__subcmd__help__subcmd__active-toolchain_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show help active-toolchain commands' commands "$@"
 }
-(( $+functions[_rustup__show__help__help_commands] )) ||
-_rustup__show__help__help_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__show__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show help help commands' commands "$@"
 }
-(( $+functions[_rustup__show__help__home_commands] )) ||
-_rustup__show__help__home_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__help__subcmd__home_commands] )) ||
+_rustup__subcmd__show__subcmd__help__subcmd__home_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show help home commands' commands "$@"
 }
-(( $+functions[_rustup__show__help__profile_commands] )) ||
-_rustup__show__help__profile_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__help__subcmd__profile_commands] )) ||
+_rustup__subcmd__show__subcmd__help__subcmd__profile_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show help profile commands' commands "$@"
 }
-(( $+functions[_rustup__show__home_commands] )) ||
-_rustup__show__home_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__home_commands] )) ||
+_rustup__subcmd__show__subcmd__home_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show home commands' commands "$@"
 }
-(( $+functions[_rustup__show__profile_commands] )) ||
-_rustup__show__profile_commands() {
+(( $+functions[_rustup__subcmd__show__subcmd__profile_commands] )) ||
+_rustup__subcmd__show__subcmd__profile_commands() {
     local commands; commands=()
     _describe -t commands 'rustup show profile commands' commands "$@"
 }
-(( $+functions[_rustup__target_commands] )) ||
-_rustup__target_commands() {
+(( $+functions[_rustup__subcmd__target_commands] )) ||
+_rustup__subcmd__target_commands() {
     local commands; commands=(
 'list:List installed and available targets' \
 'add:Add a target to a Rust toolchain' \
@@ -1598,13 +1602,13 @@ _rustup__target_commands() {
     )
     _describe -t commands 'rustup target commands' commands "$@"
 }
-(( $+functions[_rustup__target__add_commands] )) ||
-_rustup__target__add_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__add_commands] )) ||
+_rustup__subcmd__target__subcmd__add_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target add commands' commands "$@"
 }
-(( $+functions[_rustup__target__help_commands] )) ||
-_rustup__target__help_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__help_commands] )) ||
+_rustup__subcmd__target__subcmd__help_commands() {
     local commands; commands=(
 'list:List installed and available targets' \
 'add:Add a target to a Rust toolchain' \
@@ -1613,38 +1617,38 @@ _rustup__target__help_commands() {
     )
     _describe -t commands 'rustup target help commands' commands "$@"
 }
-(( $+functions[_rustup__target__help__add_commands] )) ||
-_rustup__target__help__add_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__help__subcmd__add_commands] )) ||
+_rustup__subcmd__target__subcmd__help__subcmd__add_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target help add commands' commands "$@"
 }
-(( $+functions[_rustup__target__help__help_commands] )) ||
-_rustup__target__help__help_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__target__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target help help commands' commands "$@"
 }
-(( $+functions[_rustup__target__help__list_commands] )) ||
-_rustup__target__help__list_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__help__subcmd__list_commands] )) ||
+_rustup__subcmd__target__subcmd__help__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target help list commands' commands "$@"
 }
-(( $+functions[_rustup__target__help__remove_commands] )) ||
-_rustup__target__help__remove_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__help__subcmd__remove_commands] )) ||
+_rustup__subcmd__target__subcmd__help__subcmd__remove_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target help remove commands' commands "$@"
 }
-(( $+functions[_rustup__target__list_commands] )) ||
-_rustup__target__list_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__list_commands] )) ||
+_rustup__subcmd__target__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target list commands' commands "$@"
 }
-(( $+functions[_rustup__target__remove_commands] )) ||
-_rustup__target__remove_commands() {
+(( $+functions[_rustup__subcmd__target__subcmd__remove_commands] )) ||
+_rustup__subcmd__target__subcmd__remove_commands() {
     local commands; commands=()
     _describe -t commands 'rustup target remove commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain_commands] )) ||
-_rustup__toolchain_commands() {
+(( $+functions[_rustup__subcmd__toolchain_commands] )) ||
+_rustup__subcmd__toolchain_commands() {
     local commands; commands=(
 'list:List installed toolchains' \
 'install:Install or update the given toolchains, or by default the active toolchain' \
@@ -1654,8 +1658,8 @@ _rustup__toolchain_commands() {
     )
     _describe -t commands 'rustup toolchain commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__help_commands] )) ||
-_rustup__toolchain__help_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__help_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__help_commands() {
     local commands; commands=(
 'list:List installed toolchains' \
 'install:Install or update the given toolchains, or by default the active toolchain' \
@@ -1665,63 +1669,63 @@ _rustup__toolchain__help_commands() {
     )
     _describe -t commands 'rustup toolchain help commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__help__help_commands] )) ||
-_rustup__toolchain__help__help_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__help__subcmd__help_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__help__subcmd__help_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain help help commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__help__install_commands] )) ||
-_rustup__toolchain__help__install_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__help__subcmd__install_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__help__subcmd__install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain help install commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__help__link_commands] )) ||
-_rustup__toolchain__help__link_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__help__subcmd__link_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__help__subcmd__link_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain help link commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__help__list_commands] )) ||
-_rustup__toolchain__help__list_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__help__subcmd__list_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__help__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain help list commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__help__uninstall_commands] )) ||
-_rustup__toolchain__help__uninstall_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__help__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__help__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain help uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__install_commands] )) ||
-_rustup__toolchain__install_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__install_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__install_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain install commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__link_commands] )) ||
-_rustup__toolchain__link_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__link_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__link_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain link commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__list_commands] )) ||
-_rustup__toolchain__list_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__list_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__list_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain list commands' commands "$@"
 }
-(( $+functions[_rustup__toolchain__uninstall_commands] )) ||
-_rustup__toolchain__uninstall_commands() {
+(( $+functions[_rustup__subcmd__toolchain__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__toolchain__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup toolchain uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__uninstall_commands] )) ||
-_rustup__uninstall_commands() {
+(( $+functions[_rustup__subcmd__uninstall_commands] )) ||
+_rustup__subcmd__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'rustup uninstall commands' commands "$@"
 }
-(( $+functions[_rustup__update_commands] )) ||
-_rustup__update_commands() {
+(( $+functions[_rustup__subcmd__update_commands] )) ||
+_rustup__subcmd__update_commands() {
     local commands; commands=()
     _describe -t commands 'rustup update commands' commands "$@"
 }
-(( $+functions[_rustup__which_commands] )) ||
-_rustup__which_commands() {
+(( $+functions[_rustup__subcmd__which_commands] )) ||
+_rustup__subcmd__which_commands() {
     local commands; commands=()
     _describe -t commands 'rustup which commands' commands "$@"
 }

@@ -71,6 +71,7 @@ arguments=(
   '--check[run rustdoc checks]'
   '--generate-redirect-map[generate JSON file at the top level instead of]'
   '--emit[html-non-static-files,dep-info\]]'
+  '--print[<FILE>\]]'
   '--no-run[compile doctests without running them]'
   '--merge-doctests[force all doctests to be compiled as a single binary]'
   '--remap-path-scope[diagnostics,debuginfo,coverage,object,all\]]'
