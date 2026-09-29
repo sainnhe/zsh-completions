@@ -1,9 +1,9 @@
-#compdef pnpm
+#compdef pnpm pn
 ###-begin-pnpm-completion-###
 _pnpm_completion() {
   local reply
   reply=("${(@f)$(COMP_CWORD=$((CURRENT-1)) COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" SHELL=zsh pnpm completion-server -- "${words[@]}")}")
   _describe 'values' reply
 }
-compdef _pnpm_completion pnpm
+compdef _pnpm_completion pnpm pn
 ###-end-pnpm-completion-###
